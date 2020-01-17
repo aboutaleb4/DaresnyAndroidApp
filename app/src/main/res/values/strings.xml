@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Learning Centers Hub</string>
+    <string name="home">Home</string>
+    <string name="search">Search</string>
+    <string name="courses">My Courses</string>
+    <string name="account">My Account</string>
+    <string name="add_courses">Add Course</string>
 </resources>
