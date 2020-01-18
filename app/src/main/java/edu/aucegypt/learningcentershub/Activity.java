@@ -1,30 +1,21 @@
 package edu.aucegypt.learningcentershub;
 
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.os.Bundle;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-
-
-public class Admin_home extends AppCompatActivity{
-    @Override
+public class Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.admin_home);
+        setContentView(R.layout.activity);
         FragmentManager fragmentManager = this.getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragment, new NavBar_LC());
-        fragmentTransaction.replace(R.id.fragment_1, new TopBar());
-        fragmentTransaction.replace(R.id.fragment_2, new home_frag());
+        fragmentTransaction.replace(R.id.fragment2, new NavBar_LC());
+        fragmentTransaction.replace(R.id.fragment2_1, new TopBar());
+        fragmentTransaction.replace(R.id.fragment2_2, new Registered__users());
         fragmentTransaction.commit();
 
-
-        //background
-        //name assume from database on log -in
     }
-
-
 }

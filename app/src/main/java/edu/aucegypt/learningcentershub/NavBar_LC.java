@@ -26,17 +26,17 @@ public class NavBar_LC extends Fragment implements BottomNavigationView.OnNaviga
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        if (menuItem.getTitle().toString().equals("Home")) {
-            Intent i = new Intent("edu.aucegypt.learningcentershub.ADMIN_HOME");
-            startActivity(i);
-            return true;
-        }
-        if (menuItem.getTitle().toString().equals("Add Course"))
-        {
-            Intent i = new Intent("edu.aucegypt.learningcentershub.ADD_COURSE");
-            startActivity(i);
-            return true;
-        }
-        return false;
+        Fragment selectedFragment = null;
+        switch (menuItem.getTitle().toString()) {
+            case "Home":
+                selectedFragment = new home_frag();
+                break;
+            case "Add Course":
+                selectedFragment = new add_course_frag();
+                break;
+
+    }
+        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_2, selectedFragment).commit();
+        return true;
     }
 }
