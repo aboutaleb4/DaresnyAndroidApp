@@ -13,7 +13,6 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="96dp"
         android:layout_marginEnd="24dp"
-
         android:hint="@string/firstname"
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
@@ -34,7 +33,7 @@
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/firstname" />
+        app:layout_constraintTop_toBottomOf="@id/firstname" />
 
     <EditText
         android:id="@+id/email"
@@ -51,7 +50,7 @@
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lastname" />
+        app:layout_constraintTop_toBottomOf="@id/lastname" />
 
     <EditText
         android:id="@+id/password"
@@ -68,7 +67,7 @@
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/email" />
+        app:layout_constraintTop_toBottomOf="@id/email" />
 
     <EditText
         android:id="@+id/reenterpassword"
@@ -85,19 +84,17 @@
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password" />
+        app:layout_constraintTop_toBottomOf="@id/password" />
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:id="@+id/recyclerView"
         android:orientation="horizontal"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
-        app:layout_constraintTop_toBottomOf="@+id/reenterpassword">
-
-    </android.support.v7.widget.RecyclerView>
+        app:layout_constraintTop_toBottomOf="@id/reenterpassword"/>
 
     <Button
         android:id="@+id/createaccount"
@@ -110,10 +107,11 @@
         android:layout_marginBottom="64dp"
         android:enabled="false"
         android:text="@string/action_create_account"
+        android:textColor="@color/applicationColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView"
+        app:layout_constraintTop_toBottomOf="@id/recyclerView"
         app:layout_constraintVertical_bias="0.2" />
 
     <TextView
@@ -122,10 +120,13 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="48dp"
         android:text="login"
+        android:textColor="@color/applicationColor"
         android:textSize="16sp"
         android:textStyle="bold|italic"
+        android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/createaccount"
-        app:layout_constraintVertical_bias="0.058" />
+        app:layout_constraintTop_toBottomOf="@id/createaccount"
+        app:layout_constraintVertical_bias="0.058"
+        android:focusable="true" />
 </androidx.constraintlayout.widget.ConstraintLayout>

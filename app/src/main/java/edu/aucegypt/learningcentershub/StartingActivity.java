@@ -15,7 +15,7 @@ public class StartingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_starting);
         logo = (ImageView) findViewById(R.id.startingactivityimage);
-        logo.setImageResource(R.drawable.logo);
+        logo.setImageResource(R.drawable.mainlogo);
 
         Thread welcomeThread = new Thread() {
 
@@ -36,5 +36,8 @@ public class StartingActivity extends AppCompatActivity {
             }
         };
         welcomeThread.start();
+
     }
+
+
 }

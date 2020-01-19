@@ -6,15 +6,15 @@
     android:layout_height="match_parent">
 
     <FrameLayout
-        android:id="@+id/fragment_2"
+        android:id="@+id/fragment6_2"
         android:name="edu.aucegypt.learningcentershub.main_frag"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/fragment_1" />
+        app:layout_constraintTop_toBottomOf="@id/fragment6_1" />
 
     <FrameLayout
-        android:id="@+id/fragment"
-        android:name="edu.aucegypt.learningcentershub.NavBar_LC"
+        android:id="@+id/fragment6"
+        android:name="edu.aucegypt.learningcentershub.NavBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -22,11 +22,11 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <FrameLayout
-        android:id="@+id/fragment_1"
+        android:id="@+id/fragment6_1"
         android:name="edu.aucegypt.learningcentershub.TopBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/fragment_2"
+        app:layout_constraintBottom_toTopOf="@id/fragment6_2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
