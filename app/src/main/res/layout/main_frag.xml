@@ -35,8 +35,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textColor="@color/applicationColor"
-                android:text="See all" />
+                android:text="See all"
+                android:textAlignment="textEnd"
+                android:textColor="@color/applicationColor" />
         </LinearLayout>
 
         <androidx.support.v7.widget.RecyclerView
@@ -62,8 +63,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textColor="@color/applicationColor"
-                android:text="see all" />
+                android:text="see all"
+                android:textAlignment="textEnd"
+                android:textColor="@color/applicationColor" />
         </LinearLayout>
 
         <androidx.support.v7.widget.RecyclerView
@@ -88,9 +90,10 @@
                 android:id="@+id/coursesseeall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/applicationColor"
                 android:layout_weight="1"
-                android:text="See all" />
+                android:text="See all"
+                android:textAlignment="textEnd"
+                android:textColor="@color/applicationColor" />
         </LinearLayout>
 
         <androidx.support.v7.widget.RecyclerView
