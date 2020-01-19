@@ -4,9 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.HorizontalScrollView;
-public class CreateAccountActivity extends AppCompatActivity {
+import android.widget.TextView;
+
+import edu.aucegypt.learningcentershub.ui.login.LoginActivity;
+
+public class CreateAccountActivity extends AppCompatActivity  implements View.OnClickListener {
     RecyclerView mListView;
     String[] category;
     int[] categoryIcon = {R.drawable.science, R.drawable.programming, R.drawable.engineering,
@@ -22,5 +29,15 @@ public class CreateAccountActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, category, categoryIcon);
         recyclerView.setAdapter(adapter);
+        TextView textView = findViewById(R.id.login);
+        textView.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (view.getId()==R.id.login) {
+            Intent i = new Intent("edu.aucegypt.learningcentershub.LOGIN");
+            startActivity(i);
+        }
     }
 }

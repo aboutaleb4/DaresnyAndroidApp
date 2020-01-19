@@ -5,6 +5,7 @@ import android.app.Activity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -26,7 +27,7 @@ import edu.aucegypt.learningcentershub.R;
 import edu.aucegypt.learningcentershub.ui.login.LoginViewModel;
 import edu.aucegypt.learningcentershub.ui.login.LoginViewModelFactory;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     private LoginViewModel loginViewModel;
 
@@ -34,6 +35,10 @@ public class LoginActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        TextView textView = findViewById(R.id.gotocreateAccount);
+        textView.setOnClickListener(this);
+
         loginViewModel = ViewModelProviders.of(this, new LoginViewModelFactory())
                 .get(LoginViewModel.class);
 
@@ -127,5 +132,14 @@ public class LoginActivity extends AppCompatActivity {
 
     private void showLoginFailed(@StringRes Integer errorString) {
         Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (view.getId()==R.id.gotocreateAccount) {
+
+            Intent i = new Intent("edu.aucegypt.learningcentershub.CREATE_ACCOUNT");
+            startActivity(i);
+        }
     }
 }
