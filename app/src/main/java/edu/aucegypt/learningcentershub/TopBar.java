@@ -16,6 +16,7 @@ public class TopBar extends Fragment implements View.OnClickListener {
 
         View view = inflater.inflate(R.layout.topbar, container, false);
         Toolbar myToolbar = view.findViewById(R.id.topbar2);
+        myToolbar.setLogo(R.drawable.logo4);
         ((AppCompatActivity) getActivity()).setSupportActionBar(myToolbar);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
         Button button = view.findViewById(R.id.button);
