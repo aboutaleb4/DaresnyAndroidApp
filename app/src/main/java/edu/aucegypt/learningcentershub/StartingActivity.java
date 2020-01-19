@@ -15,7 +15,7 @@ public class StartingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_starting);
         logo = (ImageView) findViewById(R.id.startingactivityimage);
-        logo.setImageResource(R.drawable.logo4);
+        logo.setImageResource(R.drawable.mainlogo);
 
         Thread welcomeThread = new Thread() {
 
