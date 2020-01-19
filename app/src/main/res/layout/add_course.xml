@@ -5,31 +5,32 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <FrameLayout
-        android:id="@+id/fragment6_2"
-        android:name="edu.aucegypt.learningcentershub.main_frag"
+    <TextView
+        android:id="@+id/add_course_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/fragment6_1" />
-
-    <FrameLayout
-        android:id="@+id/fragment6"
-        android:name="edu.aucegypt.learningcentershub.NavBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:padding="10dp"
+        android:text="New Course"
+        android:textColor="@color/applicationColor"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <FrameLayout
-        android:id="@+id/fragment6_1"
-        android:name="edu.aucegypt.learningcentershub.TopBar"
+
+    <ListView
+        android:id="@+id/add_course_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/fragment6_2"
+        android:nestedScrollingEnabled="true"
+        android:scrollbarSize="3dp"
+        android:scrollbarStyle="outsideOverlay"
+        android:scrollbars="vertical"
+        android:scrollingCache="true"
+        android:smoothScrollbar="true"
+        android:textColor="@color/applicationColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@id/add_course_title" />
 </androidx.constraintlayout.widget.ConstraintLayout>
