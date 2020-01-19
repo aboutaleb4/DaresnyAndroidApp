@@ -14,7 +14,7 @@
 
     <FrameLayout
         android:id="@+id/fragment6"
-        android:name="edu.aucegypt.learningcentershub.NavBar_LC"
+        android:name="edu.aucegypt.learningcentershub.NavBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"

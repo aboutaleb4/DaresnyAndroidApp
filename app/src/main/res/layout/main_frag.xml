@@ -9,8 +9,8 @@
 
 
     <LinearLayout
-        android:layout_width="409dp"
-        android:layout_height="729dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -38,10 +38,10 @@
                 android:text="See all" />
         </LinearLayout>
 
-        <androidx.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_id"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"></androidx.support.v7.widget.RecyclerView>
+            android:layout_height="wrap_content"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -65,7 +65,7 @@
                 android:text="see all" />
         </LinearLayout>
 
-        <androidx.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_id_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
@@ -91,7 +91,7 @@
                 android:text="See all" />
         </LinearLayout>
 
-        <androidx.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_id_2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
