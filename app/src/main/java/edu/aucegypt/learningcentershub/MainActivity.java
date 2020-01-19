@@ -32,11 +32,11 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new GridLayoutManager(this,4));
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, Category, categoryIcon);
         recyclerView.setAdapter(adapter);
-        RecyclerView recyclerView_1 = findViewById(R.id.recyclerview_id);
+        RecyclerView recyclerView_1 = findViewById(R.id.recyclerview_id_1);
         recyclerView.setLayoutManager(new GridLayoutManager(this,4));
         RecyclerViewAdapter adapter_1 = new RecyclerViewAdapter(this, LearningCenters, learningCentersIcon);
         recyclerView_1.setAdapter(adapter_1);
-        RecyclerView recyclerView_2 = findViewById(R.id.recyclerview_id);
+        RecyclerView recyclerView_2 = findViewById(R.id.recyclerview_id_2);
         recyclerView.setLayoutManager(new GridLayoutManager(this,4));
         RecyclerViewAdapter adapter_2 = new RecyclerViewAdapter(this, Courses, coursesIcon);
         recyclerView_2.setAdapter(adapter_2);
