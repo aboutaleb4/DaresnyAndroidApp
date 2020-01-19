@@ -28,4 +28,43 @@
         <item>Graphic Design</item>
         <item>Cooking</item>
     </string-array>
+    <string-array name="course_info">
+        <item>Name</item>
+        <item>Category</item>
+        <item>Fees</item>
+        <item>Registration Fees</item>
+        <item>Instructor (optional) </item>
+        <item>times</item>
+        <item>Start Date</item>
+        <item>End Date</item>
+        <item>Days</item>
+        <item>Description</item>
+        <item>Preview (optional)</item>
+    </string-array>
+<string-array name="user_info">
+    <item>Full Name</item>
+    <item>SSN</item>
+    <item>Phone Number</item>
+    <item>E-mail</item>
+    <item>Comments (optional) </item>
+    <item>Preferences</item>
+</string-array>
+    <string-array name="category_4">
+        <item>Science</item>
+        <item>Programming</item>
+        <item>Engineering</item>
+        <item>Language</item>
+    </string-array>
+    <string-array name="learningcenters_4">
+        <item>Science</item>
+        <item>Programming</item>
+        <item>Engineering</item>
+        <item>Language</item>
+    </string-array>
+    <string-array name="courses_4">
+        <item>Science</item>
+        <item>Programming</item>
+        <item>Engineering</item>
+        <item>Language</item>
+    </string-array>
 </resources>
