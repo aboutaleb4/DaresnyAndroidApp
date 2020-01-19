@@ -9,21 +9,23 @@
         android:id ="@+id/topbar2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#C57676"
+        android:background="#15bff0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:src="@drawable/logo"/>
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_gravity="top"
+        android:src="@drawable/logo4" />
+
     <Button
         android:id="@+id/button"
-        android:text="Sign out"
-        android:background="#00FFFFFF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
-        />
+        android:background="#00FFFFFF"
+        android:text="Sign out"
+        android:textColor="#ffffffff" />
 </FrameLayout>
