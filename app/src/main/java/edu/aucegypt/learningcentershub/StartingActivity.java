@@ -13,7 +13,7 @@ public class StartingActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-    /*    setContentView(R.layout.activity_starting);
+        setContentView(R.layout.activity_starting);
         logo = (ImageView) findViewById(R.id.startingactivityimage);
         logo.setImageResource(R.drawable.logo4);
 
@@ -36,7 +36,7 @@ public class StartingActivity extends AppCompatActivity {
             }
         };
         welcomeThread.start();
-        */
+
     }
 
 
