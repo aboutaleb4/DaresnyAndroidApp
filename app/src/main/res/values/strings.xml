@@ -67,4 +67,32 @@
         <item>Engineering</item>
         <item>Language</item>
     </string-array>
+    <string-array name="registered">
+        <item>Science</item>
+        <item>Programming</item>
+        <item>Engineering</item>
+        <item>Language</item>
+        <item>Science</item>
+        <item>Programming</item>
+        <item>Engineering</item>
+        <item>Language</item>
+        <item>Science</item>
+        <item>Programming</item>
+        <item>Engineering</item>
+        <item>Language</item>
+    </string-array>
+    <string-array name="favourites">
+        <item>Science</item>
+        <item>Programming</item>
+        <item>Engineering</item>
+        <item>Language</item>
+        <item>Science</item>
+        <item>Programming</item>
+        <item>Engineering</item>
+        <item>Language</item>
+        <item>Science</item>
+        <item>Programming</item>
+        <item>Engineering</item>
+        <item>Language</item>
+    </string-array>
 </resources>

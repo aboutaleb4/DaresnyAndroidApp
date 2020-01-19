@@ -21,27 +21,27 @@
                 android:id="@+id/favourites"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:textColor="@color/applicationColor"
                 android:text="Favourite Courses" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerview_id"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerview_favourites"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="7"/>
 
             <TextView
                 android:id="@+id/registered"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:textColor="@color/applicationColor"
                 android:text="Registered Courses" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerview_id_1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerview_registered"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="7"/>
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
