@@ -11,6 +11,7 @@
         android:padding="10dp"
         android:text="User 1"
         android:textSize="24sp"
+        android:textColor="@color/applicationColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
