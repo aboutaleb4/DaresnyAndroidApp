@@ -36,7 +36,6 @@ public class CreateAccountActivity extends AppCompatActivity  implements View.On
     @Override
     public void onClick(View view) {
         if (view.getId()==R.id.login) {
-
             Intent i = new Intent("edu.aucegypt.learningcentershub.LOGIN");
             startActivity(i);
         }
