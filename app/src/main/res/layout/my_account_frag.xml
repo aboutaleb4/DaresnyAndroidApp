@@ -9,13 +9,17 @@
 
 
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.48"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.53">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -33,22 +37,22 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="59dp"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="109dp"
                 android:layout_height="27dp"
+                android:layout_marginBottom="50dp"
                 android:layout_weight="1"
                 android:text="E-mail:"
-                android:layout_marginBottom="50dp"
                 android:textColor="@color/applicationColor"
                 android:textSize="18sp" />
 
             <EditText
                 android:id="@+id/emailedit"
-                android:layout_width="278dp"
-                android:layout_height="39dp"
+                android:layout_width="273dp"
+                android:layout_height="38dp"
                 android:layout_weight="1"
                 android:text="ahmedaboutaleb@aucegypt.edu"
                 android:textColor="@color/applicationColor" />
@@ -69,63 +73,75 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <EditText
-        android:id="@+id/usernameedit"
-        android:layout_width="278dp"
+        android:id="@+id/phonenumberedit"
+        android:layout_width="285dp"
         android:layout_height="39dp"
         android:layout_weight="1"
-        android:text="Ahmed Aboutaleb"
+        android:text="01126168113"
         android:textColor="@color/applicationColor"
-        tools:layout_editor_absoluteX="111dp"
-        tools:layout_editor_absoluteY="96dp" />
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView3"
+        app:layout_constraintTop_toBottomOf="@+id/usernameedit" />
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="127dp"
-        android:layout_height="28dp"
+        android:layout_width="109dp"
+        android:layout_height="27dp"
         android:layout_weight="1"
         android:text="Username:"
         android:textColor="@color/applicationColor"
         android:textSize="18sp"
-        tools:layout_editor_absoluteX="2dp"
-        tools:layout_editor_absoluteY="106dp" />
+        app:layout_constraintBottom_toTopOf="@+id/textView3"
+        app:layout_constraintEnd_toStartOf="@+id/usernameedit"
+        app:layout_constraintHorizontal_bias="0.6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.45" />
+
+    <EditText
+        android:id="@+id/usernameedit"
+        android:layout_width="282dp"
+        android:layout_height="38dp"
+        android:text="Ahmed Aboutaleb"
+        android:textColor="@color/applicationColor"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/phonenumberedit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="126dp"
+        android:layout_height="25dp"
+        android:layout_weight="1"
+        android:text="Phone Number:"
+        android:textColor="@color/applicationColor"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/usernameedit" />
 
     <Button
         android:id="@+id/signout_myaccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginStart="162dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginEnd="162dp"
+        android:layout_marginBottom="93dp"
         android:text="Sign Out"
         android:textColor="@color/applicationColor"
-        tools:layout_editor_absoluteX="161dp"
-        tools:layout_editor_absoluteY="583dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
-    <EditText
-        android:id="@+id/phonenumberedit"
-        android:layout_width="278dp"
-        android:layout_height="39dp"
-        android:layout_weight="1"
-        android:text="01126168113"
-        android:textColor="@color/applicationColor"
-        tools:layout_editor_absoluteX="130dp"
-        tools:layout_editor_absoluteY="162dp" />
 
-    <TextView
-        android:layout_width="130dp"
-        android:layout_height="33dp"
-        android:layout_weight="1"
-        android:text="Phone Number:"
-        android:textColor="@color/applicationColor"
-        android:textSize="18sp"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="162dp" />
-
-    />
 </androidx.constraintlayout.widget.ConstraintLayout>
