@@ -17,6 +17,7 @@
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@color/applicationColor"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
@@ -32,6 +33,7 @@
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@color/applicationColor"
         app:layout_constraintTop_toBottomOf="@id/firstname" />
 
     <EditText
@@ -48,6 +50,7 @@
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@color/applicationColor"
         app:layout_constraintTop_toBottomOf="@id/lastname" />
 
     <EditText
@@ -64,6 +67,7 @@
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@color/applicationColor"
         app:layout_constraintTop_toBottomOf="@id/email" />
 
     <EditText
@@ -80,6 +84,7 @@
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@color/applicationColor"
         app:layout_constraintTop_toBottomOf="@id/password" />
 
     <androidx.recyclerview.widget.RecyclerView

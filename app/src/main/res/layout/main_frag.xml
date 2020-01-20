@@ -27,6 +27,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_marginTop="10dp"
                 android:textColor="@color/applicationColor"
                 android:text="Categories" />
 
@@ -36,6 +37,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="See all"
+                android:layout_marginTop="10dp"
                 android:textAlignment="textEnd"
                 android:textColor="@color/applicationColor" />
         </LinearLayout>
@@ -56,6 +58,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="@color/applicationColor"
+                android:layout_marginTop="10dp"
                 android:text="Learning Centers" />
 
             <TextView
@@ -64,6 +67,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="see all"
+                android:layout_marginTop="10dp"
                 android:textAlignment="textEnd"
                 android:textColor="@color/applicationColor" />
         </LinearLayout>
@@ -83,6 +87,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_marginTop="10dp"
                 android:textColor="@color/applicationColor"
                 android:text="Courses" />
 
@@ -92,6 +97,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="See all"
+                android:layout_marginTop="10dp"
                 android:textAlignment="textEnd"
                 android:textColor="@color/applicationColor" />
         </LinearLayout>
