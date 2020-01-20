@@ -2,18 +2,22 @@ package edu.aucegypt.learningcentershub;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView.OnQueryTextListener;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.SearchView;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
 import edu.aucegypt.learningcentershub.data.Course;
 
-public class CoursesList extends AppCompatActivity {
+public class CoursesList extends Fragment {
 
     RecyclerView recyclerView;
     SearchView searchView;
@@ -23,10 +27,9 @@ public class CoursesList extends AppCompatActivity {
 
     coursesListAdapter adapter;
 
-    @Override
-    protected void onCreate (Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_courses_list);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view =  inflater.inflate(R.layout.my_account_frag, container, false);
 
         String [] name = getResources().getStringArray(R.array.courses_4);
 
@@ -35,11 +38,11 @@ public class CoursesList extends AppCompatActivity {
                 R.drawable.engineering,
                 R.drawable.language};
 
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-        searchView = (SearchView) findViewById(R.id.searchView);
+        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+        searchView = (SearchView) view.findViewById(R.id.searchView);
 
         arrayList = new ArrayList<>();
-        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
         for (int i = 0; i < image.length; i++) {
@@ -51,7 +54,7 @@ public class CoursesList extends AppCompatActivity {
         }
 
 
-        adapter = new coursesListAdapter(getApplicationContext(), arrayList);
+        adapter = new coursesListAdapter(getContext(), arrayList);
         recyclerView.setAdapter(adapter);
 
 
@@ -67,5 +70,6 @@ public class CoursesList extends AppCompatActivity {
                 return false;
             }
         });
+        return  view;
     }
 }
