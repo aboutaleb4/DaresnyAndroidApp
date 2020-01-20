@@ -1,10 +1,16 @@
 package edu.aucegypt.learningcentershub;
 
+import android.content.Context;
+import android.graphics.PixelFormat;
 import android.os.Bundle;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+
+import static java.security.AccessController.getContext;
 
 public class MainActivity extends AppCompatActivity {
     @Override
@@ -17,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.fragment6_1, new TopBar());
         fragmentTransaction.replace(R.id.fragment6_2, new main_frag());
         fragmentTransaction.commit();
-
 
     }
 
