@@ -13,31 +13,33 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
-public class NavBar extends Fragment implements BottomNavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemReselectedListener{
+public class NavBar extends Fragment implements BottomNavigationView.OnNavigationItemSelectedListener{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.navbar, container, false);
+        View view = inflater.inflate(R.layout.navbar, container, false);
+        BottomNavigationView navigationView = view.findViewById(R.id.navigation);
+        navigationView.setOnNavigationItemSelectedListener(this);
+        navigationView.bringToFront();
+        return view;
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         Fragment selectedFragment = null;
-        switch (menuItem.getItemId()) {
-            case R.string.home:
-                selectedFragment = new home_frag();
+        switch (menuItem.getTitle().toString()) {
+            case "Home":
+                selectedFragment = new main_frag();
                 break;
-            case R.string.account:
-                selectedFragment = new add_course_frag();
+            case "My Account":
+                selectedFragment = new MyAccount_frag();
                 break;
-
 
         }
-        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_2, selectedFragment).commit();
+
+        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment6_2, selectedFragment).commit();
         return true;
     }
 
-    @Override
-    public void onNavigationItemReselected(@NonNull MenuItem menuItem) {
-    }
+
 }
