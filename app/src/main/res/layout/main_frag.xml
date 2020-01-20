@@ -25,6 +25,7 @@
 
             <TextView
                 android:id="@+id/categories"
+                android:textSize="22sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -55,6 +56,7 @@
 
             <TextView
                 android:id="@+id/learningcenters"
+                android:textSize="22sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -67,7 +69,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="see all"
+                android:text="See all"
                 android:layout_marginTop="10dp"
                 android:textAlignment="textEnd"
                 android:textColor="@color/applicationColor" />
@@ -85,6 +87,7 @@
 
             <TextView
                 android:id="@+id/courses"
+                android:textSize="22sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

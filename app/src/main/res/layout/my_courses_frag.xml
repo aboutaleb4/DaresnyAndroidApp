@@ -18,11 +18,13 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
+            android:layout_margin="10dp"
+            android:textStyle="bold"
             android:id="@+id/favourites"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
             android:text="Favourite Courses"
+            android:textSize="22sp"
             android:textColor="@color/applicationColor" />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -32,14 +34,17 @@
             android:layout_weight="7" />
 
         <TextView
-                android:id="@+id/registered"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/applicationColor"
-                android:layout_marginTop="50dp"
-                android:text="Registered Courses" />
+            android:layout_margin="10dp"
+            android:textStyle="bold"
+            android:id="@+id/registered"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="22sp"
+            android:textColor="@color/applicationColor"
+            android:text="Registered Courses" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:layout_marginBottom="50dp"
             android:id="@+id/recyclerview_registered"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

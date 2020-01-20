@@ -13,13 +13,13 @@ import androidx.recyclerview.widget.RecyclerView;
 public class MyCourses_frag extends Fragment {
 
     String[] favourites;
-    int[] favouritesIcons = {R.drawable.science, R.drawable.science, R.drawable.science,
-            R.drawable.science, R.drawable.science, R.drawable.science, R.drawable.science, R.drawable.science
-            , R.drawable.science, R.drawable.science, R.drawable.science, R.drawable.science};
+    int[] favouritesIcons = {R.drawable.science, R.drawable.programming, R.drawable.engineering,
+            R.drawable.language, R.drawable.business, R.drawable.music, R.drawable.graphicdesign, R.drawable.cooking
+            , R.drawable.business, R.drawable.music, R.drawable.graphicdesign, R.drawable.cooking};
     String[] registered;
-    int[] registeredIcons = {R.drawable.programming, R.drawable.programming, R.drawable.programming, R.drawable.programming
-            ,R.drawable.programming, R.drawable.programming, R.drawable.programming, R.drawable.programming
-            ,R.drawable.programming, R.drawable.programming, R.drawable.programming, R.drawable.programming};
+    int[] registeredIcons = {R.drawable.science, R.drawable.programming, R.drawable.engineering,
+            R.drawable.language, R.drawable.business, R.drawable.music, R.drawable.graphicdesign, R.drawable.cooking
+            , R.drawable.business, R.drawable.music, R.drawable.graphicdesign, R.drawable.cooking};
 
 
     @Override
@@ -30,12 +30,12 @@ public class MyCourses_frag extends Fragment {
         registered = getResources().getStringArray(R.array.registered);
 
         RecyclerView recyclerView = view.findViewById(R.id.recyclerview_favourites);
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 4));
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(getContext(), favourites, favouritesIcons);
         recyclerView.setAdapter(adapter);
 
         RecyclerView recyclerView_1 = view.findViewById(R.id.recyclerview_registered);
-        recyclerView_1.setLayoutManager(new GridLayoutManager(getContext(), 4));
+        recyclerView_1.setLayoutManager(new GridLayoutManager(getContext(), 3));
         RecyclerViewAdapter adapter_1 = new RecyclerViewAdapter(getContext(), registered, registeredIcons);
         recyclerView_1.setAdapter(adapter_1);
 
