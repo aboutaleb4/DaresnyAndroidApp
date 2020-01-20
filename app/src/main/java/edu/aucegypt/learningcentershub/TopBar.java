@@ -26,11 +26,11 @@ public class TopBar extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        if (((Button) view).getText() == "Sign in") {
+        if (((Button) view).getText() == "Login") {
             Intent i = new Intent("edu.aucegypt.learningcentershub.LOGIN");
 
         } else {
-            ((Button) view).setText("Sign in");
+            ((Button) view).setText("Login");
         }
     }
 }
