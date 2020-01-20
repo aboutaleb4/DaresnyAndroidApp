@@ -17,6 +17,7 @@
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@color/applicationColor"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
@@ -32,6 +33,7 @@
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@color/applicationColor"
         app:layout_constraintTop_toBottomOf="@id/firstname" />
 
     <EditText
@@ -48,6 +50,7 @@
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@color/applicationColor"
         app:layout_constraintTop_toBottomOf="@id/lastname" />
 
     <EditText
@@ -64,6 +67,7 @@
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@color/applicationColor"
         app:layout_constraintTop_toBottomOf="@id/email" />
 
     <EditText
@@ -80,6 +84,7 @@
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@color/applicationColor"
         app:layout_constraintTop_toBottomOf="@id/password" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -125,4 +130,14 @@
         app:layout_constraintTop_toBottomOf="@id/createaccount"
         app:layout_constraintVertical_bias="0.058"
         android:focusable="true" />
+
+    <Button
+        android:id="@+id/exit_create_account"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_weight="1"
+        android:text="X"
+        android:background="@android:color/transparent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

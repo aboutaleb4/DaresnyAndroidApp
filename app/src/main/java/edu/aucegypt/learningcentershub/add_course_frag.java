@@ -9,41 +9,60 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
 public class add_course_frag extends Fragment {
-    ListView listView;
+    RecyclerView listView;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.add_course, container, false);
         listView = view.findViewById(R.id.add_course_info);
         String [] data = getResources().getStringArray(R.array.course_info);
-        ArrayList<String> Data = new ArrayList<String>();
-        for (int i = 0 ; i<data.length;i++) {
-            Data.add(data[i]);
-        }
-        listView.setAdapter(new rowAdapter(getActivity(), Data));
-
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        listView.setLayoutManager(layoutManager);
+        listView.setAdapter(new rvadapter2(getContext(), data));
         return view;
 
     }
 }
 
-class rowAdapter extends ArrayAdapter<String> {
-    public rowAdapter(Context context, ArrayList<String> row ){
-        super(context,0,row);
+class rvadapter2 extends RecyclerView.Adapter<rvadapter2.ViewHolder3>{
+    String[] rows;
+    Context mContext;
+
+    public rvadapter2(Context context, String[] Names) {
+        this.rows = Names;
+        this.mContext = context;
+    }
+    @NonNull
+    @Override
+    public ViewHolder3 onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row, parent, false);
+        return  new ViewHolder3(view);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull ViewHolder3 holder, int position) {
+        holder.text1.setText(rows[position]);
 
     }
+
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        String row = getItem(position);
-        if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.row, parent, false);
+    public int getItemCount() {
+        return rows.length;
+    }
+    public class ViewHolder3 extends RecyclerView.ViewHolder{
+
+        TextView text1;
+
+        public ViewHolder3(View itemView) {
+            super(itemView);
+            text1 = itemView.findViewById(R.id.row_text);
         }
-        TextView textView = (TextView) convertView.findViewById(R.id.row_text);
-        textView.setText(row);
-        return convertView;
     }
 }

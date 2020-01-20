@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-        <ListView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/registred_users_users"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -27,7 +27,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:nestedScrollingEnabled="true"
             android:scrollbarSize="3dp"
             android:scrollbarStyle="outsideOverlay"
             android:scrollbars="vertical"

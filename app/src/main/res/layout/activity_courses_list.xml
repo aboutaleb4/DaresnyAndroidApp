@@ -13,12 +13,14 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:queryHint="@string/hint"
+        android:textColor="@color/applicationColor"
         app:searchHintIcon="@null"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/applicationColor"
         android:layout_marginTop="5dp"/>
 
 </LinearLayout>

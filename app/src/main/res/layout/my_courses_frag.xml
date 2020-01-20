@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MyCourses">
 
 
     <LinearLayout
@@ -17,31 +17,33 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/favourites"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/applicationColor"
-                android:text="Favourite Courses" />
+        <TextView
+            android:id="@+id/favourites"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text="Favourite Courses"
+            android:textColor="@color/applicationColor" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerview_favourites"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="7"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview_favourites"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="7" />
 
-            <TextView
+        <TextView
                 android:id="@+id/registered"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/applicationColor"
+                android:layout_marginTop="50dp"
                 android:text="Registered Courses" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerview_registered"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="7"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview_registered"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="7" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -24,6 +24,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:textColor="@color/applicationColor"
                 android:hint="First Name"/>
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -38,6 +39,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:textColor="@color/applicationColor"
                 android:hint="Last Name"/>
         </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
@@ -52,6 +54,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="textEmailAddress"
+                android:textColor="@color/applicationColor"
                 android:hint="Email" />
         </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
@@ -64,6 +67,7 @@
                 android:id="@+id/signup_input_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/applicationColor"
                 android:hint="Mobile Number" />
         </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
@@ -78,6 +82,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="Birth Date"
+                android:textColor="@color/applicationColor"
                 android:inputType="date"/>
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -86,7 +91,7 @@
             android:layout_height="wrap_content"
             android:text="REGISTER"
             android:layout_marginTop="40dp"
-            android:textColor="@android:color/black"/>
+            android:textColor="@color/applicationColor"/>
 
     </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

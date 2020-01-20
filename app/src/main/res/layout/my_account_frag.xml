@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MyAccount">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="109dp"
+                android:layout_height="27dp"
+                android:layout_weight="1"
+                android:text="E-mail:"
+                android:layout_marginBottom="50dp"
+                android:textColor="@color/applicationColor"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/emailedit"
+                android:layout_width="278dp"
+                android:layout_height="39dp"
+                android:layout_weight="1"
+                android:text="ahmedaboutaleb@aucegypt.edu"
+                android:textColor="@color/applicationColor" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Preferences:"
+            android:textColor="@color/applicationColor"
+            android:textSize="18sp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview_id_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <EditText
+        android:id="@+id/usernameedit"
+        android:layout_width="278dp"
+        android:layout_height="39dp"
+        android:layout_weight="1"
+        android:text="Ahmed Aboutaleb"
+        android:textColor="@color/applicationColor"
+        tools:layout_editor_absoluteX="111dp"
+        tools:layout_editor_absoluteY="96dp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="127dp"
+        android:layout_height="28dp"
+        android:layout_weight="1"
+        android:text="Username:"
+        android:textColor="@color/applicationColor"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="2dp"
+        tools:layout_editor_absoluteY="106dp" />
+
+    <Button
+        android:id="@+id/signout_myaccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Sign Out"
+        android:textColor="@color/applicationColor"
+        tools:layout_editor_absoluteX="161dp"
+        tools:layout_editor_absoluteY="583dp" />
+
+    <EditText
+        android:id="@+id/phonenumberedit"
+        android:layout_width="278dp"
+        android:layout_height="39dp"
+        android:layout_weight="1"
+        android:text="01126168113"
+        android:textColor="@color/applicationColor"
+        tools:layout_editor_absoluteX="130dp"
+        tools:layout_editor_absoluteY="162dp" />
+
+    <TextView
+        android:layout_width="130dp"
+        android:layout_height="33dp"
+        android:layout_weight="1"
+        android:text="Phone Number:"
+        android:layout_marginBottom="50dp"
+        android:textColor="@color/applicationColor"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="162dp" />
+
+    />
+</androidx.constraintlayout.widget.ConstraintLayout>
