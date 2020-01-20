@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+    <LinearLayout
+        android:id="@+id/line1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="10dp"
+        android:padding="12dp">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Category"
+            android:textSize="30sp"
+            />
+
+        <ListView
+            android:id="@+id/lvCategoryFilters"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+        </ListView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Location Area"
+            android:textSize="30sp"
+            />
+
+        <ListView
+            android:id="@+id/lvAreaFilters"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+        </ListView>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Start Date From Now"
+            android:textSize="30sp"
+            />
+
+
+        <CheckBox
+            android:id="@+id/cbBox1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="Less than a month"
+            android:textSize="15sp"
+            android:layout_margin="5dp">
+        </CheckBox>
+
+
+        <CheckBox
+            android:id="@+id/cbBox2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="One month"
+            android:textSize="15sp"
+            android:layout_margin="5dp">
+        </CheckBox>
+
+        <CheckBox
+            android:id="@+id/cbBox3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="Two months"
+            android:textSize="15sp"
+            android:layout_margin="5dp">
+        </CheckBox>
+
+        <CheckBox
+            android:id="@+id/cbBox4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="Three months or more"
+            android:textSize="15sp"
+            android:layout_margin="5dp">
+        </CheckBox>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Duration"
+            android:textSize="30sp"
+            />
+
+
+        <CheckBox
+            android:id="@+id/cbBox5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="Less than a month"
+            android:textSize="15sp"
+            android:layout_margin="5dp">
+        </CheckBox>
+
+
+        <CheckBox
+            android:id="@+id/cbBox6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="One month"
+            android:textSize="15sp"
+            android:layout_margin="5dp">
+        </CheckBox>
+
+        <CheckBox
+            android:id="@+id/cbBox7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="Two months"
+            android:textSize="15sp"
+            android:layout_margin="5dp">
+        </CheckBox>
+
+        <CheckBox
+            android:id="@+id/cbBox8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="Three months or more"
+            android:textSize="15sp"
+            android:layout_margin="5dp">
+        </CheckBox>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Price"
+            android:textSize="30sp"
+            />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Min"
+                android:layout_gravity="center_vertical"
+                android:textSize="15sp"
+                />
+        <androidx.appcompat.widget.AppCompatSeekBar
+            android:id="@+id/sbId"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:max="10000"
+            android:progress="5000"
+            />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Max"
+                android:layout_gravity="center_vertical"
+                android:textSize="15sp"
+                />
+        </LinearLayout>
+
+
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            android:onClick="showResult"
+            android:text="Apply"
+            android:layout_below="@+id/line1"
+            >
+        </Button>
+
+
+
+
+
+
+    </LinearLayout>
+
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
