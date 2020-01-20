@@ -8,16 +8,21 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class home_frag extends Fragment {
-    ListView listView;
+    RecyclerView listView;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.home_frag, container, false);
         listView = view.findViewById(R.id.text_lc_home_actions);
         String [] Data = {"Edit Information","Edit Courses"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, android.R.id.text1,Data);
-        listView.setAdapter(adapter);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        listView.setLayoutManager(layoutManager);
+        listView.setAdapter(new rvadapter3(getContext(), Data));
+        listView.setNestedScrollingEnabled(false);
+
         return view;
     }
 }
