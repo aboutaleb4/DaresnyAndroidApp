@@ -17,11 +17,12 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Category"
             android:layout_marginTop="10dp"
-            android:textAlignment="center"
+            android:text="Category"
+            android:textAlignment="viewStart"
             android:textColor="@color/applicationColor"
-            android:textSize="30sp" />
+            android:textSize="28sp"
+            android:textStyle="bold" />
 
         <ListView
             android:id="@+id/lvCategoryFilters"
@@ -34,9 +35,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Location Area"
-            android:textAlignment="center"
+            android:textAlignment="viewStart"
             android:textColor="@color/applicationColor"
-            android:textSize="30sp" />
+            android:textSize="28sp"
+            android:textStyle="bold" />
 
         <ListView
             android:id="@+id/lvAreaFilters"
@@ -50,9 +52,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Start Date From Now"
-            android:textAlignment="center"
+            android:textAlignment="viewStart"
             android:textColor="@color/applicationColor"
-            android:textSize="30sp" />
+            android:textSize="28sp"
+            android:textStyle="bold" />
 
 
         <CheckBox
@@ -61,7 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:text="Less than a month"
-            android:textColor="@color/applicationColor"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="18sp"
             android:layout_margin="5dp">
         </CheckBox>
@@ -74,7 +77,7 @@
             android:layout_gravity="center_vertical"
             android:layout_margin="5dp"
             android:text="One month"
-            android:textColor="@color/applicationColor"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="18sp"></CheckBox>
 
         <CheckBox
@@ -83,7 +86,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:text="Two months"
-            android:textColor="@color/applicationColor"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="18sp"
             android:layout_margin="5dp">
         </CheckBox>
@@ -94,7 +97,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:text="Three months or more"
-            android:textColor="@color/applicationColor"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="18sp"
             android:layout_margin="5dp">
         </CheckBox>
@@ -104,9 +107,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Duration"
-            android:textAlignment="center"
+            android:textAlignment="viewStart"
             android:textColor="@color/applicationColor"
-            android:textSize="30sp" />
+            android:textSize="28sp"
+            android:textStyle="bold" />
 
 
         <CheckBox
@@ -115,7 +119,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:text="Less than a month"
-            android:textColor="@color/applicationColor"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="18sp"
             android:layout_margin="5dp">
         </CheckBox>
@@ -127,7 +131,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:text="One month"
-            android:textColor="@color/applicationColor"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="18sp"
             android:layout_margin="5dp">
         </CheckBox>
@@ -138,7 +142,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:text="Two months"
-            android:textColor="@color/applicationColor"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="18sp"
             android:layout_margin="5dp">
         </CheckBox>
@@ -149,7 +153,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:text="Three months or more"
-            android:textColor="@color/applicationColor"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="18sp"
             android:layout_margin="5dp">
         </CheckBox>
@@ -159,9 +163,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Price"
-            android:textAlignment="center"
+            android:textAlignment="viewStart"
             android:textColor="@color/applicationColor"
-            android:textSize="30sp" />
+            android:textSize="30sp"
+            android:textStyle="bold" />
 
 
         <LinearLayout
@@ -173,7 +178,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Min"
-                android:textColor="@color/applicationColor"
+                android:textColor="@color/colorPrimaryDark"
                 android:layout_gravity="center_vertical"
                 android:textSize="18sp"
                 />
@@ -190,7 +195,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Max"
-                android:textColor="@color/applicationColor"
+                android:textColor="@color/colorPrimaryDark"
                 android:layout_gravity="center_vertical"
                 android:textSize="18sp"
                 />
