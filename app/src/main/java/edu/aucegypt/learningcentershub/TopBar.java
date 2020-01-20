@@ -1,5 +1,6 @@
 package edu.aucegypt.learningcentershub;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +26,11 @@ public class TopBar extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        ((Button)view).setText("Sign in");
+        if (((Button) view).getText() == "Sign in") {
+            Intent i = new Intent("edu.aucegypt.learningcentershub.LOGIN");
+
+        } else {
+            ((Button) view).setText("Sign in");
+        }
     }
 }
