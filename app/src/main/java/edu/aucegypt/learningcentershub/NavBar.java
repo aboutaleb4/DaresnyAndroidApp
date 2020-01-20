@@ -23,11 +23,11 @@ public class NavBar extends Fragment implements BottomNavigationView.OnNavigatio
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         Fragment selectedFragment = null;
-        switch (menuItem.getTitle().toString()) {
-            case :
+        switch (menuItem.getItemId()) {
+            case R.string.home:
                 selectedFragment = new home_frag();
                 break;
-            case "Add Course":
+            case R.string.account:
                 selectedFragment = new add_course_frag();
                 break;
 
