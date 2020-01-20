@@ -35,14 +35,14 @@
                     android:layout_width="match_parent"
                     android:text="Course Name"
                     android:textSize="30sp"
-                    android:textColor="#000" />
+                    android:textColor="@color/applicationColor" />
                 <TextView
                     android:id="@+id/textCategory"
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
                     android:text="Course Category"
                     android:textSize="20sp"
-                    android:textColor="#000" />
+                    android:textColor="@color/applicationColor" />
 
 
 
@@ -68,6 +68,7 @@
                     android:layout_width="100dp"
                     android:layout_height="45dp"
                     android:text="REGISTER"
+                    android:textColor="@color/applicationColor"
                     android:gravity="center"/>
 
             </LinearLayout>
@@ -103,6 +104,7 @@
                             android:layout_weight="1"
                             android:padding="16dp"
                             android:text="Learning Center"
+                            android:textColor="@color/applicationColor"
                             android:textSize="22sp"
                             android:textStyle="bold"
                             />

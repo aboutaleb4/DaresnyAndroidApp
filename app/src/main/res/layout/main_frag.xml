@@ -25,23 +25,25 @@
 
             <TextView
                 android:id="@+id/categories"
-                android:textSize="22sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:text="Categories"
                 android:textColor="@color/applicationColor"
-                android:text="Categories" />
+                android:textSize="22sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/seeallcategories"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:layout_weight="1"
                 android:text="See all"
-                android:layout_marginTop="10dp"
                 android:textAlignment="textEnd"
-                android:textColor="@color/applicationColor" />
+                android:textColor="@color/applicationColor"
+                android:textStyle="italic" />
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
@@ -56,23 +58,25 @@
 
             <TextView
                 android:id="@+id/learningcenters"
-                android:textSize="22sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textColor="@color/applicationColor"
                 android:layout_marginTop="10dp"
-                android:text="Learning Centers" />
+                android:layout_weight="1"
+                android:text="Learning Centers"
+                android:textColor="@color/applicationColor"
+                android:textSize="22sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/seealllearningcenters"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:layout_weight="1"
                 android:text="See all"
-                android:layout_marginTop="10dp"
                 android:textAlignment="textEnd"
-                android:textColor="@color/applicationColor" />
+                android:textColor="@color/applicationColor"
+                android:textStyle="italic" />
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
@@ -87,23 +91,25 @@
 
             <TextView
                 android:id="@+id/courses"
-                android:textSize="22sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:text="Courses"
                 android:textColor="@color/applicationColor"
-                android:text="Courses" />
+                android:textSize="22sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/coursesseeall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:layout_weight="1"
                 android:text="See all"
-                android:layout_marginTop="10dp"
                 android:textAlignment="textEnd"
-                android:textColor="@color/applicationColor" />
+                android:textColor="@color/applicationColor"
+                android:textStyle="italic" />
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView

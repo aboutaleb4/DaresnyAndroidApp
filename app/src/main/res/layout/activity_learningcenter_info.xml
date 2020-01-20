@@ -92,7 +92,7 @@
                         android:layout_height="wrap_content"
                         android:paddingLeft="16dp"
                         android:text="Description"
-                        android:textColor="@color/applicationColor"
+                        android:textColor="@color/colorPrimaryDark"
                         android:textSize="18sp"
                         />
                     <TextView
@@ -102,7 +102,7 @@
                         android:paddingLeft="16dp"
                         android:paddingTop="10dp"
                         android:text="Phone Number"
-                        android:textColor="@color/applicationColor"
+                        android:textColor="@color/colorPrimaryDark"
                         android:textSize="18sp"
                         />
                     <TextView
@@ -113,7 +113,7 @@
                         android:paddingTop="10dp"
                         android:paddingBottom="10dp"
                         android:text="Address"
-                        android:textColor="@color/applicationColor"
+                        android:textColor="@color/colorPrimaryDark"
                         android:textSize="18sp"
                         />
 
