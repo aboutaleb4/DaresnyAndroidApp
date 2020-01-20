@@ -11,11 +11,6 @@
         android:theme="@style/AppTheme">
         <activity android:name=".CreateAccountActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-            <intent-filter>
                 <action android:name="edu.aucegypt.learningcentershub.CREATE_ACCOUNT"/>
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
@@ -36,6 +31,13 @@
             <action android:name="edu.aucegypt.learningcentershub.MAIN_ACTIVITY"/>
             <category android:name="android.intent.category.DEFAULT"/>
         </intent-filter>
+        </activity>
+        <activity android:name=".Admin_home">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".MyAccount"/>
     </application>

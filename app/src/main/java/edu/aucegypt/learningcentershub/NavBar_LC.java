@@ -34,6 +34,9 @@ public class NavBar_LC extends Fragment implements BottomNavigationView.OnNaviga
             case "Add Course":
                 selectedFragment = new add_course_frag();
                 break;
+            case "My Account":
+                selectedFragment = new MyAccount_frag();
+                break;
 
     }
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_2, selectedFragment).commit();
