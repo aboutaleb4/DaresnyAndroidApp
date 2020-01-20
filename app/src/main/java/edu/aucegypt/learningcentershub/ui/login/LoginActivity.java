@@ -46,6 +46,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         final EditText passwordEditText = findViewById(R.id.password);
         final Button loginButton = findViewById(R.id.login);
         final ProgressBar loadingProgressBar = findViewById(R.id.loading);
+        Button exitButton = findViewById(R.id.exit_login);
+        exitButton.setOnClickListener(this);
 
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
             @Override
@@ -137,8 +139,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View view) {
         if (view.getId()==R.id.gotocreateAccount) {
-
             Intent i = new Intent("edu.aucegypt.learningcentershub.CREATE_ACCOUNT");
+            startActivity(i);
+        }
+        if (view.getId()==R.id.exit_login){
+            Intent i = new Intent("edu.aucegypt.learningcentershub.MAIN_ACTIVITY");
             startActivity(i);
         }
     }

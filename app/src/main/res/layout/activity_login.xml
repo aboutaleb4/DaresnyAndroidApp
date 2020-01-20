@@ -96,8 +96,7 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_weight="1"
-        android:text="X"
-        android:background="@android:color/transparent"
+        android:background="@drawable/ic_close_black_24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.TextView;
 
@@ -18,7 +19,6 @@ public class CreateAccountActivity extends AppCompatActivity  implements View.On
     String[] category;
     int[] categoryIcon = {R.drawable.science, R.drawable.programming, R.drawable.engineering,
             R.drawable.language, R.drawable.business, R.drawable.music, R.drawable.graphicdesign, R.drawable.cooking};
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,12 +31,18 @@ public class CreateAccountActivity extends AppCompatActivity  implements View.On
         recyclerView.setAdapter(adapter);
         TextView textView = findViewById(R.id.login);
         textView.setOnClickListener(this);
+        Button b = findViewById(R.id.exit_create_account);
+        b.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
         if (view.getId()==R.id.login) {
             Intent i = new Intent("edu.aucegypt.learningcentershub.LOGIN");
+            startActivity(i);
+        }
+        if (view.getId()==R.id.exit_create_account) {
+            Intent i = new Intent("edu.aucegypt.learningcentershub.MAIN_ACTIVITY");
             startActivity(i);
         }
     }
