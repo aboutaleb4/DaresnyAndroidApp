@@ -26,7 +26,6 @@ public class add_course_frag extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         listView.setLayoutManager(layoutManager);
         listView.setAdapter(new rvadapter2(getContext(), data));
-        listView.setNestedScrollingEnabled(false);
         return view;
 
     }
