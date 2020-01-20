@@ -10,14 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".CoursesList">
+
+        </activity>
+        <activity android:name=".CourseRegisterActivity"/>
+        <activity android:name=".CourseInfoActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".CourseInfoActivity">
-
         </activity>
         <activity android:name=".CreateAccountActivity">
             <intent-filter>
