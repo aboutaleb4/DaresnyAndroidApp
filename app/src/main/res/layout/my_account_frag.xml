@@ -52,7 +52,7 @@
             <EditText
                 android:id="@+id/emailedit"
                 android:layout_width="273dp"
-                android:layout_height="38dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="ahmedaboutaleb@aucegypt.edu"
                 android:textColor="@color/applicationColor" />
@@ -88,7 +88,7 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="109dp"
+        android:layout_width="126dp"
         android:layout_height="27dp"
         android:layout_weight="1"
         android:text="Username:"
