@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragment6, new NavBar());
         fragmentTransaction.replace(R.id.fragment6_1, new TopBar());
-        //fragmentTransaction.replace(R.id.fragment6_2, new main_frag());
+        fragmentTransaction.replace(R.id.fragment6_2, new main_frag());
         fragmentTransaction.commit();
 
 
