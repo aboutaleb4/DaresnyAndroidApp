@@ -41,7 +41,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="90dp"
+                android:layout_width="wrap_content"
                 android:layout_height="27dp"
                 android:layout_marginBottom="50dp"
                 android:layout_weight="1"
@@ -51,7 +51,7 @@
 
             <EditText
                 android:id="@+id/emailedit"
-                android:layout_width="273dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="ahmedaboutaleb@aucegypt.edu"
@@ -89,7 +89,7 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="142dp"
+        android:layout_width="wrap_content"
         android:layout_height="26dp"
         android:layout_weight="1"
         android:text="Username:"
@@ -116,7 +116,7 @@
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="126dp"
+        android:layout_width="wrap_content"
         android:layout_height="25dp"
         android:layout_weight="1"
         android:text="Phone Number:"
