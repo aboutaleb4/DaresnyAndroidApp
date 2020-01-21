@@ -18,7 +18,6 @@ public class Admin_home extends AppCompatActivity{
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragment, new NavBar_LC());
         fragmentTransaction.replace(R.id.fragment_1, new TopBar());
-        fragmentTransaction.replace(R.id.fragment_2, new home_frag());
         fragmentTransaction.commit();
 
 
