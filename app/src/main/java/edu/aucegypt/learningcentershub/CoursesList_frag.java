@@ -48,15 +48,15 @@ public class CoursesList_frag extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_courses_list);
 
-        String [] name = getResources().getStringArray(R.array.courses_4);
+        String[] name = getResources().getStringArray(R.array.courses_4);
 
-        int [] image = {R.drawable.science,
+        int[] image = {R.drawable.science,
                 R.drawable.programming,
                 R.drawable.engineering,
                 R.drawable.language};
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-        searchView = (SearchView)findViewById(R.id.searchView);
+        searchView = (SearchView) findViewById(R.id.searchView);
         filters_layout = (FrameLayout) findViewById(R.id.filters_layout);
         main_layout = (ConstraintLayout) findViewById(R.id.main_layout);
         filterBtn = (Button) findViewById(R.id.filtersBtn);
@@ -79,7 +79,6 @@ public class CoursesList_frag extends AppCompatActivity implements View.OnClickL
         adapter = new coursesListAdapter(this, arrayList);
         recyclerView.setAdapter(adapter);
 
-
         searchView.setOnQueryTextListener(new OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -90,5 +89,7 @@ public class CoursesList_frag extends AppCompatActivity implements View.OnClickL
             public boolean onQueryTextChange(String newText) {
                 adapter.getFilter().filter(newText);
                 return false;
-            }
-}}}
+            }});
+
+    }}
+
