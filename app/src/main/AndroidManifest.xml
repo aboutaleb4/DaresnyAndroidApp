@@ -50,6 +50,7 @@
         <activity android:name=".Payment"/>
         <activity android:name=".LearningCenterInfoActivity"/>
         <activity android:name=".LearningCenterInfoAdmin"/>
+        <activity android:name=".CourseInfoAdmin"/>
 
     </application>
 

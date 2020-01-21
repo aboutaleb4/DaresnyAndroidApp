@@ -72,7 +72,7 @@ class rvadapter3 extends RecyclerView.Adapter<rvadapter3.ViewHolder3> implements
            mContext.startActivity(i);
              }
        else if (((TextView)view).getText().toString()=="Edit Courses"){
-           Intent i = new Intent(mContext,CourseInfo.class);
+           Intent i = new Intent(mContext,CourseInfoAdmin.class);
            mContext.startActivity(i);
        }
        else {

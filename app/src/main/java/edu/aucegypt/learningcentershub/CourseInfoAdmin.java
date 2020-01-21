@@ -23,7 +23,7 @@ public class CourseInfoAdmin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_info_admin);
 
-        expandableLearningCenter = (LinearLayout) findViewById(R.id.expandableLearningCenter);
+      /*  expandableLearningCenter = (LinearLayout) findViewById(R.id.expandableLearningCenter);
         arrowBtnLearningCenter = (Button) findViewById(R.id.arrowBtnLearningCenter);
         cardViewLearningCenter = (CardView) findViewById(R.id.cardViewLearningCenter);
         registerBtn = (Button)findViewById(R.id.registerBtn);
@@ -58,6 +58,8 @@ public class CourseInfoAdmin extends AppCompatActivity {
             }
         });
 
+
+       */
     }
 }
 
