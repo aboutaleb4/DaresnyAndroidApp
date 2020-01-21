@@ -51,7 +51,7 @@ public class main_frag extends Fragment {
         recyclerView_2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getContext(),CourseInfo.class);
+                Intent i = new Intent(getActivity(),CourseInfo.class);
                 startActivity(i);
             }
         });

@@ -115,6 +115,8 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_id_2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

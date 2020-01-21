@@ -41,13 +41,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.image.setImageResource(icons[position]);
         holder.name.setText(names[position]);
 
-        holder.image.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                   Toast.makeText(mContext, names[position], Toast.LENGTH_SHORT).show();
-            }
-        });
+        
     }
 
     @Override
