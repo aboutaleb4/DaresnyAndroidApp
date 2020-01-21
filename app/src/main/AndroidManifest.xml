@@ -25,6 +25,11 @@
             </intent-filter>
         </activity>
     <activity android:name=".StartingActivity">
+        <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+
+        <category android:name="android.intent.category.LAUNCHER" />
+    </intent-filter>
     </activity>
         <activity android:name=".MainActivity">
         <intent-filter>
@@ -33,13 +38,10 @@
         </intent-filter>
         </activity>
         <activity android:name=".Admin_home">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".MyAccount"/>
+        <activity android:name=".Payment"/>
     </application>
 
 </manifest>

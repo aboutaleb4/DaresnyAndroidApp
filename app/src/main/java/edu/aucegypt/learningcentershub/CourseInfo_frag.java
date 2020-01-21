@@ -3,6 +3,7 @@ package edu.aucegypt.learningcentershub;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -35,8 +36,11 @@ public class CourseInfo_frag extends Fragment {
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent toRegisterCourseIntent = new Intent(getContext(),CourseRegisterActivity.class);
-                startActivity(toRegisterCourseIntent);
+
+                Fragment selectedFragment = null;
+                selectedFragment = new CourseRegisterActivity();
+                ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.fragment6_2, selectedFragment).commit();
+
             }
         });
 
