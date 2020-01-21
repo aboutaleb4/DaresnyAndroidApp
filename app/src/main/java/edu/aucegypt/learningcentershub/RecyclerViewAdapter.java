@@ -45,11 +45,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             @Override
             public void onClick(View view) {
 
-                    Fragment selectedFragment = null;
-                    selectedFragment = new CourseInfo_frag();
-                    ((FragmentActivity) mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment6_2, selectedFragment).commit();
-
-                //Toast.makeText(mContext, names[position], Toast.LENGTH_SHORT).show();
+                  Toast.makeText(mContext, names[position], Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -24,7 +24,7 @@ import java.util.ArrayList;
 
 import edu.aucegypt.learningcentershub.data.Course;
 
-public class CoursesList_frag extends Fragment implements View.OnClickListener {
+public class CoursesList_frag extends AppCompatActivity implements View.OnClickListener {
 
     RecyclerView recyclerView;
     SearchView searchView;
@@ -35,18 +35,18 @@ public class CoursesList_frag extends Fragment implements View.OnClickListener {
 
 
     coursesListAdapter adapter;
-    private coursesFragOnClickListener listener;
 
-    public interface coursesFragOnClickListener {
+    @Override
+    public void onClick(View view) {
 
-        public void onFiltersBtnClick();
     }
 
 
 
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.activity_courses_list, container, false);
+
+    public void onCreate( Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_courses_list);
 
         String [] name = getResources().getStringArray(R.array.courses_4);
 
@@ -55,16 +55,16 @@ public class CoursesList_frag extends Fragment implements View.OnClickListener {
                 R.drawable.engineering,
                 R.drawable.language};
 
-        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
-        searchView = (SearchView) view.findViewById(R.id.searchView);
-        filters_layout = (FrameLayout) view.findViewById(R.id.filters_layout);
-        main_layout = (ConstraintLayout) view.findViewById(R.id.main_layout);
-        filterBtn = (Button) view.findViewById(R.id.filtersBtn);
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        searchView = (SearchView)findViewById(R.id.searchView);
+        filters_layout = (FrameLayout) findViewById(R.id.filters_layout);
+        main_layout = (ConstraintLayout) findViewById(R.id.main_layout);
+        filterBtn = (Button) findViewById(R.id.filtersBtn);
 
         filterBtn.setOnClickListener(this);
 
         arrayList = new ArrayList<>();
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
         for (int i = 0; i < image.length; i++) {
@@ -76,7 +76,7 @@ public class CoursesList_frag extends Fragment implements View.OnClickListener {
         }
 
 
-        adapter = new coursesListAdapter(getContext(), arrayList);
+        adapter = new coursesListAdapter(this, arrayList);
         recyclerView.setAdapter(adapter);
 
 
@@ -91,23 +91,4 @@ public class CoursesList_frag extends Fragment implements View.OnClickListener {
                 adapter.getFilter().filter(newText);
                 return false;
             }
-        });
-        return  view;
-    }
-
-    public void onAttach(Context context){
-        super.onAttach(context);
-
-        if(context instanceof coursesFragOnClickListener){
-            listener = (coursesFragOnClickListener) context;
-
-        }else {
-            throw  new ClassCastException(context.toString()
-                + " must implement coursesFragOnClickListener.onFiltersBtnClick.");
-        }
-    }
-
-    public void onClick(View view){
-        listener.onFiltersBtnClick();
-    }
-}
+}}}
