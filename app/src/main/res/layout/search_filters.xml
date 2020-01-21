@@ -1,17 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reset"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@android:drawable/btn_dialog" />
+
+    </LinearLayout>
 
 
     <LinearLayout
         android:id="@+id/line1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:layout_margin="10dp"
-        android:padding="12dp">
+        android:orientation="vertical"
+        android:padding="12dp"
+        tools:layout_editor_absoluteX="9dp"
+        tools:layout_editor_absoluteY="65dp">
+
+
 
 
         <TextView
@@ -27,9 +53,7 @@
         <ListView
             android:id="@+id/lvCategoryFilters"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
-        </ListView>
+            android:layout_height="wrap_content"></ListView>
 
         <TextView
             android:layout_width="match_parent"
@@ -43,9 +67,7 @@
         <ListView
             android:id="@+id/lvAreaFilters"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
-        </ListView>
+            android:layout_height="wrap_content"></ListView>
 
 
         <TextView
@@ -63,11 +85,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:layout_margin="5dp"
             android:text="Less than a month"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="18sp"
-            android:layout_margin="5dp">
-        </CheckBox>
+            android:textSize="18sp"></CheckBox>
 
 
         <CheckBox
@@ -85,22 +106,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:layout_margin="5dp"
             android:text="Two months"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="18sp"
-            android:layout_margin="5dp">
-        </CheckBox>
+            android:textSize="18sp"></CheckBox>
 
         <CheckBox
             android:id="@+id/cbBox4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:layout_margin="5dp"
             android:text="Three months or more"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="18sp"
-            android:layout_margin="5dp">
-        </CheckBox>
+            android:textSize="18sp"></CheckBox>
 
 
         <TextView
@@ -118,11 +137,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:layout_margin="5dp"
             android:text="Less than a month"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="18sp"
-            android:layout_margin="5dp">
-        </CheckBox>
+            android:textSize="18sp"></CheckBox>
 
 
         <CheckBox
@@ -130,33 +148,30 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:layout_margin="5dp"
             android:text="One month"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="18sp"
-            android:layout_margin="5dp">
-        </CheckBox>
+            android:textSize="18sp"></CheckBox>
 
         <CheckBox
             android:id="@+id/cbBox7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:layout_margin="5dp"
             android:text="Two months"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="18sp"
-            android:layout_margin="5dp">
-        </CheckBox>
+            android:textSize="18sp"></CheckBox>
 
         <CheckBox
             android:id="@+id/cbBox8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:layout_margin="5dp"
             android:text="Three months or more"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="18sp"
-            android:layout_margin="5dp">
-        </CheckBox>
+            android:textSize="18sp"></CheckBox>
 
 
         <TextView
@@ -172,34 +187,33 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
+            android:orientation="horizontal">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:text="Min"
                 android:textColor="@color/colorPrimaryDark"
-                android:layout_gravity="center_vertical"
-                android:textSize="18sp"
-                />
-        <androidx.appcompat.widget.AppCompatSeekBar
-            android:id="@+id/sbId"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:theme="@style/MySeekBarTheme"
-            android:max="10000"
-            android:progress="5000"
-            />
+                android:textSize="18sp" />
+
+            <androidx.appcompat.widget.AppCompatSeekBar
+                android:id="@+id/sbId"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:max="10000"
+                android:progress="5000"
+                android:theme="@style/MySeekBarTheme" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:text="Max"
                 android:textColor="@color/colorPrimaryDark"
-                android:layout_gravity="center_vertical"
-                android:textSize="18sp"
-                />
+                android:textSize="18sp" />
         </LinearLayout>
 
 
@@ -215,12 +229,7 @@
             android:textSize="18sp"></Button>
 
 
-
-
-
-
     </LinearLayout>
 
 
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</ScrollView>
