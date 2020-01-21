@@ -8,13 +8,32 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/searchView"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:queryHint="@string/hint"
-        android:textColor="@color/applicationColor"
-        app:searchHintIcon="@null"/>
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="6dp">
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/searchView"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="50dp"
+            android:queryHint="@string/hint"
+            android:textColor="@color/applicationColor"
+            app:searchHintIcon="@null"/>
+
+        <Button
+            android:id="@+id/filtersBtn"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:background="@drawable/ic_filter_list_black_24dp"
+            android:theme="@style/Base.Widget.AppCompat.Button.Borderless" />
+
+    </LinearLayout>
+
+
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"

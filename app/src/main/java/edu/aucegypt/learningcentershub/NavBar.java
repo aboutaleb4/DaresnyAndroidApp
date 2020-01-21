@@ -35,7 +35,11 @@ public class NavBar extends Fragment implements BottomNavigationView.OnNavigatio
                 selectedFragment = new MyAccount_frag();
                 break;
             case "Search":
-                selectedFragment = new CoursesList();
+                selectedFragment = new CoursesList_frag();
+                break;
+
+            case "My Courses":
+                selectedFragment =  new MyCourses_frag();
                 break;
 
         }
