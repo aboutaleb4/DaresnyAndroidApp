@@ -16,7 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-public class CourseInfo_frag extends Fragment {
+public class CourseInfo extends AppCompatActivity {
 
     LinearLayout expandableLearningCenter;
     Button arrowBtnLearningCenter;
@@ -24,23 +24,21 @@ public class CourseInfo_frag extends Fragment {
     Button registerBtn;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_course_info, container, false);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_course_info);
 
-        expandableLearningCenter = (LinearLayout) view.findViewById(R.id.expandableLearningCenter);
-        arrowBtnLearningCenter = (Button) view.findViewById(R.id.arrowBtnLearningCenter);
-        cardViewLearningCenter = (CardView) view.findViewById(R.id.cardViewLearningCenter);
-        registerBtn = (Button) view.findViewById(R.id.registerBtn);
+        expandableLearningCenter = (LinearLayout) findViewById(R.id.expandableLearningCenter);
+        arrowBtnLearningCenter = (Button) findViewById(R.id.arrowBtnLearningCenter);
+        cardViewLearningCenter = (CardView) findViewById(R.id.cardViewLearningCenter);
+        registerBtn = (Button)findViewById(R.id.registerBtn);
 
 
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-//                Fragment selectedFragment = null;
-//                selectedFragment = new CourseRegisterActivity();
-//                ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.fragment6_2, selectedFragment).commit();
-
+                Intent i = new Intent(getApplicationContext(),CourseRegisterActivity.class);
+                startActivity(i);
             }
         });
 
@@ -65,6 +63,5 @@ public class CourseInfo_frag extends Fragment {
             }
         });
 
-        return view;
     }
 }
