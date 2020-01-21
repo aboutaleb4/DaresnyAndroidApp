@@ -9,7 +9,9 @@ import android.os.Bundle;
 import android.transition.AutoTransition;
 import android.transition.ChangeBounds;
 import android.transition.TransitionManager;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
@@ -21,20 +23,19 @@ public class CourseInfo_frag extends Fragment {
     Button registerBtn;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_course_info);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.activity_course_info, container, false);
 
-        expandableLearningCenter = (LinearLayout) findViewById(R.id.expandableLearningCenter);
-        arrowBtnLearningCenter = (Button) findViewById(R.id.arrowBtnLearningCenter);
-        cardViewLearningCenter = (CardView) findViewById(R.id.cardViewLearningCenter);
-        registerBtn = (Button) findViewById(R.id.registerBtn);
+        expandableLearningCenter = (LinearLayout) view.findViewById(R.id.expandableLearningCenter);
+        arrowBtnLearningCenter = (Button) view.findViewById(R.id.arrowBtnLearningCenter);
+        cardViewLearningCenter = (CardView) view.findViewById(R.id.cardViewLearningCenter);
+        registerBtn = (Button) view.findViewById(R.id.registerBtn);
 
 
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent toRegisterCourseIntent = new Intent(CourseInfoActivity.this,CourseRegisterActivity.class);
+                Intent toRegisterCourseIntent = new Intent(getContext(),CourseRegisterActivity.class);
                 startActivity(toRegisterCourseIntent);
             }
         });
@@ -60,6 +61,6 @@ public class CourseInfo_frag extends Fragment {
             }
         });
 
-
+        return view;
     }
 }
