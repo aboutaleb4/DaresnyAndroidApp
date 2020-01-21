@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,6 +48,13 @@ public class main_frag extends Fragment {
         recyclerView_2.setLayoutManager(new GridLayoutManager(getContext(),4));
         RecyclerViewAdapter adapter_2 = new RecyclerViewAdapter(getContext(), Courses, coursesIcon);
         recyclerView_2.setAdapter(adapter_2);
+        recyclerView_2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getContext(),CourseInfo.class);
+                startActivity(i);
+            }
+        });
         return view;
 
     }
