@@ -21,7 +21,7 @@ import android.widget.FrameLayout;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MainActivity extends AppCompatActivity implements CoursesList_frag.coursesFragOnClickListener, FiltersFragment.filtersFragmentOnClickListener {
+public class MainActivity extends AppCompatActivity implements CoursesList_frag.coursesFragOnClickListener {
 
     String[] Category;
     int[] categoryIcon = {R.drawable.science, R.drawable.programming, R.drawable.engineering, R.drawable.language};
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements CoursesList_frag.
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragment6, new NavBar());
         fragmentTransaction.replace(R.id.fragment6_1, new TopBar());
-        fragmentTransaction.replace(R.id.filters_layout, new FiltersFragment());
+        //fragmentTransaction.replace(R.id.filters_layout, new FiltersFragment());
         fragmentTransaction.commit();
 
 
@@ -81,13 +81,5 @@ public class MainActivity extends AppCompatActivity implements CoursesList_frag.
         }
     }
 
-    public void onClickClose(){
-        final ChangeBounds transition = new ChangeBounds();
-        transition.setDuration(100L);                       // Sets a duration of 100 millisecondss
 
-        if(filters_layout.getVisibility()!= View.GONE){
-            TransitionManager.beginDelayedTransition(main_layout,transition);
-            filters_layout.setVisibility(View.GONE);
-        }
-    }
 }

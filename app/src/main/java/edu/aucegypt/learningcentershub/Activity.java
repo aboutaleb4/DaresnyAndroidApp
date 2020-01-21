@@ -14,7 +14,7 @@ public class Activity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragment2, new NavBar_LC());
         fragmentTransaction.replace(R.id.fragment2_1, new TopBar());
-        fragmentTransaction.replace(R.id.fragment2_2, new Registered__users());
+      //  fragmentTransaction.replace(R.id.fragment2_2, new Registered__users());
         fragmentTransaction.commit();
 
     }
