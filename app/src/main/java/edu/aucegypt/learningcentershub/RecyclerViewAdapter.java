@@ -41,7 +41,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.image.setImageResource(icons[position]);
         holder.name.setText(names[position]);
 
-        
+
     }
 
     @Override
@@ -62,4 +62,5 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             name = itemView.findViewById(R.id.name);
         }
     }
+
 }

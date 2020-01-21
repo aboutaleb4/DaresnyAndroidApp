@@ -48,14 +48,8 @@ public class main_frag extends Fragment {
         recyclerView_2.setLayoutManager(new GridLayoutManager(getContext(),4));
         RecyclerViewAdapter adapter_2 = new RecyclerViewAdapter(getContext(), Courses, coursesIcon);
         recyclerView_2.setAdapter(adapter_2);
-        recyclerView_2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(getActivity(),CourseInfo.class);
-                startActivity(i);
-            }
-        });
         return view;
 
     }
+
 }
