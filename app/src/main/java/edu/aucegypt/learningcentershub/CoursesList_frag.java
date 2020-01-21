@@ -40,6 +40,7 @@ public class CoursesList_frag extends Fragment implements View.OnClickListener {
     public interface coursesFragOnClickListener {
 
         public void onFiltersBtnClick();
+        ;;
     }
 
 
