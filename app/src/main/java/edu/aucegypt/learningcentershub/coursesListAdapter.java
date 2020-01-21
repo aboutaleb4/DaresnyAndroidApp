@@ -1,6 +1,7 @@
 package edu.aucegypt.learningcentershub;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -44,7 +45,7 @@ public class coursesListAdapter extends RecyclerView.Adapter<coursesListAdapter.
         return arrayListFiltered.size();
     }
 
-    public class viewHolder extends RecyclerView.ViewHolder {
+    public class viewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView name;
         ImageView image;
 
@@ -52,7 +53,13 @@ public class coursesListAdapter extends RecyclerView.Adapter<coursesListAdapter.
             super(itemView);
             name = (TextView) itemView.findViewById(R.id.name);
             image = (ImageView) itemView.findViewById(R.id.image);
+            itemView.setOnClickListener(this);
 
+        }
+
+        public void onClick(View view){
+            Intent toCourseInfoIntent = new Intent(context, CourseInfoActivity.class);
+            context.startActivity(toCourseInfoIntent);
         }
     }
 

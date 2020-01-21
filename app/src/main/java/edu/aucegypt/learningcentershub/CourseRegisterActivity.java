@@ -10,18 +10,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-public class CourseRegisterActivity extends Fragment {
+public class CourseRegisterActivity extends AppCompatActivity {
 
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_course_register, container, false);
-        Button reg = view.findViewById(R.id.btn_signup);
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        setContentView(R.layout.activity_course_register);
+
+        Button reg = (Button) findViewById(R.id.btn_signup);
         reg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getContext(), Payment.class);
+                Intent i = new Intent(CourseRegisterActivity.this, Payment.class);
                 startActivity(i);
             }
         });
-        return view;
+
     }
+    
 }

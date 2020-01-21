@@ -37,9 +37,9 @@ public class CourseInfo_frag extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Fragment selectedFragment = null;
-                selectedFragment = new CourseRegisterActivity();
-                ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.fragment6_2, selectedFragment).commit();
+//                Fragment selectedFragment = null;
+//                selectedFragment = new CourseRegisterActivity();
+//                ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.fragment6_2, selectedFragment).commit();
 
             }
         });
