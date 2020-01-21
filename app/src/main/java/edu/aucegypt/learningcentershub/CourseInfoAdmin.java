@@ -6,12 +6,14 @@ import android.transition.ChangeBounds;
 import android.transition.TransitionManager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 
-public class CourseInfoAdmin extends AppCompatActivity {
+public class CourseInfoAdmin extends AppCompatActivity implements View.OnClickListener {
 
     LinearLayout expandableLearningCenter;
     Button arrowBtnLearningCenter;
@@ -22,6 +24,22 @@ public class CourseInfoAdmin extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_info_admin);
+
+        Toolbar myToolbar = findViewById(R.id.topbar4);
+
+        setSupportActionBar(myToolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        ImageButton button = findViewById(R.id.buttonback);
+        button.setOnClickListener(this);
+        //load exisiting info
+    }
+
+    @Override
+    public void onClick(View view) {
+        //should save data
+        finish();
+    }
+
 
       /*  expandableLearningCenter = (LinearLayout) findViewById(R.id.expandableLearningCenter);
         arrowBtnLearningCenter = (Button) findViewById(R.id.arrowBtnLearningCenter);
@@ -59,9 +77,10 @@ public class CourseInfoAdmin extends AppCompatActivity {
         });
 
 
+
        */
     }
-}
+
 
 
 
