@@ -10,11 +10,13 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import edu.aucegypt.learningcentershub.R;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>{
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>  {
 
     String[] names;
     int[] icons;
@@ -42,7 +44,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(mContext, names[position], Toast.LENGTH_SHORT).show();
+
+                    Fragment selectedFragment = null;
+                    selectedFragment = new CourseInfo_frag();
+                    ((FragmentActivity) mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment6_2, selectedFragment).commit();
+
+                //Toast.makeText(mContext, names[position], Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -51,6 +58,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public int getItemCount() {
         return names.length;
     }
+
+
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 

@@ -1,11 +1,14 @@
 package edu.aucegypt.learningcentershub;
 
 
+import android.content.Context;
+import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -40,6 +43,9 @@ public class NavBar extends Fragment implements BottomNavigationView.OnNavigatio
 
             case "My Courses":
                 selectedFragment =  new MyCourses_frag();
+                break;
+            case "My Courses":
+                selectedFragment= new MyCourses_frag();
                 break;
 
         }

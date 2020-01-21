@@ -67,12 +67,26 @@ class rvadapter3 extends RecyclerView.Adapter<rvadapter3.ViewHolder3> implements
     }
     @Override
     public void onClick(View view) {
+       if (((TextView)view).getText().toString()=="Edit Information") {
+           Fragment selectedFragment = null;
+           selectedFragment = new LearningCenterInfoActivity();
+           ((FragmentActivity) mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_2, selectedFragment).commit();
+       }
+       else if (((TextView)view).getText().toString()=="Edit Courses"){
+           Fragment selectedFragment = null;
+           selectedFragment = new CourseInfo_frag();
+           ((FragmentActivity) mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_2, selectedFragment).commit();
 
-        Fragment selectedFragment = null;
-        selectedFragment = new user_info_frag();
+       }
+       else {
+           Fragment selectedFragment = null;
+           selectedFragment = new user_info_frag();
+           ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment2_2, selectedFragment).commit();
 
-        ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment2_2, selectedFragment).commit();
+       }
     }
+
+
     public class ViewHolder3 extends RecyclerView.ViewHolder  {
 
         TextView text1;

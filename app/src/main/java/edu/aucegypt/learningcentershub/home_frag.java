@@ -6,12 +6,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class home_frag extends Fragment {
+public class home_frag extends Fragment{
     RecyclerView listView;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -22,7 +25,10 @@ public class home_frag extends Fragment {
         listView.setLayoutManager(layoutManager);
         listView.setAdapter(new rvadapter3(getContext(), Data));
         listView.setNestedScrollingEnabled(false);
-
         return view;
     }
+
+
+
+
 }

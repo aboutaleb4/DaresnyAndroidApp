@@ -18,7 +18,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="96dp"
         android:layout_marginEnd="24dp"
-        android:textColor="@color/applicationColor"
+        android:textColor="@color/colorPrimaryDark"
         android:hint="@string/prompt_email"
         android:inputType="textEmailAddress"
         android:selectAllOnFocus="true"
@@ -33,7 +33,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
-        android:textColor="@color/applicationColor"
+        android:textColor="@color/colorPrimaryDark"
         android:hint="@string/prompt_password"
         android:imeActionLabel="@string/action_sign_in_short"
         android:imeOptions="actionDone"
@@ -96,8 +96,7 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_weight="1"
-        android:text="X"
-        android:background="@android:color/transparent"
+        android:background="@drawable/ic_close_black_24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
