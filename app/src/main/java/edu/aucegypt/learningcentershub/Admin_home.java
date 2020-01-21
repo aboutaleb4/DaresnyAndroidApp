@@ -21,9 +21,6 @@ public class Admin_home extends AppCompatActivity{
         fragmentTransaction.replace(R.id.fragment_2, new home_frag());
         fragmentTransaction.commit();
 
-
-        //background
-        //name assume from database on log -in
     }
 
 

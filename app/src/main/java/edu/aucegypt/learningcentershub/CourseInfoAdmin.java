@@ -1,22 +1,19 @@
 package edu.aucegypt.learningcentershub;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.transition.AutoTransition;
 import android.transition.ChangeBounds;
 import android.transition.TransitionManager;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
-public class CourseInfo_frag extends Fragment {
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
+
+public class CourseInfoAdmin extends AppCompatActivity implements View.OnClickListener {
 
     LinearLayout expandableLearningCenter;
     Button arrowBtnLearningCenter;
@@ -24,23 +21,37 @@ public class CourseInfo_frag extends Fragment {
     Button registerBtn;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_course_info, container, false);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_course_info_admin);
 
-        expandableLearningCenter = (LinearLayout) view.findViewById(R.id.expandableLearningCenter);
-        arrowBtnLearningCenter = (Button) view.findViewById(R.id.arrowBtnLearningCenter);
-        cardViewLearningCenter = (CardView) view.findViewById(R.id.cardViewLearningCenter);
-        registerBtn = (Button) view.findViewById(R.id.registerBtn);
+        Toolbar myToolbar = findViewById(R.id.topbar4);
+
+        setSupportActionBar(myToolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        ImageButton button = findViewById(R.id.buttonback);
+        button.setOnClickListener(this);
+        //load exisiting info
+    }
+
+    @Override
+    public void onClick(View view) {
+        //should save data
+        finish();
+    }
+
+
+      /*  expandableLearningCenter = (LinearLayout) findViewById(R.id.expandableLearningCenter);
+        arrowBtnLearningCenter = (Button) findViewById(R.id.arrowBtnLearningCenter);
+        cardViewLearningCenter = (CardView) findViewById(R.id.cardViewLearningCenter);
+        registerBtn = (Button)findViewById(R.id.registerBtn);
 
 
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-//                Fragment selectedFragment = null;
-//                selectedFragment = new CourseRegisterActivity();
-//                ((FragmentActivity) getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.fragment6_2, selectedFragment).commit();
-
+                Intent i = new Intent(getApplicationContext(),CourseRegisterActivity.class);
+                startActivity(i);
             }
         });
 
@@ -65,6 +76,12 @@ public class CourseInfo_frag extends Fragment {
             }
         });
 
-        return view;
+
+
+       */
     }
-}
+
+
+
+
+

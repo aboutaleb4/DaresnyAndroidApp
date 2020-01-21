@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -59,4 +60,5 @@ public class main_frag extends Fragment implements RecyclerViewAdapter.RecyclerV
     public void RecyclerViewClick(int position) {
 
     }
+
 }

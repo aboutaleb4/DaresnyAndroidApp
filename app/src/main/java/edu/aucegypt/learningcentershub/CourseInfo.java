@@ -2,17 +2,21 @@ package edu.aucegypt.learningcentershub;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.transition.AutoTransition;
 import android.transition.ChangeBounds;
 import android.transition.TransitionManager;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-public class CourseInfoActivity extends AppCompatActivity {
+public class CourseInfo extends AppCompatActivity {
 
     LinearLayout expandableLearningCenter;
     Button arrowBtnLearningCenter;
@@ -20,21 +24,21 @@ public class CourseInfoActivity extends AppCompatActivity {
     Button registerBtn;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_info);
 
         expandableLearningCenter = (LinearLayout) findViewById(R.id.expandableLearningCenter);
         arrowBtnLearningCenter = (Button) findViewById(R.id.arrowBtnLearningCenter);
         cardViewLearningCenter = (CardView) findViewById(R.id.cardViewLearningCenter);
-        registerBtn = (Button) findViewById(R.id.registerBtn);
+        registerBtn = (Button)findViewById(R.id.registerBtn);
 
 
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent toRegisterCourseIntent = new Intent(CourseInfoActivity.this,CourseRegisterActivity.class);
-                startActivity(toRegisterCourseIntent);
+                Intent i = new Intent(getApplicationContext(),CourseRegisterActivity.class);
+                startActivity(i);
             }
         });
 
@@ -59,6 +63,9 @@ public class CourseInfoActivity extends AppCompatActivity {
             }
         });
 
-
     }
 }
+
+
+
+
