@@ -1,34 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white">
-
-
-    <RelativeLayout
-        android:id="@+id/top_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="15dp">
 
 
         <Button
             android:id="@+id/button2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="start"
             android:text="Reset"
-            android:layout_alignParentLeft="true"
             android:textSize="12sp"
+            android:layout_marginBottom="10dp"
             style="@style/Widget.AppCompat.Button.Borderless"
 
             />
 
         <Button
-            android:id="@+id/closeBtn1"
+            android:id="@+id/closeBtn"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_alignParentRight="true"
+            android:layout_gravity="end"
             style="@style/Widget.AppCompat.Button.Borderless"
             android:background="@drawable/ic_close_black_24dp" />
 
@@ -36,232 +30,237 @@
 
 
 
-    </RelativeLayout>
-
-
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-
-
-    <LinearLayout
-        android:id="@+id/line1"
+        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_margin="10dp"
-        android:padding="12dp"
-        android:layout_marginTop="10dp">
-
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Category"
-            android:textAlignment="viewStart"
-            android:textColor="@color/applicationColor"
-            android:textSize="28sp"
-            android:textStyle="bold" />
-
-        <ListView
-            android:id="@+id/lvCategoryFilters"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
-        </ListView>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Location Area"
-            android:textAlignment="viewStart"
-            android:textColor="@color/applicationColor"
-            android:textSize="28sp"
-            android:textStyle="bold" />
-
-        <ListView
-            android:id="@+id/lvAreaFilters"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
-        </ListView>
-
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Start Date From Now"
-            android:textAlignment="viewStart"
-            android:textColor="@color/applicationColor"
-            android:textSize="28sp"
-            android:textStyle="bold" />
-
-
-        <CheckBox
-            android:id="@+id/cbBox1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:text="Less than a month"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="18sp"
-            android:layout_margin="5dp">
-        </CheckBox>
-
-
-        <CheckBox
-            android:id="@+id/cbBox2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_margin="5dp"
-            android:text="One month"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="18sp"></CheckBox>
-
-        <CheckBox
-            android:id="@+id/cbBox3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:text="Two months"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="18sp"
-            android:layout_margin="5dp">
-        </CheckBox>
-
-        <CheckBox
-            android:id="@+id/cbBox4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:text="Three months or more"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="18sp"
-            android:layout_margin="5dp">
-        </CheckBox>
-
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Duration"
-            android:textAlignment="viewStart"
-            android:textColor="@color/applicationColor"
-            android:textSize="28sp"
-            android:textStyle="bold" />
-
-
-        <CheckBox
-            android:id="@+id/cbBox5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:text="Less than a month"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="18sp"
-            android:layout_margin="5dp">
-        </CheckBox>
-
-
-        <CheckBox
-            android:id="@+id/cbBox6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:text="One month"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="18sp"
-            android:layout_margin="5dp">
-        </CheckBox>
-
-        <CheckBox
-            android:id="@+id/cbBox7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:text="Two months"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="18sp"
-            android:layout_margin="5dp">
-        </CheckBox>
-
-        <CheckBox
-            android:id="@+id/cbBox8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:text="Three months or more"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="18sp"
-            android:layout_margin="5dp">
-        </CheckBox>
-
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Price"
-            android:textAlignment="viewStart"
-            android:textColor="@color/applicationColor"
-            android:textSize="30sp"
-            android:textStyle="bold" />
+        app:layout_anchor="@+id/scrollView2"
+        app:layout_anchorGravity="center">
 
 
         <LinearLayout
+            android:id="@+id/line1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Min"
-                android:textColor="@color/colorPrimaryDark"
-                android:layout_gravity="center_vertical"
-                android:textSize="18sp"
-                />
-        <androidx.appcompat.widget.AppCompatSeekBar
-            android:id="@+id/sbId"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_margin="10dp"
-            android:theme="@style/MySeekBarTheme"
-            android:max="10000"
-            android:progress="5000"
-            />
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:padding="12dp">
+
+
             <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Category"
+                android:textAlignment="viewStart"
+                android:textColor="@color/applicationColor"
+                android:textSize="28sp"
+                android:textStyle="bold" />
+
+            <!--        <ListView-->
+            <!--            android:id="@+id/lvCategoryFilters"-->
+            <!--            android:layout_width="match_parent"-->
+            <!--            android:layout_height="wrap_content"-->
+            <!--            >-->
+            <!--        </ListView>-->
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView_CategoryFilter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:scrollbars="vertical" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Location Area"
+                android:textAlignment="viewStart"
+                android:textColor="@color/applicationColor"
+                android:textSize="28sp"
+                android:textStyle="bold" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView_AreaFilter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:scrollbars="vertical" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Start Date From Now"
+                android:textAlignment="viewStart"
+                android:textColor="@color/applicationColor"
+                android:textSize="28sp"
+                android:textStyle="bold" />
+
+
+            <CheckBox
+                android:id="@+id/cbBox1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Max"
-                android:textColor="@color/colorPrimaryDark"
                 android:layout_gravity="center_vertical"
-                android:textSize="18sp"
-                />
+                android:layout_margin="5dp"
+                android:text="Less than a month"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18sp"></CheckBox>
+
+
+            <CheckBox
+                android:id="@+id/cbBox2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="5dp"
+                android:text="One month"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18sp"></CheckBox>
+
+            <CheckBox
+                android:id="@+id/cbBox3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="5dp"
+                android:text="Two months"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18sp"></CheckBox>
+
+            <CheckBox
+                android:id="@+id/cbBox4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="5dp"
+                android:text="Three months or more"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18sp"></CheckBox>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Duration"
+                android:textAlignment="viewStart"
+                android:textColor="@color/applicationColor"
+                android:textSize="28sp"
+                android:textStyle="bold" />
+
+
+            <CheckBox
+                android:id="@+id/cbBox5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="5dp"
+                android:text="Less than a month"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18sp"></CheckBox>
+
+
+            <CheckBox
+                android:id="@+id/cbBox6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="5dp"
+                android:text="One month"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18sp"></CheckBox>
+
+            <CheckBox
+                android:id="@+id/cbBox7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="5dp"
+                android:text="Two months"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18sp"></CheckBox>
+
+            <CheckBox
+                android:id="@+id/cbBox8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="5dp"
+                android:text="Three months or more"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18sp"></CheckBox>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Price"
+                android:textAlignment="viewStart"
+                android:textColor="@color/applicationColor"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="Min"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="18sp" />
+
+                <androidx.appcompat.widget.AppCompatSeekBar
+                    android:id="@+id/sbId"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:max="10000"
+                    android:progress="5000"
+                    android:theme="@style/MySeekBarTheme" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="Max"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+
+
+
+
+
+
         </LinearLayout>
-
-
-        <Button
-            android:id="@+id/closeBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/line1"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="5dp"
-            android:onClick="showResult"
-            android:text="Apply"
-            android:textColor="@color/applicationColor"
-            android:textSize="18sp"></Button>
-
-
-
-    </LinearLayout>
 
     </ScrollView>
 
+    <Button
+        android:id="@+id/applyBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/line1"
+        android:layout_gravity="bottom|end"
+        android:layout_marginTop="5dp"
+        android:onClick="showResult"
+        android:text="Apply"
+        android:textColor="@color/applicationColor"
+        android:textSize="18sp"></Button>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

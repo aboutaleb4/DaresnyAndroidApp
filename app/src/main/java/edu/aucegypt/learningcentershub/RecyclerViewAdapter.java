@@ -1,6 +1,5 @@
 package edu.aucegypt.learningcentershub;
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,21 +21,19 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     String[] names;
     int[] icons;
     Context mContext;
-    private RecyclerViewListner mrecyclerViewListner;
 
 
-    public RecyclerViewAdapter(Context context, String[] Names, int[] Icons, RecyclerViewListner recyclerViewListner) {
+    public RecyclerViewAdapter(Context context, String[] Names, int[] Icons) {
         this.names = Names;
         this.icons = Icons;
         this.mContext = context;
-        this.mrecyclerViewListner = recyclerViewListner;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_listitem, parent, false);
-        return new ViewHolder(view, mrecyclerViewListner);
+        return new ViewHolder(view);
     }
 
     @Override
@@ -44,10 +41,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.image.setImageResource(icons[position]);
         holder.name.setText(names[position]);
 
-
         holder.image.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
-                view.setBackgroundColor(Color.CYAN);
+
+                  Toast.makeText(mContext, names[position], Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -59,24 +57,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder{
 
         ImageView image;
         TextView name;
-        RecyclerViewListner recyclerViewListner;
-        public ViewHolder(View itemView, RecyclerViewListner recyclerViewListner) {
+
+        public ViewHolder(View itemView) {
             super(itemView);
             image = itemView.findViewById(R.id.image_view);
             name = itemView.findViewById(R.id.name);
-            this.recyclerViewListner = recyclerViewListner;
-            itemView.setOnClickListener(this);
         }
-        @Override
-        public void onClick(View view){
-            recyclerViewListner.RecyclerViewClick(getAdapterPosition());
-        }
-    }
-    public interface RecyclerViewListner{
-        void RecyclerViewClick(int position);
     }
 }

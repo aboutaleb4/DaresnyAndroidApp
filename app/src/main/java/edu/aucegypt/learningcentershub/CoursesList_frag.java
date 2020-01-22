@@ -104,7 +104,7 @@ public class CoursesList_frag extends Fragment implements View.OnClickListener {
 
         }else {
             throw  new ClassCastException(context.toString()
-                + " must implement coursesFragOnClickListener.onFiltersBtnClick.");
+                    + " must implement coursesFragOnClickListener.onFiltersBtnClick.");
         }
     }
 

@@ -13,25 +13,25 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class Registered__users extends Fragment  {
+public class Registered__users extends AppCompatActivity {
     RecyclerView listView;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.registered_users, container, false);
-        listView = view.findViewById(R.id.registred_users_users);
+    public void onCreate( Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.registered_users);
+        listView = findViewById(R.id.registred_users_users);
         String[] Data = {"User 1", "User 2"}; //comes from database
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         listView.setLayoutManager(layoutManager);
-        listView.setAdapter(new rvadapter3(getContext(), Data));
+        listView.setAdapter(new rvadapter3(this, Data));
         listView.setNestedScrollingEnabled(false);
-        return view;
     }
 
 
@@ -68,16 +68,16 @@ class rvadapter3 extends RecyclerView.Adapter<rvadapter3.ViewHolder3> implements
     @Override
     public void onClick(View view) {
        if (((TextView)view).getText().toString()=="Edit Information") {
-           Intent i = new Intent(mContext,LearningCenterInfoAdmin.class);
-           mContext.startActivity(i);
-             }
+           Fragment selectedFragment = null;
+           //selectedFragment = new LearningCenterInfoActivity();
+           ((FragmentActivity) mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_2, selectedFragment).commit();
+       }
        else if (((TextView)view).getText().toString()=="Edit Courses"){
-           Intent i = new Intent(mContext,CourseInfoAdmin.class);
-           mContext.startActivity(i);
+            //course info editable
        }
        else {
            Fragment selectedFragment = null;
-           selectedFragment = new user_info_frag();
+           //selectedFragment = new user_info_frag();
            ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment2_2, selectedFragment).commit();
 
        }
