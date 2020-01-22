@@ -26,7 +26,7 @@ public class NavBar_LC extends Fragment implements BottomNavigationView.OnNaviga
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        Fragment selectedFragment = null;
+       /* Fragment selectedFragment = null;
         switch (menuItem.getTitle().toString()) {
             case "Home":
                 selectedFragment = new home_frag();
@@ -40,6 +40,8 @@ public class NavBar_LC extends Fragment implements BottomNavigationView.OnNaviga
 
     }
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_2, selectedFragment).commit();
+
+        */
         return true;
     }
 }
