@@ -21,6 +21,9 @@ import org.jetbrains.annotations.NotNull;
 import org.w3c.dom.Text;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import edu.aucegypt.learningcentershub.Network.APIcall;
 import edu.aucegypt.learningcentershub.data.User;
@@ -39,6 +42,7 @@ public class CreateAccountActivity extends AppCompatActivity  implements View.On
     EditText emailField;
     EditText passwordField;
     String category[];
+    Boolean isSelected[] = {false, false, false, false, false, false, false, false};
 
     TextView textView2;
     int[] categoryIcon = {R.drawable.science, R.drawable.programming, R.drawable.engineering,
@@ -73,9 +77,17 @@ public class CreateAccountActivity extends AppCompatActivity  implements View.On
             startActivity(i);
         }
         if (view.getId()==R.id.exit_create_account) {
+            ArrayList<String> choosenCategories = new ArrayList<String>();
+            String choosenCategoriesArray[] = {};
 //           Intent i = new Intent("edu.aucegypt.learningcentershub.MAIN_ACTIVITY");
  //           startActivity(i);
-            User user = new User("", firstNameField.getText().toString().trim(), lastNameField.getText().toString().trim(), emailField.getText().toString().trim(), passwordField.getText().toString().trim(), "",category , false);
+            for(int i=1;i<=8;i++){
+                if (isSelected[i]){
+                    choosenCategories.add(category[i]);
+                }
+            }
+            choosenCategoriesArray = choosenCategories.toArray(choosenCategoriesArray);
+            User user = new User("", firstNameField.getText().toString().trim(), lastNameField.getText().toString().trim(), emailField.getText().toString().trim(), passwordField.getText().toString().trim(), "",choosenCategoriesArray , false);
             Gson gson = new Gson();
             String json = gson.toJson(user);
 
@@ -112,5 +124,6 @@ public class CreateAccountActivity extends AppCompatActivity  implements View.On
 
     @Override
     public void RecyclerViewClick(int position) {
+        isSelected[position] = !isSelected[position];
     }
 }

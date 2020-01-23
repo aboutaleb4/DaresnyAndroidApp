@@ -22,6 +22,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     String[] names;
     int[] icons;
     Context mContext;
+    Boolean[] isSelected;
     private RecyclerViewListner mrecyclerViewListner;
 
 
