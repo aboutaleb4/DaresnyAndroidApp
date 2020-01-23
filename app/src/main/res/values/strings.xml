@@ -79,6 +79,12 @@
         <item>EGP 900</item>
         <item>EGP 850</item>
     </string-array>
+    <string-array name="locations_4">
+        <item>Tagamo3</item>
+        <item>Masr Elgedida</item>
+        <item>Madinaty</item>
+        <item>Elgiza</item>
+    </string-array>
 
     <string name="hint">Search Here</string>
 
