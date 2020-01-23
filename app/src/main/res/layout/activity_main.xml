@@ -41,4 +41,11 @@
         android:layout_height="match_parent"
         android:visibility="gone" />
 
+    <FrameLayout
+        android:id="@+id/fragmentseeallcategories"
+        android:name="edu.aucegypt.learningcentershub.Categories"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
