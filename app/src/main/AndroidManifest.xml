@@ -46,10 +46,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".CourseInfo"></activity>
-        <activity android:name=".MyAccount"/>
+        <activity android:name=".MyAccount"
+            android:windowSoftInputMode="adjustPan"
+            />
         <activity android:name=".Payment"/>
         <activity android:name=".LearningCenterInfoActivity"/>
-        <activity android:name=".LearningCenterInfoAdmin"/>
+        <activity android:name=".LearningCenterInfoAdmin"
+            />
         <activity android:name=".CourseInfoAdmin"/>
 
     </application>
