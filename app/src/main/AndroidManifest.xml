@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="edu.aucegypt.learningcentershub">
-
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission
+        android:name="android.permission.INTERNET"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -38,20 +41,22 @@
             <category android:name="android.intent.category.DEFAULT"/>
         </intent-filter>
 
+
+        </activity>
+        <activity android:name=".Admin_home">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Admin_home">
-
-        </activity>
         <activity android:name=".CourseInfo"></activity>
-        <activity android:name=".MyAccount"/>
+        <activity android:name=".MyAccount"
+            />
         <activity android:name=".Payment"/>
         <activity android:name=".LearningCenterInfoActivity"/>
-        <activity android:name=".LearningCenterInfoAdmin"/>
+        <activity android:name=".LearningCenterInfoAdmin"
+            />
         <activity android:name=".CourseInfoAdmin"/>
 
     </application>

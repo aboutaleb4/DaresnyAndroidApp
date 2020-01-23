@@ -43,7 +43,8 @@
                 android:text="See all"
                 android:textAlignment="textEnd"
                 android:textColor="@color/applicationColor"
-                android:textStyle="italic" />
+                android:textStyle="italic"
+                android:clickable="true"/>
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
@@ -74,6 +75,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
                 android:text="See all"
+                android:clickable="true"
                 android:textAlignment="textEnd"
                 android:textColor="@color/applicationColor"
                 android:textStyle="italic" />
