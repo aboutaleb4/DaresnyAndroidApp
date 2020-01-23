@@ -72,9 +72,15 @@ class rvadapter3 extends RecyclerView.Adapter<rvadapter3.ViewHolder3> implements
            mContext.startActivity(i);
              }
        else if (((TextView)view).getText().toString()=="Edit Courses"){
+           Fragment selectedFragment = null;
+           selectedFragment = new learningCentersFrag();
+           ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_2, selectedFragment).commit();
+
+       }
+       else if (((TextView)view).getText().toString()=="Course 1"){
            Intent i = new Intent(mContext,CourseInfoAdmin.class);
            mContext.startActivity(i);
-       }
+        }
        else {
            Fragment selectedFragment = null;
            selectedFragment = new user_info_frag();
