@@ -8,15 +8,17 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class main_frag extends Fragment implements RecyclerViewAdapter.RecyclerViewListner {
+public class main_frag extends Fragment implements RecyclerViewAdapter.RecyclerViewListner, View.OnClickListener {
 
     String[] Category;
     int[] categoryIcon = {R.drawable.science, R.drawable.programming, R.drawable.engineering, R.drawable.language};
@@ -26,6 +28,21 @@ public class main_frag extends Fragment implements RecyclerViewAdapter.RecyclerV
     String[] Courses_learningCenter;
     String[] Courses_Price;
     int[] coursesIcon = {R.drawable.science, R.drawable.programming, R.drawable.engineering, R.drawable.language};
+
+    private categoriesOnClickListener listener;
+    private learningCenterOnClickListener listener2;
+    TextView seeAllCategories;
+    TextView seeAllLearningCenters;
+
+    public interface categoriesOnClickListener
+    {
+         void onCategoriesListener();
+    }
+
+    public interface learningCenterOnClickListener
+    {
+        void onLearningCenterListener();
+    }
 
 
     @Override
@@ -54,11 +71,50 @@ public class main_frag extends Fragment implements RecyclerViewAdapter.RecyclerV
         CoursesAdapter adapter_2 = new CoursesAdapter(getContext(), Courses, Courses_learningCenter, Courses_Price, coursesIcon);
         recyclerView_2.setAdapter(adapter_2);
 
+        //view = inflater.inflate(R.layout.activity_categories, container, false);
+        seeAllCategories = (TextView) view.findViewById(R.id.seeallcategories);
+        seeAllCategories.setOnClickListener(this);
+        //view = inflater.inflate(R.layout.activity_categories, container, false);
+        seeAllLearningCenters = (TextView) view.findViewById(R.id.seealllearningcenters);
+        seeAllLearningCenters.setOnClickListener(this);
+
+
         return view;
     }
+
+    public void onAttach(Context context){
+        super.onAttach(context);
+
+        if(context instanceof categoriesOnClickListener){
+            listener = (categoriesOnClickListener) context;
+        }else {
+            throw  new ClassCastException(context.toString()
+                    + " must implement categoriesOnClickListener.");
+        }
+        if(context instanceof learningCenterOnClickListener){
+            listener2 = (learningCenterOnClickListener) context;
+        }else {
+            throw new ClassCastException(context.toString()
+                    + " must implement learningCenterOnClickListener.");
+        }
+
+    }
+
+    public void onClick(View view){
+        listener.onCategoriesListener();
+    }
+
+    public void onClickLearningCenters(View view){
+        listener2.onLearningCenterListener();
+    }
+
+
     @Override
     public void RecyclerViewClick(int position) {
 
     }
+
+
+
 
 }
