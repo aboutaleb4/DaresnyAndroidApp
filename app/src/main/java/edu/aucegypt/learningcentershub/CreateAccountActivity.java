@@ -9,13 +9,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.HorizontalScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import edu.aucegypt.learningcentershub.ui.login.LoginActivity;
 
-public class CreateAccountActivity extends AppCompatActivity  implements View.OnClickListener {
-    RecyclerView mListView;
+public class CreateAccountActivity extends AppCompatActivity  implements View.OnClickListener, RecyclerViewAdapter.RecyclerViewListner {
     String[] category;
     int[] categoryIcon = {R.drawable.science, R.drawable.programming, R.drawable.engineering,
             R.drawable.language, R.drawable.business, R.drawable.music, R.drawable.graphicdesign, R.drawable.cooking};
@@ -23,12 +26,14 @@ public class CreateAccountActivity extends AppCompatActivity  implements View.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
+
         category = getResources().getStringArray(R.array.category);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(layoutManager);
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, category, categoryIcon);
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, category, categoryIcon, this);
         recyclerView.setAdapter(adapter);
+
         TextView textView = findViewById(R.id.login);
         textView.setOnClickListener(this);
         Button b = findViewById(R.id.exit_create_account);
@@ -45,5 +50,10 @@ public class CreateAccountActivity extends AppCompatActivity  implements View.On
             Intent i = new Intent("edu.aucegypt.learningcentershub.MAIN_ACTIVITY");
             startActivity(i);
         }
+    }
+
+    @Override
+    public void RecyclerViewClick(int position) {
+
     }
 }

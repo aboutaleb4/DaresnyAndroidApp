@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class MyCourses_frag extends Fragment {
+public class MyCourses_frag extends Fragment implements RecyclerViewAdapter.RecyclerViewListner {
 
     String[] favourites;
     int[] favouritesIcons = {R.drawable.science, R.drawable.programming, R.drawable.engineering,
@@ -31,14 +31,19 @@ public class MyCourses_frag extends Fragment {
 
         RecyclerView recyclerView = view.findViewById(R.id.recyclerview_favourites);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(getContext(), favourites, favouritesIcons);
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(getContext(), favourites, favouritesIcons, this);
         recyclerView.setAdapter(adapter);
 
         RecyclerView recyclerView_1 = view.findViewById(R.id.recyclerview_registered);
         recyclerView_1.setLayoutManager(new GridLayoutManager(getContext(), 3));
-        RecyclerViewAdapter adapter_1 = new RecyclerViewAdapter(getContext(), registered, registeredIcons);
+        RecyclerViewAdapter adapter_1 = new RecyclerViewAdapter(getContext(), registered, registeredIcons, this);
         recyclerView_1.setAdapter(adapter_1);
 
         return view;
+    }
+
+    @Override
+    public void RecyclerViewClick(int position) {
+
     }
 }

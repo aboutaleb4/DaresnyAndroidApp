@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class MyAccount_frag extends Fragment {
+public class MyAccount_frag extends Fragment implements RecyclerViewAdapter.RecyclerViewListner {
 
     String[] Category;
     int[] categoryIcon = {R.drawable.science, R.drawable.programming, R.drawable.engineering, R.drawable.language};
@@ -23,9 +23,14 @@ public class MyAccount_frag extends Fragment {
 
         RecyclerView recyclerView = view.findViewById(R.id.recyclerview_id_3);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(),4));
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(getContext(), Category, categoryIcon);
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(getContext(), Category, categoryIcon, this);
         recyclerView.setAdapter(adapter);
         return view;
+
+    }
+
+    @Override
+    public void RecyclerViewClick(int position) {
 
     }
 }
