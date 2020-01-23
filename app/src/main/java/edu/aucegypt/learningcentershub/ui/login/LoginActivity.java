@@ -23,9 +23,23 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.jetbrains.annotations.NotNull;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+
+import edu.aucegypt.learningcentershub.MyAccount;
 import edu.aucegypt.learningcentershub.R;
 import edu.aucegypt.learningcentershub.ui.login.LoginViewModel;
 import edu.aucegypt.learningcentershub.ui.login.LoginViewModelFactory;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -119,9 +133,59 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadingProgressBar.setVisibility(View.VISIBLE);
-                loginViewModel.login(usernameEditText.getText().toString(),
-                        passwordEditText.getText().toString());
+                String jsonString;
+                JSONObject json = new JSONObject();
+                try {
+                    json.put("Email", usernameEditText.getText());
+                    json.put("Password", passwordEditText.getText().toString());
+                    jsonString = json.toString();
+                    String url = "http://10.40.47.60:3000/myroute/login";
+
+                    OkHttpClient client = new OkHttpClient();
+                    final MediaType JSON = MediaType.get("application/json; charset=utf-8");
+
+                    final RequestBody body = RequestBody.create(jsonString, JSON);
+                    final Request request = new Request.Builder()
+                            .url(url)
+                            .post(body)
+                            .build();
+
+                    client.newCall(request).enqueue(new Callback() {
+
+                        @Override
+                        public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                            if (response.isSuccessful()){
+                                final String myResponse = response.body().string();
+                                JSONObject myResponseReader;
+                                    if (myResponse != "") {
+                                        try {
+                                            myResponseReader = new JSONObject(myResponse);
+                                            Boolean status = myResponseReader.getBoolean("status");
+                                            String message = myResponseReader.getString("message");
+                                                if (status == true){
+                                                    Intent mIntent = new Intent(LoginActivity.this, MyAccount.class);
+                                                    startActivity(mIntent);
+                                                }
+
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+
+                                    }
+                            }
+
+                        }
+
+                        @Override
+                        public void onFailure(@NotNull Call call, @NotNull IOException e) {
+
+                        }
+                    });
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
             }
         });
     }
