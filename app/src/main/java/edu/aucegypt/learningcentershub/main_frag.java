@@ -19,6 +19,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class main_frag extends Fragment implements RecyclerViewAdapter.RecyclerViewListner {
 
     String[] Category;
+    String[] Locations;
     int[] categoryIcon = {R.drawable.science, R.drawable.programming, R.drawable.engineering, R.drawable.language};
     String[] LearningCenters;
     int[] learningCentersIcon = {R.drawable.science, R.drawable.programming, R.drawable.engineering, R.drawable.language};
@@ -37,20 +38,22 @@ public class main_frag extends Fragment implements RecyclerViewAdapter.RecyclerV
         Courses = getResources().getStringArray(R.array.courses_4);
         Courses_learningCenter = getResources().getStringArray(R.array.courses_learningcenter_4);
         Courses_Price = getResources().getStringArray(R.array.courses_price_4);
+        Locations = getResources().getStringArray(R.array.locations_4);
 
         RecyclerView recyclerView = view.findViewById(R.id.recyclerview_id);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(),4));
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(getContext(), Category, categoryIcon, this);
         recyclerView.setAdapter(adapter);
 
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         RecyclerView recyclerView_1 = view.findViewById(R.id.recyclerview_id_1);
-        recyclerView_1.setLayoutManager(new GridLayoutManager(getContext(),4));
-        RecyclerViewAdapter adapter_1 = new RecyclerViewAdapter(getContext(), LearningCenters, learningCentersIcon, this);
+        recyclerView_1.setLayoutManager(layoutManager);
+        LearningCenterAdapter adapter_1 = new LearningCenterAdapter(getContext(), Courses_learningCenter, Category, Locations, coursesIcon);
         recyclerView_1.setAdapter(adapter_1);
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        LinearLayoutManager layoutManager_1 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         RecyclerView recyclerView_2 = view.findViewById(R.id.recyclerview_id_2);
-        recyclerView_2.setLayoutManager(layoutManager);
+        recyclerView_2.setLayoutManager(layoutManager_1);
         CoursesAdapter adapter_2 = new CoursesAdapter(getContext(), Courses, Courses_learningCenter, Courses_Price, coursesIcon);
         recyclerView_2.setAdapter(adapter_2);
 
