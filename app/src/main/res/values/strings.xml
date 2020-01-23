@@ -110,4 +110,35 @@
         <item>Engineering</item>
         <item>Language</item>
     </string-array>
+
+    <string-array name="categories">
+        <item>Science</item>
+        <item>Programming</item>
+        <item>Engineering</item>
+        <item>Language</item>
+        <item>Science</item>
+        <item>Programming</item>
+        <item>Engineering</item>
+        <item>Language</item>
+        <item>Science</item>
+        <item>Programming</item>
+        <item>Engineering</item>
+        <item>Language</item>
+    </string-array>
+
+    <string-array name="Areas">
+        <item>Science</item>
+        <item>Programming</item>
+        <item>Engineering</item>
+        <item>Language</item>
+        <item>Science</item>
+        <item>Programming</item>
+        <item>Engineering</item>
+        <item>Language</item>
+        <item>Science</item>
+        <item>Programming</item>
+        <item>Engineering</item>
+        <item>Language</item>
+    </string-array>
+
 </resources>
