@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.SeekBar;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -20,6 +22,9 @@ public class FiltersFragment extends Fragment implements View.OnClickListener {
 
     RecyclerView recyclerView_CategoryFilter;
     RecyclerView recyclerView_AreaFilter;
+
+    SeekBar seekBar;
+    TextView textView;
 
     private filtersListAdapter catAdapter;
     private filtersListAdapter areaAdapter;
@@ -39,6 +44,9 @@ public class FiltersFragment extends Fragment implements View.OnClickListener {
         recyclerView_CategoryFilter = view.findViewById(R.id.recyclerView_CategoryFilter);
         recyclerView_AreaFilter = view.findViewById(R.id.recyclerView_AreaFilter);
 
+        seekBar = view.findViewById(R.id.sbId);
+        textView = view.findViewById(R.id.price_txt);
+
         closeBtn.setOnClickListener(this);
         // Inflate the layout for this fragment
 
@@ -46,8 +54,33 @@ public class FiltersFragment extends Fragment implements View.OnClickListener {
         initRecyclerView_Area(view);
 
 
+
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+                int val = (progress * (seekBar.getWidth() - 6 * seekBar.getThumbOffset())) / seekBar.getMax();
+                textView.setText("" + progress);
+                textView.setX(seekBar.getX() + val + seekBar.getThumbOffset() / 2);
+                textView.setY(seekBar.getY()-70);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+
+
+        });
+
         return  view;
     }
+
 
     public void onAttach(Context context){
         super.onAttach(context);
