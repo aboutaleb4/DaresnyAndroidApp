@@ -15,13 +15,20 @@ import android.widget.HorizontalScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import org.w3c.dom.Text;
 
+import edu.aucegypt.learningcentershub.data.User;
 import edu.aucegypt.learningcentershub.ui.login.LoginActivity;
 
 public class CreateAccountActivity extends AppCompatActivity  implements View.OnClickListener, RecyclerViewAdapter.RecyclerViewListner {
-    String[] category;
-    String t = "";
+    EditText firstNameField;
+    EditText lastNameField;
+    EditText emailField;
+    EditText passwordField;
+    String category[];
+
     TextView textView2;
     int[] categoryIcon = {R.drawable.science, R.drawable.programming, R.drawable.engineering,
             R.drawable.language, R.drawable.business, R.drawable.music, R.drawable.graphicdesign, R.drawable.cooking};
@@ -42,6 +49,10 @@ public class CreateAccountActivity extends AppCompatActivity  implements View.On
         textView.setOnClickListener(this);
         Button b = findViewById(R.id.exit_create_account);
         b.setOnClickListener(this);
+        firstNameField = (EditText) findViewById(R.id.firstname);
+        lastNameField = (EditText) findViewById(R.id.lastname);
+        emailField = (EditText) findViewById(R.id.email);
+        passwordField = (EditText) findViewById(R.id.password);
     }
 
     @Override
@@ -53,12 +64,13 @@ public class CreateAccountActivity extends AppCompatActivity  implements View.On
         if (view.getId()==R.id.exit_create_account) {
             Intent i = new Intent("edu.aucegypt.learningcentershub.MAIN_ACTIVITY");
             startActivity(i);
+            User user = new User("", firstNameField.getText().toString().trim(), lastNameField.getText().toString().trim(), emailField.getText().toString().trim(), passwordField.getText().toString().trim(), "",category , false);
+            Gson gson = new Gson();
+            String json = gson.toJson(user);
         }
     }
 
     @Override
     public void RecyclerViewClick(int position) {
-        t = t + category[position];
-        textView2.setText(t);
     }
 }
