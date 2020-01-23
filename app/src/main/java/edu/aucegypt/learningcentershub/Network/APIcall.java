@@ -35,7 +35,8 @@ public class APIcall {
     String url;
 
 
-    String post(String APIendpoint, String json) throws IOException {
+    public String post(String APIendpoint, String json) throws IOException {
+
         RequestBody body = RequestBody.create(json, JSON);
         Request request = new Request.Builder()
                 .url(url+APIendpoint)
@@ -44,9 +45,11 @@ public class APIcall {
         try (Response response = client.newCall(request).execute()) {
             return response.body().string();
         }
+
+
     }
 
-    String get(String APIendpoint) throws IOException {
+    public String get(String APIendpoint) throws IOException {
         Request request = new Request.Builder()
                 .url(url+APIendpoint)
                 .build();
