@@ -6,7 +6,9 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -45,12 +47,14 @@ public class add_course_frag extends Fragment {
     }
 }
 
-class rvadapter2 extends RecyclerView.Adapter<rvadapter2.ViewHolder3> implements View.OnClickListener{
+class rvadapter2 extends RecyclerView.Adapter<rvadapter2.ViewHolder3> implements View.OnClickListener {
     String[] rows;
     Context mContext;
     ArrayAdapter<String> dataAdapter;
-    Calendar myCalendar;
-     DatePickerDialog.OnDateSetListener date;
+    Calendar myCalendar, myCalendar2;
+    DatePickerDialog DPD,DPD2;
+    View view, view2;
+     DatePickerDialog.OnDateSetListener date,date2;
     public rvadapter2(Context context, String[] Names) {
         this.rows = Names;
         this.mContext = context;
@@ -58,17 +62,30 @@ class rvadapter2 extends RecyclerView.Adapter<rvadapter2.ViewHolder3> implements
         dataAdapter = new ArrayAdapter<>(mContext, android.R.layout.simple_spinner_item, categories);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
          myCalendar = Calendar.getInstance();
-        date = new DatePickerDialog.OnDateSetListener() {@Override
-        public void onDateSet(DatePicker view, int year, int monthOfYear,
-                              int dayOfMonth) {
-            // TODO Auto-generated method stub
-            myCalendar.set(Calendar.YEAR, year);
-            myCalendar.set(Calendar.MONTH, monthOfYear);
-            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+        date = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view1, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                setDate(view);
 
+            }};
+        DPD = new DatePickerDialog(mContext, date, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH));
+        myCalendar2 = Calendar.getInstance();
+        date2 = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view1, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                myCalendar2.set(Calendar.YEAR, year);
+                myCalendar2.set(Calendar.MONTH, monthOfYear);
+                myCalendar2.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                setDate(view2);
 
+            }};
+        DPD2 = new DatePickerDialog(mContext, date2, myCalendar2.get(Calendar.YEAR), myCalendar2.get(Calendar.MONTH), myCalendar2.get(Calendar.DAY_OF_MONTH));
 
-        }};
     }
 
     @NonNull
@@ -83,12 +100,7 @@ class rvadapter2 extends RecyclerView.Adapter<rvadapter2.ViewHolder3> implements
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_image, parent, false);
             return new ViewHolder3(view);
         }
-        if(viewType == 3)
-        {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_dropdown, parent, false);
 
-            return new ViewHolder3(view);
-        }
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row, parent, false);
         return new ViewHolder3(view);
     }
@@ -112,13 +124,32 @@ class rvadapter2 extends RecyclerView.Adapter<rvadapter2.ViewHolder3> implements
             holder.text1.setText(rows[position]);
 
         }
-        else if (position == 6)
+        else if (position == 6 )
         {
-            holder.editText.setOnClickListener(this);
-            holder.editText.setRawInputType(Configuration.KEYBOARDHIDDEN_YES);
-            String myFormat = "MM/dd/yy"; //In which you need put here
-            SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-            holder.editText.setText(sdf.format(myCalendar.getTime()));
+            holder.text1.setText(rows[position]);
+            view = holder.editText;
+            holder.editText.setInputType(InputType.TYPE_NULL);
+            holder.editText.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    DPD.show();
+                    return true;
+                }
+            });
+
+        }
+        else if (position == 7)
+        {
+            holder.text1.setText(rows[position]);
+            view2 = holder.editText;
+            holder.editText.setInputType(InputType.TYPE_NULL);
+            holder.editText.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    DPD2.show();
+                    return true;
+                }
+            });
         }
         else {
             holder.text1.setText(rows[position]);
@@ -130,6 +161,8 @@ class rvadapter2 extends RecyclerView.Adapter<rvadapter2.ViewHolder3> implements
             return 1;
         if(position == 2)
             return 2;
+        if (position == 6)
+            return 3;
         return 0;
     }
     @Override
@@ -141,15 +174,15 @@ class rvadapter2 extends RecyclerView.Adapter<rvadapter2.ViewHolder3> implements
     {
         if (view.getId() == R.id.row_select)
             ((Admin_home)mContext).chooseImage();
-        else if (view.getId() == R.id.row_edit)
-        {
-                    new DatePickerDialog(mContext, date, myCalendar
-                            .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                            myCalendar.get(Calendar.DAY_OF_MONTH)).show();
-
-        }
 
     }
+    void setDate(View view)
+    {
+        String myFormat = "MM/dd/yy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+        ((EditText)view).setText(sdf.format(myCalendar.getTime()));
+    }
+
 
     public class ViewHolder3 extends RecyclerView.ViewHolder{
 
