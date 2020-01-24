@@ -78,15 +78,27 @@ public class CreateAccountActivity extends AppCompatActivity  implements View.On
         }
         if (view.getId()==R.id.exit_create_account) {
             ArrayList<String> choosenCategories = new ArrayList<String>();
-            String choosenCategoriesArray[] = {};
+//            String choosenCategoriesArray[] = {};
 //           Intent i = new Intent("edu.aucegypt.learningcentershub.MAIN_ACTIVITY");
  //           startActivity(i);
-            for(int i=1;i<=8;i++){
+            for(int i=0;i<8;i++){
                 if (isSelected[i]){
                     choosenCategories.add(category[i]);
                 }
             }
-            choosenCategoriesArray = choosenCategories.toArray(choosenCategoriesArray);
+//            choosenCategoriesArray = choosenCategories.toArray(choosenCategoriesArray);
+
+            // declaration and initialise String Array
+            String choosenCategoriesArray[] = new String[choosenCategories.size()];
+
+            // Convert ArrayList to object array
+            Object[] objArr = choosenCategories.toArray();
+
+            // Iterating and converting to String
+            int i = 0;
+            for (Object obj : objArr) {
+                choosenCategoriesArray[i++] = (String)obj;
+            }
             User user = new User("", firstNameField.getText().toString().trim(), lastNameField.getText().toString().trim(), emailField.getText().toString().trim(), passwordField.getText().toString().trim(), "",choosenCategoriesArray , false);
             Gson gson = new Gson();
             String json = gson.toJson(user);
