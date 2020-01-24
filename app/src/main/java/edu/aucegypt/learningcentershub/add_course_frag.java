@@ -3,22 +3,21 @@ package edu.aucegypt.learningcentershub;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Configuration;
-import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.InputType;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -29,7 +28,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -56,17 +54,21 @@ public class add_course_frag extends Fragment implements View.OnClickListener {
         //perform checks
 
     }
+
 }
 
-class rvadapter2 extends RecyclerView.Adapter<rvadapter2.ViewHolder3> implements View.OnClickListener {
+class rvadapter2 extends RecyclerView.Adapter<rvadapter2.ViewHolder3> implements View.OnClickListener{
     String[] rows;
     Context mContext;
     ArrayAdapter<String> dataAdapter;
     Calendar myCalendar, myCalendar2;
     DatePickerDialog DPD,DPD2;
     View view, view2;
+    String name, category, instructor, std, end,sun,mon,tue,wed,thu,fri,sat;
+    Double fees, regfees;
      DatePickerDialog.OnDateSetListener date,date2;
-    public rvadapter2(Context context, String[] Names) {
+
+     public rvadapter2(Context context, String[] Names) {
         this.rows = Names;
         this.mContext = context;
         String [] categories = mContext.getResources().getStringArray(R.array.category_4);
@@ -121,11 +123,22 @@ class rvadapter2 extends RecyclerView.Adapter<rvadapter2.ViewHolder3> implements
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final ViewHolder3 holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder3 holder, final int position) {
         if(position == 1)
         {
             holder.text2.setText(rows[position]);
             holder.spinner.setAdapter(dataAdapter);
+            holder.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    category = view.toString();
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                }
+            });
         }
         else if (position == 2)
         {
@@ -285,6 +298,32 @@ class rvadapter2 extends RecyclerView.Adapter<rvadapter2.ViewHolder3> implements
         }
         else {
             holder.text1.setText(rows[position]);
+            holder.editText.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                    switch (position)
+                    {
+                        case 0:
+                            name = charSequence.toString();
+                            break;
+                        case 5:
+                            instructor = charSequence.toString();
+                            break;
+                            default:
+                                break;
+                    }
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) {
+
+                }
+            });
         }
     }
     public int getItemViewType(int position) {
@@ -322,7 +361,7 @@ class rvadapter2 extends RecyclerView.Adapter<rvadapter2.ViewHolder3> implements
         Spinner spinner;
         ImageButton imageButton;
         ImageView imageView;
-        EditText editText, cbsun,cbmon,cbtue,cbwed,cbthu,cbfri,cbsat;
+        EditText editText,cbsun,cbmon,cbtue,cbwed,cbthu,cbfri,cbsat;
 
         public ViewHolder3(View itemView) {
             super(itemView);

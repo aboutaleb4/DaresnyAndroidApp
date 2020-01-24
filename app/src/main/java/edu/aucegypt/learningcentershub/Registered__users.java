@@ -51,7 +51,7 @@ public class Registered__users extends Fragment  {
 class rvadapter3 extends RecyclerView.Adapter<rvadapter3.ViewHolder3> implements View.OnClickListener{
     String[] rows;
     public Context mContext;
-    private static String[] message = new String[9];
+    private static String[] message = new String[14];
 
     public rvadapter3(Context context, String[] Names) {
         this.rows = Names;
@@ -90,6 +90,12 @@ class rvadapter3 extends RecyclerView.Adapter<rvadapter3.ViewHolder3> implements
            i.putExtra("BuildingNo",message[6]);
            i.putExtra("FloorNo",message[7]);
            i.putExtra("AptNo",message[8] );
+           i.putExtra("Area",message[9] );
+           i.putExtra("City",message[10] );
+           i.putExtra("Longtitude",message[11] );
+           i.putExtra("Latitude",message[12] );
+           i.putExtra("id",message[13] );
+
            mContext.startActivity(i);
 
        }
@@ -110,7 +116,7 @@ class rvadapter3 extends RecyclerView.Adapter<rvadapter3.ViewHolder3> implements
 
        }
     }
-    void Network(String id){
+    private void Network(String id){
         String url = "http://192.168.1.7:3000/myroute/LCinfodisplay?id="+ id;
 
         OkHttpClient client = new OkHttpClient();
@@ -139,6 +145,11 @@ class rvadapter3 extends RecyclerView.Adapter<rvadapter3.ViewHolder3> implements
                             message[6] = myResponseReader.getString("BuildingNo");
                             message[7] = myResponseReader.getString("FloorNo");
                             message[8] = myResponseReader.getString("AptNo");
+                            message[9] = myResponseReader.getString("Area");
+                            message[10] = myResponseReader.getString("City");
+                            message[11] = myResponseReader.getString("Longtitude");
+                            message[12] = myResponseReader.getString("Latitude");
+                            message[13] = myResponseReader.getString("LCID");
 
                         } catch (JSONException e) {
                             e.printStackTrace();

@@ -50,7 +50,7 @@ public class Admin_home extends AppCompatActivity {
 
 
     }
-    void Network(String id){
+    private void Network(String id){
         String url = "http://192.168.1.7:3000/myroute/LCinfo?id="+ id;
 
         OkHttpClient client = new OkHttpClient();
