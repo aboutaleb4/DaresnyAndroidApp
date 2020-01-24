@@ -37,7 +37,9 @@ public class categoriesListAdapter extends RecyclerView.Adapter<categoriesListAd
     @Override
     public  void onBindViewHolder(viewHolder viewHolder, int position) {
         viewHolder.name.setText(arrayListFiltered.get(position).getCatName());
-        viewHolder.image.setImageResource(arrayListFiltered.get(position).getImage());
+
+        new DownloadImageTask(viewHolder.image)
+                .execute("http://10.40.47.60:3000/images/"+ arrayListFiltered.get(position).getCatImage());
 
     }
 

@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements CoursesList_frag.
         fragmentTransaction.replace(R.id.fragment6_1, new TopBar());
         fragmentTransaction.replace(R.id.fragment6_2, new main_frag());
         fragmentTransaction.replace(R.id.filters_layout, new FiltersFragment());
-        fragmentTransaction.replace(R.id.fragmentseeallcategories, new Categories());
+       // fragmentTransaction.replace(R.id.fragmentseeallcategories, new Categories());
         //fragmentTransaction.replace(R.id.seealllearningcenters, new LearningCenter());
         fragmentTransaction.commit();
 
