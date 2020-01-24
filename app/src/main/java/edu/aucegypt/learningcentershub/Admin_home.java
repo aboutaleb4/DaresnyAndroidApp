@@ -28,7 +28,7 @@ import okhttp3.Response;
 
 
 public class Admin_home extends AppCompatActivity {
-    private static String[] message = new String[1];
+    private static String[] message = new String[2];
     Uri uri;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +42,11 @@ public class Admin_home extends AppCompatActivity {
         b.putString("LCname",message[0]);
         Fragment hf =  new home_frag();
         hf.setArguments(b);
-        fragmentTransaction.replace(R.id.fragment, new NavBar_LC());
+        b = new Bundle();
+        b.putString("LCID",message[1]);
+        Fragment navbar =  new NavBar_LC();
+        navbar.setArguments(b);
+        fragmentTransaction.replace(R.id.fragment,navbar);
         fragmentTransaction.replace(R.id.fragment_1, new TopBar());
         fragmentTransaction.replace(R.id.fragment_2, hf);
         fragmentTransaction.commit();
@@ -71,6 +75,7 @@ public class Admin_home extends AppCompatActivity {
                         try {
                             myResponseReader = new JSONObject(String.valueOf(new JSONArray(myResponse).getJSONObject(0)));
                             Admin_home.message[0] = myResponseReader.getString("LCname");
+                            Admin_home.message[1] = myResponseReader.getString("LCID");
 
                         } catch (JSONException e) {
                             e.printStackTrace();
