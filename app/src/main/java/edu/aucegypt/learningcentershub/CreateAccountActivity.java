@@ -81,7 +81,7 @@ public class CreateAccountActivity extends AppCompatActivity  implements View.On
             String choosenCategoriesArray[] = {};
 //           Intent i = new Intent("edu.aucegypt.learningcentershub.MAIN_ACTIVITY");
  //           startActivity(i);
-            for(int i=1;i<=8;i++){
+            for(int i=0;i<8;i++){
                 if (isSelected[i]){
                     choosenCategories.add(category[i]);
                 }
