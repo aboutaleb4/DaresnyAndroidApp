@@ -13,11 +13,14 @@ import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import edu.aucegypt.learningcentershub.data.Course;
 
 import static edu.aucegypt.learningcentershub.Network.APIcall.url;
+import static edu.aucegypt.learningcentershub.utitlies.Utility.formatdouble;
 
 public class coursesListAdapter extends RecyclerView.Adapter<coursesListAdapter.viewHolder> implements Filterable {
 
@@ -41,9 +44,14 @@ public class coursesListAdapter extends RecyclerView.Adapter<coursesListAdapter.
 
         new DownloadImageTask(viewHolder.image)
                 .execute(url+"images/"+ arrayListFiltered.get(position).getCourseImage());
-        //viewHolder.image.setImageResource(arrayListFiltered.get(position).getImage());
+
+        viewHolder.LCname.setText((arrayListFiltered.get(position).getLCname()));
+
+        viewHolder.Price.setText("EGP " + formatdouble(arrayListFiltered.get(position).getPrice()));
 
     }
+
+
 
     @Override
     public int getItemCount() {
@@ -52,18 +60,29 @@ public class coursesListAdapter extends RecyclerView.Adapter<coursesListAdapter.
 
     public class viewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView name;
+        TextView LCname;
         ImageView image;
+        TextView Price;
 
         public viewHolder(View itemView) {
             super(itemView);
             name = (TextView) itemView.findViewById(R.id.name);
             image = (ImageView) itemView.findViewById(R.id.image);
+            LCname = (TextView) itemView.findViewById(R.id.lc_name);
+            Price = itemView.findViewById(R.id.price_view);
+
+
             itemView.setOnClickListener(this);
 
         }
 
         public void onClick(View view){
+
+            int itemPosition = getAdapterPosition();
             Intent toCourseInfoIntent = new Intent(context, CourseInfo.class);
+
+            toCourseInfoIntent.putExtra("CID", arrayListFiltered.get(itemPosition).getCID());
+            toCourseInfoIntent.putExtra("LCID", arrayListFiltered.get(itemPosition).getLCID());
             context.startActivity(toCourseInfoIntent);
         }
     }

@@ -31,11 +31,15 @@
     <string-array name="course_info">
         <item>Name</item>
         <item>Category</item>
+        <item>Image</item>
         <item>Fees</item>
         <item>Registration Fees</item>
+        <item>Instructor (optional) </item>
         <item>Start Date</item>
         <item>End Date</item>
         <item>Days</item>
+        <item>Description</item>
+        <item>Preview (optional)</item>
     </string-array>
     <string-array name="user_info">
         <item>Full Name</item>

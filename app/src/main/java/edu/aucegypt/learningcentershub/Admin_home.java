@@ -1,23 +1,28 @@
 package edu.aucegypt.learningcentershub;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.VideoView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 
 
 public class Admin_home extends AppCompatActivity {
     public static String[] message = new String[1];
     Uri uri;
     public static String lcid;
+    int LOAD_IMAGE = 1, LOAD_VIDEO = 2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         savedInstanceState=getIntent().getExtras();
@@ -50,7 +55,13 @@ public class Admin_home extends AppCompatActivity {
     {
         Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
         photoPickerIntent.setType("image/*");
-        startActivityForResult(photoPickerIntent, 1);
+        startActivityForResult(photoPickerIntent, LOAD_IMAGE);
+    }
+    void chooseVideo()
+    {
+        Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+        photoPickerIntent.setType("video/*");
+        startActivityForResult(photoPickerIntent, LOAD_VIDEO);
     }
 
     @Override
@@ -60,15 +71,29 @@ public class Admin_home extends AppCompatActivity {
         if (resultCode != RESULT_OK) {
             return;
         }
-        if (requestCode == 1) {
+        if (requestCode == LOAD_IMAGE) {
             final Bundle extras = data.getExtras();
             if (extras != null) {
                 //Get image
-                String path =  extras.getString("media-path");
-                uri =  Uri.parse(new File(path).toString());
-                ImageView t=findViewById(R.id.row_edit3);
-                t.setImageURI(Uri.parse(path));
+
+                final Uri imageUri = data.getData();
+                final InputStream imageStream  ;
+                try {
+                    imageStream = getContentResolver().openInputStream(imageUri);
+                    final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+                    ((ImageView)findViewById(R.id.row_edit3)).setImageBitmap(selectedImage);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+
             }
+        }
+        else if (requestCode == LOAD_VIDEO)
+        {
+            Uri mVideoURI = data.getData();
+            VideoView videoView = ((VideoView) findViewById(R.id.row_edit4));
+            videoView.setVideoURI(mVideoURI);
+            videoView.start();
         }
     }
 }
