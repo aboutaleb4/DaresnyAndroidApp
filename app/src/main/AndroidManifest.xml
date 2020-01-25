@@ -34,11 +34,7 @@
         </activity>
         <activity android:name=".CourseRegisterActivity" />
         <activity android:name=".StartingActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -47,7 +43,13 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".Admin_home" />
+        <activity android:name=".Admin_home" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".CourseInfo" />
         <activity android:name=".MyAccount" />
         <activity android:name=".Payment" />
