@@ -46,6 +46,8 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+import static edu.aucegypt.learningcentershub.Network.APIcall.url;
+
 
 public class add_course_frag extends Fragment implements View.OnClickListener {
     RecyclerView listView;
@@ -430,7 +432,7 @@ class rvadapter2 extends RecyclerView.Adapter<rvadapter2.ViewHolder3> implements
 
         }}
      void Network_add_crse(String id){
-         String url = "http://192.168.1.7:3000/myroute/AddCourse";
+         String url2 = url+"/myroute/AddCourse";
         id =String.valueOf(1);
          OkHttpClient client = new OkHttpClient();
          final MediaType JSON = MediaType.get("application/json; charset=utf-8");
@@ -439,7 +441,7 @@ class rvadapter2 extends RecyclerView.Adapter<rvadapter2.ViewHolder3> implements
                  +"\",\"id\":"+id+", \"cat\":\""+category+"\"}";
          final RequestBody body = RequestBody.create(json,JSON);
          final Request request = new Request.Builder()
-                 .url(url)
+                 .url(url2)
                  .post(body)
                  .build();
 

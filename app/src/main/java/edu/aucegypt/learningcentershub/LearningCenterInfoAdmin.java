@@ -23,6 +23,8 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+import static edu.aucegypt.learningcentershub.Network.APIcall.url;
+
 public class LearningCenterInfoAdmin extends AppCompatActivity implements View.OnClickListener {
     EditText name, desc, aptno, floor, city, area, build, street, phone,email;
     String id;
@@ -85,7 +87,7 @@ public class LearningCenterInfoAdmin extends AppCompatActivity implements View.O
     }
 
     private void Network() throws JSONException {
-        String url = "http://192.168.1.7:3000/myroute/LCinfoupdate";
+        String url2 = url+"/myroute/LCinfoupdate";
 
         OkHttpClient client = new OkHttpClient();
         final MediaType JSON = MediaType.get("application/json; charset=utf-8");
@@ -94,7 +96,7 @@ public class LearningCenterInfoAdmin extends AppCompatActivity implements View.O
                 +"\",\"floor\":\""+floor.getText().toString()+"\", \"apt\":"+aptno.getText().toString()+",\"city\": \""+city.getText().toString()+"\", \"area\":\""+area.getText().toString()+"\"}";
         final RequestBody body = RequestBody.create(json,JSON);
         final Request request = new Request.Builder()
-                .url(url)
+                .url(url2)
                 .post(body)
                 .build();
 
