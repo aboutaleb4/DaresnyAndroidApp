@@ -97,7 +97,7 @@ public class CourseInfoAdmin extends AppCompatActivity implements View.OnClickLi
         finish();
     }
     private void Network() throws JSONException {
-        String url2 = url+"/myroute/Courseupdate";
+        String url2 = url+"myroute/Courseupdate";
 
         OkHttpClient client = new OkHttpClient();
         final MediaType JSON = MediaType.get("application/json; charset=utf-8");

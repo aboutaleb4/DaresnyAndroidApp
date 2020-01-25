@@ -87,7 +87,7 @@ public class LearningCenterInfoAdmin extends AppCompatActivity implements View.O
     }
 
     private void Network() throws JSONException {
-        String url2 = url+"/myroute/LCinfoupdate";
+        String url2 = url+"myroute/LCinfoupdate";
 
         OkHttpClient client = new OkHttpClient();
         final MediaType JSON = MediaType.get("application/json; charset=utf-8");

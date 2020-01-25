@@ -20,18 +20,29 @@ public class TopBar extends Fragment implements View.OnClickListener {
         ((AppCompatActivity) getActivity()).setSupportActionBar(myToolbar);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
         Button button = view.findViewById(R.id.button);
+        if (Admin_home.class == getContext().getClass())
+        {
+            button.setText("Log Out");
+        }
         button.setOnClickListener(this);
         return view;
     }
 
     @Override
     public void onClick(View view) {
-        if (((Button) view).getText().toString()== "Login") {
+        if (((Button) view).getText().toString().equals("Login")) {
             Intent i = new Intent("edu.aucegypt.learningcentershub.LOGIN");
             startActivity(i);
 
-        } else {
-            ((Button) view).setText("Login");
         }
+        else  if (((Button) view).getText().toString().equals("Log Out")) {
+            Intent i = new Intent("edu.aucegypt.learningcentershub.MAIN_ACTIVITY");
+            startActivity(i);
+            rvadapter3.cname.clear();
+            rvadapter3.cid.clear();
+            rvadapter3.
+
+        }
+
     }
 }
