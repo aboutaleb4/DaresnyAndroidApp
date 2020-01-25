@@ -28,6 +28,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end"
         android:background="#00FFFFFF"
-        android:text="Sign out"
+        android:text="Login"
         android:textColor="#ffffffff" />
 </FrameLayout>

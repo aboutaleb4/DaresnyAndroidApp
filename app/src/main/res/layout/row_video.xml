@@ -15,7 +15,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/row_text"
+            android:id="@+id/row_text5"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
@@ -26,20 +26,24 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-        <EditText
-            android:id="@+id/row_edit"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_weight="1"
-            android:inputType="text"
-            android:maxLines="1"
-            android:textColor="@color/applicationColor"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:focusableInTouchMode="false"/>
 
+        <VideoView
+            android:id="@+id/row_edit4"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+<ImageButton
+    android:id="@+id/row_select2"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="end"
+    app:layout_constraintEnd_toEndOf="parent"
+    android:src = "@drawable/gallery"
+    android:background="@android:color/transparent"
+    />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

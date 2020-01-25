@@ -1,17 +1,8 @@
 package edu.aucegypt.learningcentershub.ui.login;
 
 import android.app.Activity;
-
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
-
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
@@ -23,16 +14,23 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 
+import edu.aucegypt.learningcentershub.Admin_home;
 import edu.aucegypt.learningcentershub.MyAccount;
 import edu.aucegypt.learningcentershub.R;
-import edu.aucegypt.learningcentershub.ui.login.LoginViewModel;
-import edu.aucegypt.learningcentershub.ui.login.LoginViewModelFactory;
+import edu.aucegypt.learningcentershub.rvadapter3;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MediaType;
@@ -46,7 +44,7 @@ import static edu.aucegypt.learningcentershub.Network.APIcall.url;
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     private LoginViewModel loginViewModel;
-
+    int lcid;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -164,9 +162,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                             myResponseReader = new JSONObject(myResponse);
                                             Boolean status = myResponseReader.getBoolean("status");
                                             String message = myResponseReader.getString("message");
-                                                if (status == true){
-                                                    Intent mIntent = new Intent(LoginActivity.this, MyAccount.class);
-                                                    startActivity(mIntent);
+                                            int isadmin = myResponseReader.getInt("isadmin");
+                                             lcid = myResponseReader.getInt("lcid");
+                                            if (status == true){
+                                                Intent mIntent;
+                                                    if (isadmin == 1) {
+                                                        mIntent = new Intent(LoginActivity.this, Admin_home.class);
+                                                        mIntent.putExtra("lcid",String.valueOf(lcid));
+                                                        Network_lcinfo(String.valueOf(lcid));
+                                                        Network_course(String.valueOf(lcid));
+                                                        Network_lcinfodisplay(String.valueOf(lcid));
+                                                    }
+                                                    else
+                                                         mIntent = new Intent(LoginActivity.this, MyAccount.class);
+                                                startActivity(mIntent);
                                                 }
 
                                         } catch (JSONException e) {
@@ -212,5 +221,178 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             Intent i = new Intent("edu.aucegypt.learningcentershub.MAIN_ACTIVITY");
             startActivity(i);
         }
+    }
+    private void Network_lcinfo(String id){
+        String url2 = url+"myroute/LCinfo?id="+ id;
+
+        OkHttpClient client = new OkHttpClient();
+        final MediaType JSON = MediaType.get("application/json; charset=utf-8");
+
+        final Request request = new Request.Builder()
+                .url(url2)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                if (response.isSuccessful()){
+                    final String myResponse = response.body().string();
+                    JSONObject myResponseReader;
+                    if (myResponse != "") {
+                        try {
+                            myResponseReader = new JSONObject(String.valueOf(new JSONArray(myResponse).getJSONObject(0)));
+                            Admin_home.message[0] = myResponseReader.getString("LCname");
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+
+            }});
+
+
+    }
+    private void Network_course(String id){
+        String url2 = url+"myroute/LCcourses?id="+ id;
+
+        OkHttpClient client = new OkHttpClient();
+        final MediaType JSON = MediaType.get("application/json; charset=utf-8");
+
+        final Request request = new Request.Builder()
+                .url(url2)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                if (response.isSuccessful()){
+                    final String myResponse = response.body().string();
+                    JSONArray myResponseReader;
+                    if (myResponse != "") {
+                        try {
+                            myResponseReader = new JSONArray(myResponse);
+                            for (int i = 0; i<myResponseReader.length();i++) {
+                                JSONObject jsonObject = myResponseReader.getJSONObject(i);
+                                rvadapter3.cname.add(jsonObject.getString("CourseName"));
+                                rvadapter3.cid.add(jsonObject.getInt("CID"));
+                                Network_course_info(i,String.valueOf(jsonObject.getInt("CID")));
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+
+            }});
+
+
+    }
+    public void Network_lcinfodisplay(String id){
+    String url2 = url+"myroute/LCinfodisplay?id="+ id;
+
+    OkHttpClient client = new OkHttpClient();
+    final MediaType JSON = MediaType.get("application/json; charset=utf-8");
+
+    final Request request = new Request.Builder()
+            .url(url2)
+            .build();
+
+        client.newCall(request).enqueue(new Callback() {
+
+        @Override
+        public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+            if (response.isSuccessful()){
+                final String myResponse = response.body().string();
+                JSONObject myResponseReader;
+                if (myResponse != "") {
+                    try {
+                        myResponseReader = new JSONObject(String.valueOf(new JSONArray(myResponse).getJSONObject(0)));
+                        rvadapter3.message[0] = myResponseReader.getString("LCname");
+                        rvadapter3.message[1] = myResponseReader.getString("Logo");
+                        rvadapter3.message[2] = myResponseReader.getString("Description");
+                        rvadapter3.message[3] = myResponseReader.getString("Email");
+                        rvadapter3.message[4] = myResponseReader.getString("PhoneNo");
+                        rvadapter3.message[5] = myResponseReader.getString("Street");
+                        rvadapter3.message[6] = myResponseReader.getString("BuildingNo");
+                        rvadapter3.message[7] = myResponseReader.getString("FloorNo");
+                        rvadapter3.message[8] = myResponseReader.getString("AptNo");
+                        rvadapter3.message[9] = myResponseReader.getString("Area");
+                        rvadapter3.message[10] = myResponseReader.getString("City");
+                        rvadapter3.message[11] = myResponseReader.getString("Longtitude");
+                        rvadapter3.message[12] = myResponseReader.getString("Latitude");
+                        rvadapter3.message[13] = myResponseReader.getString("LCID");
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+        }
+
+        @Override
+        public void onFailure(@NotNull Call call, @NotNull IOException e) {
+
+        }});
+
+
+}
+    private void Network_course_info(final int i , String id){
+        String url2 = url+"myroute/LCcourse?id="+ id;
+
+        OkHttpClient client = new OkHttpClient();
+        final MediaType JSON = MediaType.get("application/json; charset=utf-8");
+
+        final Request request = new Request.Builder()
+                .url(url2)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                if (response.isSuccessful()){
+                    final String myResponse = response.body().string();
+                    JSONObject myResponseReader;
+                    try {
+                        myResponseReader = new JSONObject(String.valueOf(new JSONArray(myResponse).getJSONObject(0)));
+                        rvadapter3.message2[i][0] = String.valueOf(myResponseReader.getInt("CID"));
+                        rvadapter3.message2[i][1] = myResponseReader.getString("CourseName");
+                        rvadapter3.message2[i][2] = String.valueOf(myResponseReader.getInt("CourseImage"));
+                        rvadapter3.message2[i][3] = String.valueOf(myResponseReader.getInt("Price"));
+                        rvadapter3.message2[i][4] = String.valueOf(myResponseReader.getInt("RegFees"));
+                        rvadapter3.message2[i][5] = myResponseReader.getString("StDate");
+                        rvadapter3.message2[i][6] = myResponseReader.getString("EndDate");
+                        rvadapter3.message2[i][7] = myResponseReader.getString("Description");
+                        rvadapter3.message2[i][8] = myResponseReader.getString("Video");
+                        rvadapter3.message2[i][9] = String.valueOf(myResponseReader.getInt("LCID"));
+                        rvadapter3.message2[i][10] = myResponseReader.getString("CatName");
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+
+            }});
+
+
     }
 }
