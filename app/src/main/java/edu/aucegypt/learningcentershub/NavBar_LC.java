@@ -34,26 +34,40 @@ public class NavBar_LC extends Fragment implements BottomNavigationView.OnNaviga
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        Fragment selectedFragment = null;
+        Fragment selectedFragment = null, selectedFragment2= null;
         switch (menuItem.getTitle().toString()) {
             case "Home":
                 selectedFragment = new home_frag();
                 Bundle b2 = new Bundle();
                 b2.putString("LCname",lcname);
                 selectedFragment.setArguments(b2);
+
                 break;
             case "Add Course":
                 selectedFragment = new add_course_frag();
                 Bundle b = new Bundle();
                 b.putString("LCID",lcid);
                 selectedFragment.setArguments(b);
+
                 break;
             case "My Account":
                 selectedFragment = new MyAccount_frag();
                 break;
 
     }
+    if (selectedFragment.equals(add_course_frag.class))
+    {
+        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_21, selectedFragment).commit();
+        getActivity().getSupportFragmentManager().beginTransaction().remove(getActivity().getSupportFragmentManager().findFragmentById(R.id.fragment_2)).commit();
+
+    }
+    else {
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_2, selectedFragment).commit();
-        return true;
+        Fragment frag = getActivity().getSupportFragmentManager().findFragmentById(R.id.fragment_21);
+        if (frag != null)
+            getActivity().getSupportFragmentManager().beginTransaction().remove(getActivity().getSupportFragmentManager().findFragmentById(R.id.fragment_21)).commit();
+
+    }
+           return true;
     }
 }
