@@ -64,6 +64,7 @@ public class add_course_frag extends Fragment implements View.OnClickListener {
         rv =new rvadapter2(getContext(), data);
         listView.setAdapter(rv);
         Button add = view.findViewById(R.id.buttonadd);
+        add.setText("Add Course");
         add.setOnClickListener(this);
         if (getArguments() != null) {
             Bundle b = getArguments();
