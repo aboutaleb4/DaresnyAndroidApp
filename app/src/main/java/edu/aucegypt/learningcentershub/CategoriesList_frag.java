@@ -33,10 +33,11 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class Categories extends Fragment {
+import static edu.aucegypt.learningcentershub.Network.APIcall.url;
+
+public class CategoriesList_frag extends Fragment {
 
    // private categoriesOnClickListener listener;
-    TextView seeAllCategories;
     categoriesListAdapter adapter;
     private RecyclerView recyclerView;
     private SearchView searchView;
@@ -58,13 +59,13 @@ public class Categories extends Fragment {
 
 
 
-        String url = "http://10.40.47.60:3000/myroute/getCategories";
+        String url_api = url + "myroute/getCategories";
 
         OkHttpClient client = new OkHttpClient();
         final MediaType JSON = MediaType.get("application/json; charset=utf-8");
 
         final Request request = new Request.Builder()
-                .url(url)
+                .url(url_api)
                 .build();
 
         client.newCall(request).enqueue(new Callback() {

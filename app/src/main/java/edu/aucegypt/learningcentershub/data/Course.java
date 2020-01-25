@@ -4,43 +4,34 @@ import java.io.Serializable;
 
 
 public class Course implements Serializable {
-    private String courseName;
-  //  private LearningCenter learningCenter;
-    private int image;
-
-
-    public Course(String courseName, int image) {
-        this.courseName = courseName;
-        //this.learningCenter = learningCenter;
-        this.image = image;
-    }
-
-    public Course(){
-    }
-
-
+   String CourseName;
+   String CourseImage;
 
     public String getCourseName() {
-        return courseName;
+        return CourseName;
     }
 
     public void setCourseName(String courseName) {
-        this.courseName = courseName;
+        CourseName = courseName;
     }
 
-//    public LearningCenter getLearningCenter() {
-//        return learningCenter;
-//    }
-//
-//    public void setLearningCenter(LearningCenter learningCenter) {
-//        this.learningCenter = learningCenter;
-//    }
-
-    public int getImage() {
-        return image;
+    public String getCourseImage() {
+        return CourseImage;
     }
 
-    public void setImage(int image) {
-        this.image = image;
+    public void setCourseImage(String courseImage) {
+        CourseImage = courseImage;
+    }
+
+    public Course(String courseName) {
+        CourseName = courseName;
+    }
+
+    public Course() {
+    }
+
+    public Course(String courseName, String courseImage) {
+        CourseName = courseName;
+        CourseImage = courseImage;
     }
 }

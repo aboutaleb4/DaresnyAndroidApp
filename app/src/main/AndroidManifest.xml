@@ -13,9 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".DownloadImageActivity">
-
-        </activity>
+        <activity android:name=".CatCoursesActivity"
+            android:theme="@style/ActionBarTheme"></activity>
+        <activity android:name=".DownloadImageActivity"></activity>
         <activity android:name=".CreateAccountActivity">
             <intent-filter>
                 <action android:name="edu.aucegypt.learningcentershub.CREATE_ACCOUNT" />
@@ -32,7 +32,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".CourseRegisterActivity"></activity>
+        <activity android:name=".CourseRegisterActivity" />
         <activity android:name=".StartingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -47,7 +47,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".Admin_home"></activity>
+        <activity android:name=".Admin_home" />
         <activity android:name=".CourseInfo" />
         <activity android:name=".MyAccount" />
         <activity android:name=".Payment" />

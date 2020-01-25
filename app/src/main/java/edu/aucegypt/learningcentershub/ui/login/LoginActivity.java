@@ -41,6 +41,8 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+import static edu.aucegypt.learningcentershub.Network.APIcall.url;
+
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     private LoginViewModel loginViewModel;
@@ -139,14 +141,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     json.put("Email", usernameEditText.getText());
                     json.put("Password", passwordEditText.getText().toString());
                     jsonString = json.toString();
-                    String url = "http://10.40.47.60:3000/myroute/login";
+                    String url_api = url + "myroute/login";
 
                     OkHttpClient client = new OkHttpClient();
                     final MediaType JSON = MediaType.get("application/json; charset=utf-8");
 
                     final RequestBody body = RequestBody.create(jsonString, JSON);
                     final Request request = new Request.Builder()
-                            .url(url)
+                            .url(url_api)
                             .post(body)
                             .build();
 
