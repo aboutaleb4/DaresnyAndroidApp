@@ -1,6 +1,8 @@
 package edu.aucegypt.learningcentershub;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.WindowManager;
@@ -11,7 +13,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 
 
 public class Admin_home extends AppCompatActivity {
@@ -64,10 +67,20 @@ public class Admin_home extends AppCompatActivity {
             final Bundle extras = data.getExtras();
             if (extras != null) {
                 //Get image
-                String path =  extras.getString("media-path");
-                uri =  Uri.parse(new File(path).toString());
-                ImageView t=findViewById(R.id.row_edit3);
-                t.setImageURI(Uri.parse(path));
+                //String path =  extras.getString("media-path");
+                //uri =  Uri.parse(new File(path).toString());
+                //ImageView t=findViewById(R.id.row_edit3);
+                //t.setImageURI(Uri.parse(path));
+                final Uri imageUri = data.getData();
+                final InputStream imageStream  ;
+                try {
+                    imageStream = getContentResolver().openInputStream(imageUri);
+                    final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+                    ((ImageView)findViewById(R.id.row_edit3)).setImageBitmap(selectedImage);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+
             }
         }
     }
