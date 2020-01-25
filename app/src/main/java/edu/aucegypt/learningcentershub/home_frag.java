@@ -31,7 +31,4 @@ public class home_frag extends Fragment{
         return view;
     }
 
-
-
-
 }
