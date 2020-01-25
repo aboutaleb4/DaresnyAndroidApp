@@ -14,13 +14,15 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
 public class NavBar_LC extends Fragment implements BottomNavigationView.OnNavigationItemSelectedListener {
-    String  lcid;
+    String  lcid,lcname;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         if (getArguments() != null) {
             Bundle b = getArguments();
             lcid = b.getString("LCID");
+            lcname = b.getString("LCname");
+
         }
         View view =  inflater.inflate(R.layout.navbar_lc, container, false);
         BottomNavigationView navigationView = view.findViewById(R.id.navigation2);
@@ -36,6 +38,9 @@ public class NavBar_LC extends Fragment implements BottomNavigationView.OnNaviga
         switch (menuItem.getTitle().toString()) {
             case "Home":
                 selectedFragment = new home_frag();
+                Bundle b2 = new Bundle();
+                b2.putString("LCname",lcname);
+                selectedFragment.setArguments(b2);
                 break;
             case "Add Course":
                 selectedFragment = new add_course_frag();
