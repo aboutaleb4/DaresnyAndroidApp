@@ -22,6 +22,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -145,6 +146,11 @@ class rvadapter2 extends RecyclerView.Adapter<rvadapter2.ViewHolder3> implements
         if (viewType == 3)
         {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_checkbox, parent, false);
+            return new ViewHolder3(view);
+        }
+        if (viewType == 4)
+        {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_video, parent, false);
             return new ViewHolder3(view);
         }
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row, parent, false);
@@ -345,6 +351,12 @@ class rvadapter2 extends RecyclerView.Adapter<rvadapter2.ViewHolder3> implements
                 }
             });
         }
+        else if (position == 10)
+        {
+            holder.text5.setText(rows[position]);
+            holder.imageButton2.setOnClickListener(this);
+            holder.videoview.setVideoURI(null);
+        }
         else {
             holder.text1.setText(rows[position]);
             holder.editText.addTextChangedListener(new TextWatcher() {
@@ -383,6 +395,8 @@ class rvadapter2 extends RecyclerView.Adapter<rvadapter2.ViewHolder3> implements
             return 2;
         if (position == 8)
             return 3;
+        if (position==10)
+            return 4;
         return 0;
     }
     @Override
@@ -394,6 +408,8 @@ class rvadapter2 extends RecyclerView.Adapter<rvadapter2.ViewHolder3> implements
     {
         if (view.getId() == R.id.row_select)
             ((Admin_home)mContext).chooseImage();
+        if (view.getId() == R.id.row_select2)
+            ((Admin_home)mContext).chooseVideo();
 
     }
     void setDate(View view)
@@ -406,9 +422,10 @@ class rvadapter2 extends RecyclerView.Adapter<rvadapter2.ViewHolder3> implements
 
     public class ViewHolder3 extends RecyclerView.ViewHolder{
 
-        TextView text1, text2, text3, text4;
+        TextView text1, text2, text3, text4,text5;
         Spinner spinner;
-        ImageButton imageButton;
+        ImageButton imageButton, imageButton2;
+        VideoView videoview;
         ImageView imageView;
         EditText editText,cbsun,cbmon,cbtue,cbwed,cbthu,cbfri,cbsat;
 
@@ -429,6 +446,10 @@ class rvadapter2 extends RecyclerView.Adapter<rvadapter2.ViewHolder3> implements
             cbthu = itemView.findViewById(R.id.thuTime);
             cbfri = itemView.findViewById(R.id.friTime);
             cbsat = itemView.findViewById(R.id.satTime);
+            videoview = itemView.findViewById(R.id.row_edit4);
+            text5 = itemView.findViewById(R.id.row_text5);
+            imageButton2 = itemView.findViewById(R.id.row_select2);
+
 
         }}
      void Network_add_crse(String id){
