@@ -20,6 +20,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -51,7 +52,11 @@ public class Registered__users extends Fragment  {
 class rvadapter3 extends RecyclerView.Adapter<rvadapter3.ViewHolder3> implements View.OnClickListener{
     String[] rows;
     public Context mContext;
+    ArrayList<String> cname = new ArrayList<>();
+    ArrayList<Integer> cid = new ArrayList<>();
+
     private static String[] message = new String[14];
+    private static String[] message2 = new String[11];
 
     public rvadapter3(Context context, String[] Names) {
         this.rows = Names;
@@ -102,18 +107,39 @@ class rvadapter3 extends RecyclerView.Adapter<rvadapter3.ViewHolder3> implements
        else if (((TextView)view).getText().toString()=="Edit Courses"){
            Fragment selectedFragment = null;
            selectedFragment = new learningCentersFrag();
+           Network_course(String.valueOf(1));
+           Bundle b = new Bundle();
+           b.putStringArrayList("Courses",cname);
+           selectedFragment.setArguments(b);
            ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_2, selectedFragment).commit();
 
        }
-       else if (((TextView)view).getText().toString()=="Course 1"){
-           Intent i = new Intent(mContext,CourseInfoAdmin.class);
-           mContext.startActivity(i);
-        }
        else {
-           Fragment selectedFragment = null;
-           selectedFragment = new user_info_frag();
-           ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment2_2, selectedFragment).commit();
+           Network_course(String.valueOf(1));
+           if (cname.contains(((TextView)view).getText().toString())){
+               int r = cname.indexOf(((TextView)view).getText().toString());
+               int id  = cid.get(r);
+               Intent i = new Intent(mContext,CourseInfoAdmin.class);
+               Network_course_info(String.valueOf(id));
+               i.putExtra("CID",message2[0]);
+               i.putExtra("CourseName",message2[1]);
+               i.putExtra("CourseImage",message2[2]);
+               i.putExtra("Price",message2[3]);
+               i.putExtra("RegFees",message2[4]);
+               i.putExtra("StDate",message2[5]);
+               i.putExtra("EndDate",message2[6]);
+               i.putExtra("Description",message2[7]);
+               i.putExtra("Video",message2[8] );
+               i.putExtra("LCID",message2[9] );
+               i.putExtra("CatName",message2[10] );
+               mContext.startActivity(i);
+           }
+           else {
+               Fragment selectedFragment = null;
+               selectedFragment = new user_info_frag();
+               ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment2_2, selectedFragment).commit();
 
+           }
        }
     }
     private void Network(String id){
@@ -167,6 +193,91 @@ class rvadapter3 extends RecyclerView.Adapter<rvadapter3.ViewHolder3> implements
 
     }
 
+    private void Network_course(String id){
+        String url = "http://192.168.1.7:3000/myroute/LCcourses?id="+ id;
+
+        OkHttpClient client = new OkHttpClient();
+        final MediaType JSON = MediaType.get("application/json; charset=utf-8");
+
+        final Request request = new Request.Builder()
+                .url(url)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                if (response.isSuccessful()){
+                    final String myResponse = response.body().string();
+                    JSONArray myResponseReader;
+                    if (myResponse != "") {
+                        try {
+                            myResponseReader = new JSONArray(myResponse);
+                            for (int i = 0; i<myResponseReader.length();i++) {
+                                JSONObject jsonObject = myResponseReader.getJSONObject(i);
+                                cname.add(jsonObject.getString("CourseName"));
+                                cid.add(jsonObject.getInt("CID"));
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+
+            }});
+
+
+    }
+    private void Network_course_info(String id){
+        String url = "http://192.168.1.7:3000/myroute/LCcourse?id="+ id;
+
+        OkHttpClient client = new OkHttpClient();
+        final MediaType JSON = MediaType.get("application/json; charset=utf-8");
+
+        final Request request = new Request.Builder()
+                .url(url)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                if (response.isSuccessful()){
+                    final String myResponse = response.body().string();
+                    JSONObject myResponseReader;
+                        try {
+                            myResponseReader = new JSONObject(String.valueOf(new JSONArray(myResponse).getJSONObject(0)));
+                                message2[0] = String.valueOf(myResponseReader.getInt("CID"));
+                                message2[1] = myResponseReader.getString("CourseName");
+                                message2[2] = String.valueOf(myResponseReader.getInt("CourseImage"));
+                                message2[3] = String.valueOf(myResponseReader.getInt("Price"));
+                                message2[4] = String.valueOf(myResponseReader.getInt("RegFees"));
+                                message2[5] = myResponseReader.getString("StDate");
+                                message2[6] = myResponseReader.getString("EndDate");
+                                message2[7] = myResponseReader.getString("Description");
+                                message2[8] = myResponseReader.getString("Video");
+                                message2[9] = String.valueOf(myResponseReader.getInt("LCID"));
+                                message2[10] = myResponseReader.getString("CatName");
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+            }
+
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+
+            }});
+
+
+    }
     public class ViewHolder3 extends RecyclerView.ViewHolder  {
 
         TextView text1;
