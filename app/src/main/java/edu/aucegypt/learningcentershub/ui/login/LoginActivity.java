@@ -21,6 +21,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -29,6 +30,7 @@ import java.io.IOException;
 import edu.aucegypt.learningcentershub.Admin_home;
 import edu.aucegypt.learningcentershub.MyAccount;
 import edu.aucegypt.learningcentershub.R;
+import edu.aucegypt.learningcentershub.rvadapter3;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MediaType;
@@ -167,6 +169,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                                     if (isadmin == 1) {
                                                         mIntent = new Intent(LoginActivity.this, Admin_home.class);
                                                         mIntent.putExtra("lcid",String.valueOf(lcid));
+                                                        Network_lcinfo(String.valueOf(lcid));
+                                                        Network_course(String.valueOf(lcid));
                                                     }
                                                     else
                                                          mIntent = new Intent(LoginActivity.this, MyAccount.class);
@@ -217,4 +221,82 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             startActivity(i);
         }
     }
+    private void Network_lcinfo(String id){
+        String url2 = url+"myroute/LCinfo?id="+ id;
+
+        OkHttpClient client = new OkHttpClient();
+        final MediaType JSON = MediaType.get("application/json; charset=utf-8");
+
+        final Request request = new Request.Builder()
+                .url(url2)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                if (response.isSuccessful()){
+                    final String myResponse = response.body().string();
+                    JSONObject myResponseReader;
+                    if (myResponse != "") {
+                        try {
+                            myResponseReader = new JSONObject(String.valueOf(new JSONArray(myResponse).getJSONObject(0)));
+                            Admin_home.message[0] = myResponseReader.getString("LCname");
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+
+            }});
+
+
+    }
+    private void Network_course(String id){
+        String url2 = url+"myroute/LCcourses?id="+ id;
+
+        OkHttpClient client = new OkHttpClient();
+        final MediaType JSON = MediaType.get("application/json; charset=utf-8");
+
+        final Request request = new Request.Builder()
+                .url(url2)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                if (response.isSuccessful()){
+                    final String myResponse = response.body().string();
+                    JSONArray myResponseReader;
+                    if (myResponse != "") {
+                        try {
+                            myResponseReader = new JSONArray(myResponse);
+                            for (int i = 0; i<myResponseReader.length();i++) {
+                                JSONObject jsonObject = myResponseReader.getJSONObject(i);
+                                rvadapter3.cname.add(jsonObject.getString("CourseName"));
+                                rvadapter3.cid.add(jsonObject.getInt("CID"));
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+
+            }});
+
+
+    }
+
 }
