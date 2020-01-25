@@ -1,6 +1,7 @@
 package edu.aucegypt.learningcentershub;
 import android.content.Context;
 import android.graphics.Color;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import edu.aucegypt.learningcentershub.R;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>  {
@@ -24,7 +28,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     Context mContext;
     Boolean[] isSelected;
     private RecyclerViewListner mrecyclerViewListner;
-
+    /////////////////////////////////////////////////
+    private SparseBooleanArray selectedItems;
+////////////////////////////////////////////////////
 
     public RecyclerViewAdapter(Context context, String[] Names, int[] Icons, RecyclerViewListner recyclerViewListner) {
         this.names = Names;
@@ -46,11 +52,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.name.setText(names[position]);
 
 
-        holder.image.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                view.setBackgroundColor(Color.CYAN);
-            }
-        });
     }
 
     @Override
@@ -58,7 +59,34 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return names.length;
     }
 
+    public void toggleSelection(int pos) {
+        if (selectedItems.get(pos, false)) {
+            selectedItems.delete(pos);
+        }
+        else {
+            selectedItems.put(pos, true);
+        }
+        notifyItemChanged(pos);
+    }
 
+    public void clearSelections() {
+        selectedItems.clear();
+        notifyDataSetChanged();
+    }
+
+    public int getSelectedItemCount() {
+        return selectedItems.size();
+    }
+
+    public List<Integer> getSelectedItems() {
+        List<Integer> items =
+                new ArrayList<Integer>(selectedItems.size());
+        for (int i = 0; i < selectedItems.size(); i++) {
+            items.add(selectedItems.keyAt(i));
+        }
+        return items;
+    }
+////////////////////////////////////////////////////////////////////////////////////////////////
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
