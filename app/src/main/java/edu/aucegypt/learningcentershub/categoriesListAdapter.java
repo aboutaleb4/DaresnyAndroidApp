@@ -16,7 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import edu.aucegypt.learningcentershub.data.Category;
-import edu.aucegypt.learningcentershub.data.Course;
+
+import static edu.aucegypt.learningcentershub.Network.APIcall.url;
 
 public class categoriesListAdapter extends RecyclerView.Adapter<categoriesListAdapter.viewHolder> implements Filterable {
 
@@ -31,13 +32,15 @@ public class categoriesListAdapter extends RecyclerView.Adapter<categoriesListAd
 
     @Override
     public  viewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(context).inflate(R.layout.courses_list_item, viewGroup, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.cat_list_item, viewGroup, false);
         return new viewHolder(view);
     }
     @Override
     public  void onBindViewHolder(viewHolder viewHolder, int position) {
         viewHolder.name.setText(arrayListFiltered.get(position).getCatName());
-        viewHolder.image.setImageResource(arrayListFiltered.get(position).getImage());
+
+        new DownloadImageTask(viewHolder.image)
+                .execute(url+"images/"+ arrayListFiltered.get(position).getCatImage());
 
     }
 
@@ -59,8 +62,10 @@ public class categoriesListAdapter extends RecyclerView.Adapter<categoriesListAd
         }
 
         public void onClick(View view){
-            Intent toCourseInfoIntent = new Intent(context, CourseInfo.class);
-            context.startActivity(toCourseInfoIntent);
+//            name.getText();
+            Intent toCatCourses = new Intent(context, CatCoursesActivity.class);
+            toCatCourses.putExtra("CatName", name.getText());
+            context.startActivity(toCatCourses);
         }
     }
 

@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import edu.aucegypt.learningcentershub.data.LearningCenter;
 
-public class MainActivity extends AppCompatActivity implements CoursesList_frag.coursesFragOnClickListener, FiltersFragment.filtersFragmentOnClickListener, main_frag.categoriesOnClickListener, main_frag.learningCenterOnClickListener{
+public class MainActivity extends AppCompatActivity implements CoursesList_frag.coursesFragOnClickListener, FiltersFragment.filtersFragmentOnClickListener, main_frag.categoriesOnClickListener, main_frag.learningCenterOnClickListener, main_frag.courseOnClickListener{
 
     FrameLayout filters_layout;
     ConstraintLayout main_layout;
@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity implements CoursesList_frag.
         fragmentTransaction.replace(R.id.fragment6_1, new TopBar());
         fragmentTransaction.replace(R.id.fragment6_2, new main_frag());
         fragmentTransaction.replace(R.id.filters_layout, new FiltersFragment());
-        fragmentTransaction.replace(R.id.fragmentseeallcategories, new Categories());
         //fragmentTransaction.replace(R.id.seealllearningcenters, new LearningCenter());
         fragmentTransaction.commit();
 
@@ -71,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements CoursesList_frag.
 
     public void onCategoriesListener()
     {
-        MainActivity.this.getSupportFragmentManager().beginTransaction().replace(R.id.fragment6_2, new Categories()).commit();
+        MainActivity.this.getSupportFragmentManager().beginTransaction().replace(R.id.fragment6_2, new CategoriesList_frag()).commit();
 
     }
 
@@ -79,6 +78,11 @@ public class MainActivity extends AppCompatActivity implements CoursesList_frag.
     {
         MainActivity.this.getSupportFragmentManager().beginTransaction().replace(R.id.fragment6_2, new LearningCenter_frag()).commit();
 
+    }
+
+    public void onCourseListener()
+    {
+        MainActivity.this.getSupportFragmentManager().beginTransaction().replace(R.id.fragment6_2, new LearningCenter_frag()).commit();
     }
 }
 

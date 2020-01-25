@@ -11,17 +11,17 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-public class Categories extends Fragment {
+public class course_frag extends Fragment {
 
-   // private categoriesOnClickListener listener;
-    TextView seeAllCategories;
+    // private learningCenterOnClickListener listener;
+    TextView seeAllCourses;
 
 
 
     public View OnCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
-        View view = inflater.inflate(R.layout.activity_categories, container, false);
+        View view = inflater.inflate(R.layout.activity_course, container, false);
         return view;
 
     }

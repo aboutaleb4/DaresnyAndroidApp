@@ -1,5 +1,21 @@
 package edu.aucegypt.learningcentershub.data;
 
+import com.google.gson.Gson;
+
+import org.jetbrains.annotations.NotNull;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
 public class Category {
 
     String CatName;
@@ -12,12 +28,12 @@ public class Category {
         CatName = catName;
     }
 
-    public int getImage() {
-        return Image;
+    public String getCatImage() {
+        return CatImage;
     }
 
-    public void setImage(int image) {
-        Image = image;
+    public void setCatImage(String image) {
+        CatImage = image;
     }
 
     public Category() {
@@ -27,10 +43,12 @@ public class Category {
         CatName = catName;
     }
 
-    public Category(String catName, int image) {
+    public Category(String catName, String catImage) {
         CatName = catName;
-        Image = image;
+        CatImage = catImage;
     }
 
-    int Image;
+    String CatImage;
+
+
 }

@@ -20,19 +20,17 @@ import okhttp3.Response;
 
 public class APIcall {
 
+
+
     public APIcall() {
         client = new OkHttpClient();
-        url ="http://10.40.47.60:3000/myroute/";
     }
 
     OkHttpClient client;
     public static final MediaType JSON = MediaType.get("application/json; charset=utf-8");
 
-    public APIcall(String url) {
-        this.url = url;
-    }
 
-    String url;
+    public final static String url ="http://192.168.1.4:3000/";
 
 
     public String post(String APIendpoint, String json) throws IOException {

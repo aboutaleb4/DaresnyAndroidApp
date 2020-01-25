@@ -111,7 +111,8 @@
                 android:text="See all"
                 android:textAlignment="textEnd"
                 android:textColor="@color/applicationColor"
-                android:textStyle="italic" />
+                android:textStyle="italic"
+                android:clickable="true"/>
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView

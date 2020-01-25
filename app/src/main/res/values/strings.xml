@@ -31,15 +31,11 @@
     <string-array name="course_info">
         <item>Name</item>
         <item>Category</item>
-        <item>Image</item>
         <item>Fees</item>
         <item>Registration Fees</item>
-        <item>Instructor (optional) </item>
         <item>Start Date</item>
         <item>End Date</item>
         <item>Days</item>
-        <item>Description</item>
-        <item>Preview (optional)</item>
     </string-array>
     <string-array name="user_info">
         <item>Full Name</item>
@@ -62,15 +58,15 @@
         <item>Language</item>
     </string-array>
     <string-array name="courses_4">
-        <item>PhotoShop- Beginners Course- Basic Designs</item>
+        <item>Photoshop- Beginners Course- Basic Designs</item>
         <item>Violin- Beginners Course- Basic Notes</item>
-        <item>PhotoShop- Advanced Course- Complex Designs</item>
-        <item>PhotoShop- Expert Course- Any Designs</item>
+        <item>Photoshop- Advanced Course- Complex Designs</item>
+        <item>Photoshop- Expert Course- Any Designs</item>
     </string-array>
     <string-array name="courses_learningcenter_4">
         <item>Center El7amd</item>
         <item>ABC Center</item>
-        <item>Center elGiza</item>
+        <item>Giza Center</item>
         <item>Cairo Center</item>
     </string-array>
     <string-array name="courses_price_4">
@@ -83,7 +79,7 @@
         <item>Tagamo3</item>
         <item>Masr Elgedida</item>
         <item>Madinaty</item>
-        <item>Elgiza</item>
+        <item>Giza</item>
     </string-array>
 
     <string name="hint">Search Here</string>

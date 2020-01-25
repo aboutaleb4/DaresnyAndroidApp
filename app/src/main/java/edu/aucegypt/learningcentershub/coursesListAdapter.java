@@ -17,6 +17,8 @@ import java.util.ArrayList;
 
 import edu.aucegypt.learningcentershub.data.Course;
 
+import static edu.aucegypt.learningcentershub.Network.APIcall.url;
+
 public class coursesListAdapter extends RecyclerView.Adapter<coursesListAdapter.viewHolder> implements Filterable {
 
     Context context;
@@ -30,13 +32,16 @@ public class coursesListAdapter extends RecyclerView.Adapter<coursesListAdapter.
 
     @Override
     public  viewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(context).inflate(R.layout.courses_list_item, viewGroup, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.course_list_item, viewGroup, false);
         return new viewHolder(view);
     }
     @Override
     public  void onBindViewHolder(viewHolder viewHolder, int position) {
         viewHolder.name.setText(arrayListFiltered.get(position).getCourseName());
-        viewHolder.image.setImageResource(arrayListFiltered.get(position).getImage());
+
+        new DownloadImageTask(viewHolder.image)
+                .execute(url+"images/"+ arrayListFiltered.get(position).getCourseImage());
+        //viewHolder.image.setImageResource(arrayListFiltered.get(position).getImage());
 
     }
 

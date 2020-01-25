@@ -38,6 +38,8 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+import static edu.aucegypt.learningcentershub.Network.APIcall.url;
+
 public class CreateAccountActivity extends AppCompatActivity  implements View.OnClickListener, RecyclerViewAdapter.RecyclerViewListner {
     EditText firstNameField;
     EditText lastNameField;
@@ -131,14 +133,14 @@ public class CreateAccountActivity extends AppCompatActivity  implements View.On
             Gson gson = new Gson();
             String json = gson.toJson(user);
 
-            String url = "http://10.40.47.60:3000/myroute/registerUser";
+            String url_api = url + "myroute/registerUser";
 
             OkHttpClient client = new OkHttpClient();
              final MediaType JSON = MediaType.get("application/json; charset=utf-8");
 
             final RequestBody body = RequestBody.create(json, JSON);
             final Request request = new Request.Builder()
-                    .url(url)
+                    .url(url_api)
                     .post(body)
                     .build();
 

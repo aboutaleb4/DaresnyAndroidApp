@@ -20,7 +20,8 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentseeallcategories"/>
 
     <FrameLayout
         android:id="@+id/fragment6_1"
@@ -43,9 +44,11 @@
 
     <FrameLayout
         android:id="@+id/fragmentseeallcategories"
+        app:layout_constraintTop_toBottomOf="@+id/fragment6_2"
+        app:layout_constraintBottom_toTopOf="@+id/fragment6"
         android:name="edu.aucegypt.learningcentershub.Categories"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="0dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

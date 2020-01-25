@@ -32,8 +32,10 @@ public class main_frag extends Fragment implements RecyclerViewAdapter.RecyclerV
 
     private categoriesOnClickListener listener;
     private learningCenterOnClickListener listener2;
+    private courseOnClickListener listener3;
     TextView seeAllCategories;
     TextView seeAllLearningCenters;
+    TextView seeAllCourses;
 
     public interface categoriesOnClickListener
     {
@@ -43,6 +45,11 @@ public class main_frag extends Fragment implements RecyclerViewAdapter.RecyclerV
     public interface learningCenterOnClickListener
     {
         void onLearningCenterListener();
+    }
+
+    public interface courseOnClickListener
+    {
+        void onCourseListener();
     }
 
 
@@ -80,6 +87,10 @@ public class main_frag extends Fragment implements RecyclerViewAdapter.RecyclerV
         //view = inflater.inflate(R.layout.activity_categories, container, false);
         seeAllLearningCenters = (TextView) view.findViewById(R.id.seealllearningcenters);
         seeAllLearningCenters.setOnClickListener(this);
+        //view = inflater.inflate(R.layout.activity_categories, container, false);
+        seeAllCourses = (TextView) view.findViewById(R.id.coursesseeall);
+        seeAllCourses.setOnClickListener(this);
+
 
 
         return view;
@@ -100,6 +111,12 @@ public class main_frag extends Fragment implements RecyclerViewAdapter.RecyclerV
             throw new ClassCastException(context.toString()
                     + " must implement learningCenterOnClickListener.");
         }
+        if(context instanceof courseOnClickListener){
+            listener3 = (courseOnClickListener) context;
+        }else {
+            throw new ClassCastException(context.toString()
+                    + " must implement courseOnClickListener.");
+        }
 
     }
 
@@ -110,6 +127,8 @@ public class main_frag extends Fragment implements RecyclerViewAdapter.RecyclerV
     public void onClickLearningCenters(View view){
         listener2.onLearningCenterListener();
     }
+
+    public void onCourseListener(View view) { listener3.onCourseListener(); }
 
 
     @Override

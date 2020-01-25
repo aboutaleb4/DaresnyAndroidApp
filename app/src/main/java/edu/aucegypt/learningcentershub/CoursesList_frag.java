@@ -20,9 +20,25 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import org.jetbrains.annotations.NotNull;
+
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
+import edu.aucegypt.learningcentershub.data.Category;
 import edu.aucegypt.learningcentershub.data.Course;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
+import static edu.aucegypt.learningcentershub.Network.APIcall.url;
 
 public class CoursesList_frag extends Fragment implements View.OnClickListener {
 
@@ -68,13 +84,57 @@ public class CoursesList_frag extends Fragment implements View.OnClickListener {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        for (int i = 0; i < image.length; i++) {
-            Course itemModel = new Course();
-            itemModel.setCourseName(name[i]);
-            itemModel.setImage(image[i]);
-            arrayList.add(itemModel);
+//        for (int i = 0; i < image.length; i++) {
+//            Course itemModel = new Course();
+//            itemModel.setCourseName(name[i]);
+//            itemModel.setImage(image[i]);
+//            arrayList.add(itemModel);
+//
+//        }
 
-        }
+
+        String url_api = url + "myroute/getCourses";
+
+        OkHttpClient client = new OkHttpClient();
+        final MediaType JSON = MediaType.get("application/json; charset=utf-8");
+
+        final Request request = new Request.Builder()
+                .url(url_api)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    Gson gson = new Gson();
+
+                    Type courseListType = new TypeToken<ArrayList<Course>>(){}.getType();
+
+                    ArrayList<Course> courseArrayList = gson.fromJson(response.body().string(), courseListType);
+                    adapter = new coursesListAdapter(getContext(), courseArrayList);
+
+
+                    getActivity().runOnUiThread(
+                            new Runnable() {
+                                @Override
+                                public void run() {
+                                    recyclerView.setAdapter(adapter);
+                                }
+                            }
+                    );
+
+
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+
+            }
+        });
 
 
         adapter = new coursesListAdapter(getContext(), arrayList);

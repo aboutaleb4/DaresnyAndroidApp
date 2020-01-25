@@ -9,6 +9,12 @@
 
     </style>
 
+    <style name="ActionBarTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/applicationColor</item>
+<!--        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
+        <item name="colorAccent">@color/applicationColor</item>
+    </style>
+
     <style name="MySeekBarTheme" parent="Widget.AppCompat.SeekBar" >
         <item name="colorAccent">@color/applicationColor</item>
     </style>

@@ -11,7 +11,12 @@ import android.widget.ImageView;
 
 import java.io.InputStream;
 
+import edu.aucegypt.learningcentershub.Network.APIcall;
+
+import static edu.aucegypt.learningcentershub.Network.APIcall.url;
+
 public class DownloadImageActivity extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,31 +24,7 @@ public class DownloadImageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_download_image);
 
         new DownloadImageTask((ImageView) findViewById(R.id.image1))
-                .execute("http://10.40.47.60:3000/images/tech.png");
+                .execute( url + "images/tech.png");
     }
 }
 
-class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
-    ImageView bmImage;
-
-    public DownloadImageTask(ImageView bmImage) {
-        this.bmImage = bmImage;
-    }
-
-    protected Bitmap doInBackground(String... urls) {
-        String urldisplay = urls[0];
-        Bitmap mIcon11 = null;
-        try {
-            InputStream in = new java.net.URL(urldisplay).openStream();
-            mIcon11 = BitmapFactory.decodeStream(in);
-        } catch (Exception e) {
-            Log.e("Error", e.getMessage());
-            e.printStackTrace();
-        }
-        return mIcon11;
-    }
-
-    protected void onPostExecute(Bitmap result) {
-        bmImage.setImageBitmap(result);
-    }
-}
