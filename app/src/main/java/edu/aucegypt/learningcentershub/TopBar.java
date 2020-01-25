@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
+import java.util.Arrays;
+
 public class TopBar extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -40,8 +42,11 @@ public class TopBar extends Fragment implements View.OnClickListener {
             startActivity(i);
             rvadapter3.cname.clear();
             rvadapter3.cid.clear();
-            rvadapter3.
-
+            Arrays.fill(rvadapter3.message, null);
+            for( int j = 0; j < 10; j++ )
+                Arrays.fill(rvadapter3.message2[j], null);
+            Admin_home.lcid = "";
+            Arrays.fill(Admin_home.message, null);
         }
 
     }
