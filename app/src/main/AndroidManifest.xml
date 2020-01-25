@@ -48,7 +48,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".Admin_home" />
-        <activity android:name=".CourseInfo" />
+        <activity android:name=".CourseInfo"
+            android:theme="@style/ActionBarTheme"/>
         <activity android:name=".MyAccount" />
         <activity android:name=".Payment" />
         <activity android:name=".LearningCenterInfoActivity" />
