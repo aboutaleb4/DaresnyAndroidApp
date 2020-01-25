@@ -70,6 +70,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="Course Name"
+                                android:inputType="text"
+                                android:maxLines="1"
                                 android:textColor="@color/applicationColor"
                                 android:textSize="30sp" />
 
@@ -105,69 +107,123 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Description:"
+                            android:textColor="@color/applicationColor"
+                            android:textSize="22sp" />
                         <EditText
                             android:id="@+id/crsedesc"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Description"
                             android:textColor="@color/applicationColor"
-                            android:textSize="22sp" />
+                            android:textSize="22sp"
+                            android:inputType="text"
+                            android:maxLines="1"/>
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Video:"
+                            android:textColor="@color/applicationColor"
+                            android:textSize="22sp" />
                         <EditText
                             android:id="@+id/crsevideo"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Preview"
                             android:textColor="@color/applicationColor"
-                            android:textSize="22sp" />
+                            android:textSize="22sp"
+                            android:inputType="text"
+                            android:maxLines="1"/>
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Start Date:"
+                            android:textColor="@color/applicationColor"
+                            android:textSize="22sp" />
                         <EditText
                             android:id="@+id/crsestd"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Start date"
                             android:textColor="@color/applicationColor"
-                            android:textSize="22sp" />
+                            android:textSize="22sp"
+                            android:inputType="text"
+                            android:maxLines="1"/>
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="End Date:"
+                            android:textColor="@color/applicationColor"
+                            android:textSize="22sp" />
                         <EditText
                             android:id="@+id/crseend"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="End date"
                             android:textColor="@color/applicationColor"
-                            android:textSize="22sp" />
+                            android:textSize="22sp"
+                            android:inputType="text"
+                            android:maxLines="1" />
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Registration Fees:"
+                            android:textColor="@color/applicationColor"
+                            android:textSize="22sp" />
                         <EditText
                             android:id="@+id/crsereg"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Reg"
                             android:textColor="@color/applicationColor"
-                            android:textSize="22sp" />
+                            android:textSize="22sp"
+                            android:inputType="text"
+                            android:maxLines="1"/>
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Price:"
+                            android:textColor="@color/applicationColor"
+                            android:textSize="22sp" />
                         <EditText
                             android:id="@+id/crseprice"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Price"
                             android:textColor="@color/applicationColor"
-                            android:textSize="22sp" />
+                            android:textSize="22sp"
+                            android:inputType="text"
+                            android:maxLines="1"/>
                     </LinearLayout>
 
                 </LinearLayout>

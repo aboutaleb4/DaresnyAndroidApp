@@ -29,6 +29,8 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+import static edu.aucegypt.learningcentershub.Network.APIcall.url;
+
 public class Registered__users extends Fragment  {
     RecyclerView listView;
 
@@ -194,13 +196,13 @@ class rvadapter3 extends RecyclerView.Adapter<rvadapter3.ViewHolder3> implements
     }
 
     private void Network_course(String id){
-        String url = "http://192.168.1.7:3000/myroute/LCcourses?id="+ id;
+        String url2 = url+"/myroute/LCcourses?id="+ id;
 
         OkHttpClient client = new OkHttpClient();
         final MediaType JSON = MediaType.get("application/json; charset=utf-8");
 
         final Request request = new Request.Builder()
-                .url(url)
+                .url(url2)
                 .build();
 
         client.newCall(request).enqueue(new Callback() {
@@ -234,13 +236,13 @@ class rvadapter3 extends RecyclerView.Adapter<rvadapter3.ViewHolder3> implements
 
     }
     private void Network_course_info(String id){
-        String url = "http://192.168.1.7:3000/myroute/LCcourse?id="+ id;
+        String url2 = url+"/myroute/LCcourse?id="+ id;
 
         OkHttpClient client = new OkHttpClient();
         final MediaType JSON = MediaType.get("application/json; charset=utf-8");
 
         final Request request = new Request.Builder()
-                .url(url)
+                .url(url2)
                 .build();
 
         client.newCall(request).enqueue(new Callback() {

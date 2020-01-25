@@ -26,6 +26,8 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+import static edu.aucegypt.learningcentershub.Network.APIcall.url;
+
 
 public class Admin_home extends AppCompatActivity {
     private static String[] message = new String[1];
@@ -33,10 +35,10 @@ public class Admin_home extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.admin_home);
         savedInstanceState=getIntent().getExtras();
         String lcid = savedInstanceState.getString("lcid");
         Network(lcid);
+        setContentView(R.layout.admin_home);
 
         FragmentManager fragmentManager = this.getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -58,13 +60,13 @@ public class Admin_home extends AppCompatActivity {
 
     }
     private void Network(String id){
-        String url = "http://192.168.1.7:3000/myroute/LCinfo?id="+ id;
+        String url2 = url+"/myroute/LCinfo?id="+ id;
 
         OkHttpClient client = new OkHttpClient();
         final MediaType JSON = MediaType.get("application/json; charset=utf-8");
 
         final Request request = new Request.Builder()
-                .url(url)
+                .url(url2)
                 .build();
 
         client.newCall(request).enqueue(new Callback() {
