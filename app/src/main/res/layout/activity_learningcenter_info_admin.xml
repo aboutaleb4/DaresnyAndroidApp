@@ -77,7 +77,7 @@
 
 
                     <ImageView
-                        android:id="@+id/image1"
+                        android:id="@+id/learningcenter_info_image"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_marginTop="55dp"

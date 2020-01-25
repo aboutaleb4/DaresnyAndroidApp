@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements CoursesList_frag.
 
     public void onLearningCenterListener()
     {
-        MainActivity.this.getSupportFragmentManager().beginTransaction().replace(R.id.fragment6_2, new LearningCenter_frag()).commit();
+        MainActivity.this.getSupportFragmentManager().beginTransaction().replace(R.id.fragment6_2, new LearningCenterList_frag()).commit();
 
     }
 

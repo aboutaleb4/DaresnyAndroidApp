@@ -1,21 +1,31 @@
 package edu.aucegypt.learningcentershub;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.Locale;
+
+import edu.aucegypt.learningcentershub.data.Category;
+import edu.aucegypt.learningcentershub.data.LearningCenter;
+
+import static edu.aucegypt.learningcentershub.Network.APIcall.url;
+
 public class LearningCenterAdapter extends RecyclerView.Adapter<LearningCenterAdapter.LearningCenterViewHolder>  {
 
     String[] names;
     String[] category;
-    String[] location;
     int[] icons;
     Context mContext;
 
@@ -23,7 +33,6 @@ public class LearningCenterAdapter extends RecyclerView.Adapter<LearningCenterAd
     public LearningCenterAdapter(Context context, String[] Names, String[] Category, String[] Location, int[] Icons) {
         this.names = Names;
         this.category = Category;
-        this.location = Location;
         this.icons = Icons;
         this.mContext = context;
     }
@@ -40,7 +49,6 @@ public class LearningCenterAdapter extends RecyclerView.Adapter<LearningCenterAd
         holder.image.setImageResource(icons[position]);
         holder.name.setText(names[position]);
         holder.category.setText(category[position]);
-        holder.location.setText(location[position]);
     }
 
     @Override
@@ -55,14 +63,12 @@ public class LearningCenterAdapter extends RecyclerView.Adapter<LearningCenterAd
         ImageView image;
         TextView name;
         TextView category;
-        TextView location;
 
         public LearningCenterViewHolder(View itemView) {
             super(itemView);
             image = itemView.findViewById(R.id.learningcenter_image_view);
             name = itemView.findViewById(R.id.learningcenter_name_view);
             category = itemView.findViewById(R.id.learningcenter_category_view);
-            location = itemView.findViewById(R.id.learningcenter_location_view);
         }
     }
 }
