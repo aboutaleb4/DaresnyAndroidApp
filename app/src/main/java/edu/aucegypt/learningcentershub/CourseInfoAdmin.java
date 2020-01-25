@@ -37,13 +37,14 @@ public class CourseInfoAdmin extends AppCompatActivity implements View.OnClickLi
     EditText name, desc, video,std, end, price, reg;
     TextView cat;
     ImageView imageView;
+    String CID;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_info_admin);
 
         savedInstanceState=getIntent().getExtras();
-        String CID = savedInstanceState.getString("CID");
+         CID = savedInstanceState.getString("CID");
         String CourseName = savedInstanceState.getString("CourseName");
         String CourseImage = savedInstanceState.getString("CourseImage");
         String Price = savedInstanceState.getString("Price");
@@ -53,6 +54,7 @@ public class CourseInfoAdmin extends AppCompatActivity implements View.OnClickLi
         String Description = savedInstanceState.getString("Description");
         String Video = savedInstanceState.getString("Video");
         String LCID = savedInstanceState.getString("LCID");
+
         String CatName = savedInstanceState.getString("CatName");
         name = findViewById(R.id.crseName);
         name.setText(CourseName);
@@ -85,6 +87,11 @@ public class CourseInfoAdmin extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onClick(View view) {
         //should save data
+        try {
+            Network();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         finish();
     }
     private void Network() throws JSONException {
@@ -93,8 +100,8 @@ public class CourseInfoAdmin extends AppCompatActivity implements View.OnClickLi
         OkHttpClient client = new OkHttpClient();
         final MediaType JSON = MediaType.get("application/json; charset=utf-8");
         String json = "{\"name\":\""+name.getText().toString()+"\", \"video\":\""+video.getText().toString()+"\", \"std\": \""+std.getText().toString()
-                +"\", \"end\":\""+ end.getText().toString()+" \"desc\":\""+desc.getText().toString()
-                +"\",\"floor\":"+reg.getText().toString()+", \"price\":"+price.getText().toString()+"\"}";
+                +"\", \"end\":\""+ end.getText().toString()+"\", \"desc\":\""+desc.getText().toString()
+                +"\",\"reg\":"+reg.getText().toString()+", \"price\":"+price.getText().toString()+", \"id\":"+CID+"}";
         final RequestBody body = RequestBody.create(json,JSON);
         final Request request = new Request.Builder()
                 .url(url)

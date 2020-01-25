@@ -1,17 +1,7 @@
 package edu.aucegypt.learningcentershub.Network;
 
-import android.app.PendingIntent;
-import android.telephony.SmsManager;
-import android.widget.Toast;
-
-import org.jetbrains.annotations.NotNull;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.IOException;
 
-import okhttp3.Call;
-import okhttp3.Callback;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -30,7 +20,7 @@ public class APIcall {
     public static final MediaType JSON = MediaType.get("application/json; charset=utf-8");
 
 
-    public final static String url ="http://192.168.1.4:3000/";
+    public final static String url ="http://192.168.1.7:3000/";
 
 
     public String post(String APIendpoint, String json) throws IOException {

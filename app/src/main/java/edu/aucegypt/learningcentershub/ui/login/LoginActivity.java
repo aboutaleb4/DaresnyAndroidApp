@@ -1,17 +1,8 @@
 package edu.aucegypt.learningcentershub.ui.login;
 
 import android.app.Activity;
-
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
-
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
@@ -23,16 +14,21 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 
+import edu.aucegypt.learningcentershub.Admin_home;
 import edu.aucegypt.learningcentershub.MyAccount;
 import edu.aucegypt.learningcentershub.R;
-import edu.aucegypt.learningcentershub.ui.login.LoginViewModel;
-import edu.aucegypt.learningcentershub.ui.login.LoginViewModelFactory;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MediaType;
@@ -164,9 +160,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                             myResponseReader = new JSONObject(myResponse);
                                             Boolean status = myResponseReader.getBoolean("status");
                                             String message = myResponseReader.getString("message");
-                                                if (status == true){
-                                                    Intent mIntent = new Intent(LoginActivity.this, MyAccount.class);
-                                                    startActivity(mIntent);
+                                            int isadmin = myResponseReader.getInt("isadmin");
+                                            int lcid = myResponseReader.getInt("lcid");
+                                            if (status == true){
+                                                Intent mIntent;
+                                                    if (isadmin == 1) {
+                                                        mIntent = new Intent(LoginActivity.this, Admin_home.class);
+                                                        mIntent.putExtra("lcid",String.valueOf(lcid));
+                                                    }
+                                                    else
+                                                         mIntent = new Intent(LoginActivity.this, MyAccount.class);
+                                                startActivity(mIntent);
                                                 }
 
                                         } catch (JSONException e) {
