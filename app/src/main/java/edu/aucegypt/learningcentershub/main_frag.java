@@ -121,7 +121,20 @@ public class main_frag extends Fragment implements RecyclerViewAdapter.RecyclerV
     }
 
     public void onClick(View view){
-        listener.onCategoriesListener();
+        switch (view.getId()){
+            case R.id.seeallcategories:
+                listener.onCategoriesListener();
+                break;
+            case R.id.seealllearningcenters:
+                listener2.onLearningCenterListener();
+                break;
+            case R.id.coursesseeall:
+                listener3.onCourseListener();
+                break;
+            default:
+                break;
+        }
+
     }
 
     public void onClickLearningCenters(View view){

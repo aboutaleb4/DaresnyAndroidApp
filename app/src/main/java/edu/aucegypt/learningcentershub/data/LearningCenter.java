@@ -3,39 +3,48 @@ package edu.aucegypt.learningcentershub.data;
 import java.io.Serializable;
 
 public class LearningCenter implements Serializable {
-    private String name;
-    private String address;
-    private String phoneNumber;
+    private int LCID;
+    private String LCname;
+    private String Logo;
 
-    public LearningCenter(String name, String address, String phoneNumber) {
-        this.name = name;
-        this.address = address;
-        this.phoneNumber = phoneNumber;
+    public void setLCID(int LCID) {
+        this.LCID = LCID;
     }
 
-    public String getName() {
-        return name;
+    public void setLCname(String LCname) {
+        this.LCname = LCname;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setLogo(String logo) {
+        Logo = logo;
     }
 
-    public String getAddress() {
-        return address;
+    public void setCatName(String catName) {
+        CatName = catName;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public int getLCID() {
+        return LCID;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getLCname() {
+        return LCname;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public String getLogo() {
+        return Logo;
     }
 
+    public String getCatName() {
+        return CatName;
+    }
 
+    public LearningCenter(int LCID, String LCname, String logo, String catName) {
+        this.LCID = LCID;
+        this.LCname = LCname;
+        Logo = logo;
+        CatName = catName;
+    }
+
+    private String CatName;
 }

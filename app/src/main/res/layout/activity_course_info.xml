@@ -58,7 +58,7 @@
 
 
                 <ImageView
-                    android:id="@+id/image1"
+                    android:id="@+id/learningcenter_info_image"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:src="@mipmap/ic_launcher"
@@ -127,7 +127,7 @@
                         android:orientation="vertical"
                         android:visibility="gone">
                         <TextView
-                            android:id="@+id/tv_learningCenterName"
+                            android:id="@+id/learningcenter_info_description"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:paddingLeft="16dp"
@@ -135,7 +135,7 @@
                             android:textSize="18sp"
                             />
                         <TextView
-                            android:id="@+id/tv_learningCenterPhone"
+                            android:id="@+id/learningcenter_info_phonenumber"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:paddingLeft="16dp"
@@ -144,7 +144,7 @@
                             android:textSize="18sp"
                             />
                         <TextView
-                            android:id="@+id/tv_learningCenterAddress"
+                            android:id="@+id/learningcenter_info_address"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:paddingLeft="16dp"
@@ -205,7 +205,7 @@
                         android:orientation="vertical"
                         android:visibility="gone">
                         <TextView
-                            android:id="@+id/tv_learningCenterName"
+                            android:id="@+id/learningcenter_info_description"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:paddingLeft="16dp"
@@ -213,7 +213,7 @@
                             android:textSize="18sp"
                             />
                         <TextView
-                            android:id="@+id/tv_learningCenterPhone"
+                            android:id="@+id/learningcenter_info_phonenumber"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:paddingLeft="16dp"
@@ -222,7 +222,7 @@
                             android:textSize="18sp"
                             />
                         <TextView
-                            android:id="@+id/tv_learningCenterAddress"
+                            android:id="@+id/learningcenter_info_address"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:paddingLeft="16dp"
@@ -284,7 +284,7 @@
                         android:orientation="vertical"
                         android:visibility="gone">
                         <TextView
-                            android:id="@+id/tv_learningCenterName"
+                            android:id="@+id/learningcenter_info_description"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:paddingLeft="16dp"
@@ -292,7 +292,7 @@
                             android:textSize="18sp"
                             />
                         <TextView
-                            android:id="@+id/tv_learningCenterPhone"
+                            android:id="@+id/learningcenter_info_phonenumber"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:paddingLeft="16dp"
@@ -301,7 +301,7 @@
                             android:textSize="18sp"
                             />
                         <TextView
-                            android:id="@+id/tv_learningCenterAddress"
+                            android:id="@+id/learningcenter_info_address"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:paddingLeft="16dp"
@@ -363,7 +363,7 @@
                         android:orientation="vertical"
                         android:visibility="gone">
                         <TextView
-                            android:id="@+id/tv_learningCenterName"
+                            android:id="@+id/learningcenter_info_description"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:paddingLeft="16dp"
@@ -371,7 +371,7 @@
                             android:textSize="18sp"
                             />
                         <TextView
-                            android:id="@+id/tv_learningCenterPhone"
+                            android:id="@+id/learningcenter_info_phonenumber"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:paddingLeft="16dp"
@@ -380,7 +380,7 @@
                             android:textSize="18sp"
                             />
                         <TextView
-                            android:id="@+id/tv_learningCenterAddress"
+                            android:id="@+id/learningcenter_info_address"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:paddingLeft="16dp"
@@ -443,7 +443,7 @@
                         android:orientation="vertical"
                         android:visibility="gone">
                         <TextView
-                            android:id="@+id/tv_learningCenterName"
+                            android:id="@+id/learningcenter_info_description"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:paddingLeft="16dp"
@@ -451,7 +451,7 @@
                             android:textSize="18sp"
                             />
                         <TextView
-                            android:id="@+id/tv_learningCenterPhone"
+                            android:id="@+id/learningcenter_info_phonenumber"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:paddingLeft="16dp"
@@ -460,7 +460,7 @@
                             android:textSize="18sp"
                             />
                         <TextView
-                            android:id="@+id/tv_learningCenterAddress"
+                            android:id="@+id/learningcenter_info_address"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:paddingLeft="16dp"
