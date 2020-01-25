@@ -35,11 +35,12 @@
                 android:id="@+id/learningcenter_name_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="12dp"
                 android:layout_below="@id/learningcenter_image_view"
                 android:gravity="left"
                 android:textColor="@color/applicationColor"
+                android:textSize="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.027"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/learningcenter_image_view" />
 
@@ -47,7 +48,7 @@
                 android:id="@+id/learningcenter_category_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="12dp"
+                android:textSize="14dp"
                 android:layout_below="@id/learningcenter_name_view"
                 android:gravity="left"
                 android:textColor="@color/grey"

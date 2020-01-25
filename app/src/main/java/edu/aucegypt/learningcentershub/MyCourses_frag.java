@@ -26,7 +26,7 @@ public class MyCourses_frag extends Fragment implements RecyclerViewAdapter.Recy
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.my_courses_frag, container, false);
 
-        favourites = getResources().getStringArray(R.array.favourites);
+/*        favourites = getResources().getStringArray(R.array.favourites);
         registered = getResources().getStringArray(R.array.registered);
 
         RecyclerView recyclerView = view.findViewById(R.id.recyclerview_favourites);
@@ -37,7 +37,7 @@ public class MyCourses_frag extends Fragment implements RecyclerViewAdapter.Recy
         RecyclerView recyclerView_1 = view.findViewById(R.id.recyclerview_registered);
         recyclerView_1.setLayoutManager(new GridLayoutManager(getContext(), 3));
         RecyclerViewAdapter adapter_1 = new RecyclerViewAdapter(getContext(), registered, registeredIcons, this);
-        recyclerView_1.setAdapter(adapter_1);
+        recyclerView_1.setAdapter(adapter_1);*/
 
         return view;
     }

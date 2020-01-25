@@ -19,12 +19,12 @@ public class MyAccount_frag extends Fragment implements RecyclerViewAdapter.Recy
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.my_account_frag, container, false);
 
-        Category = getResources().getStringArray(R.array.category_4);
+        /*Category = getResources().getStringArray(R.array.category_4);
 
         RecyclerView recyclerView = view.findViewById(R.id.recyclerview_id_3);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(),4));
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(getContext(), Category, categoryIcon, this);
-        recyclerView.setAdapter(adapter);
+        //RecyclerViewAdapter adapter = new RecyclerViewAdapter(getContext(), Category, categoryIcon, this);
+        recyclerView.setAdapter(adapter);*/
         return view;
 
     }
