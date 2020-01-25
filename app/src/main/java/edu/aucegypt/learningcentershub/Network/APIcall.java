@@ -1,17 +1,7 @@
 package edu.aucegypt.learningcentershub.Network;
 
-import android.app.PendingIntent;
-import android.telephony.SmsManager;
-import android.widget.Toast;
-
-import org.jetbrains.annotations.NotNull;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.IOException;
 
-import okhttp3.Call;
-import okhttp3.Callback;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -22,7 +12,7 @@ public class APIcall {
 
     public APIcall() {
         client = new OkHttpClient();
-        url ="http://10.40.47.60:3000/myroute/";
+        url ="http://192.168.1.7:3000/myroute/";
     }
 
     OkHttpClient client;
