@@ -47,12 +47,15 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
 
     LinearLayout expandableLearningCenter;
     LinearLayout expandableCourseInfo;
+    LinearLayout expandableCourseSchedule;
 
     CardView cardViewLearningCenter;
     CardView cardViewCourseInfo;
+    CardView cardViewSchedule;
 
     Button arrowBtnLearningCenter;
     Button arrowBtnCourseInfo;
+    Button arrowBtnCourseSchedule;
     Button registerBtn;
 
     ImageView course_logo;
@@ -67,6 +70,8 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
     TextView tv_learningCenterPhone;
     TextView tv_learningCenterAddress;
     TextView tv_learningCenterEmail;
+
+
 
     RecyclerView recyclerView_Schedule;
 
@@ -83,7 +88,7 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             CID = bundle.getInt("CID");
-            setTitle(" ");
+            setTitle(Integer.toString(CID));
         }
 
         assert getSupportActionBar() != null;   //null check
@@ -91,10 +96,14 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
 
         expandableLearningCenter = (LinearLayout) findViewById(R.id.expandableLearningCenter);
         expandableCourseInfo = (LinearLayout) findViewById(R.id.expandableCourseInfo);
+        expandableCourseSchedule = (LinearLayout) findViewById(R.id.expandableCourseSchedule);
         arrowBtnLearningCenter = (Button) findViewById(R.id.arrowBtnLearningCenter);
         arrowBtnCourseInfo = (Button) findViewById(R.id.arrowBtnCourseInfo);
+        arrowBtnCourseSchedule = (Button) findViewById(R.id.arrowBtnSchedule);
+
         cardViewLearningCenter = (CardView) findViewById(R.id.cardViewLearningCenter);
         cardViewCourseInfo = (CardView) findViewById(R.id.cardViewDescription);
+        cardViewSchedule = (CardView) findViewById(R.id.cardViewSchedule);
 
         tv_name = (TextView) findViewById(R.id.tv_name);
         tv_category = (TextView) findViewById(R.id.tv_category);
@@ -130,6 +139,7 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
 
         arrowBtnLearningCenter.setOnClickListener(this);
         arrowBtnCourseInfo.setOnClickListener(this);
+        arrowBtnCourseSchedule.setOnClickListener(this);
 
 
 
@@ -279,6 +289,21 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
                     TransitionManager.beginDelayedTransition(cardViewCourseInfo,transition);
                     expandableCourseInfo.setVisibility(View.GONE);
                     arrowBtnCourseInfo.setBackgroundResource(R.drawable.ic_keyboard_arrow_down_black_24dp);
+
+                }
+                break;
+
+            case  R.id.arrowBtnSchedule:
+
+                if(expandableCourseSchedule.getVisibility()==View.GONE){
+                    TransitionManager.beginDelayedTransition(cardViewSchedule,transition);
+                    expandableCourseSchedule.setVisibility(View.VISIBLE);
+                    arrowBtnCourseSchedule.setBackgroundResource(R.drawable.ic_keyboard_arrow_up_black_24dp);
+
+                }else {
+                    TransitionManager.beginDelayedTransition(cardViewSchedule,transition);
+                    expandableCourseSchedule.setVisibility(View.GONE);
+                    arrowBtnCourseSchedule.setBackgroundResource(R.drawable.ic_keyboard_arrow_down_black_24dp);
 
                 }
                 break;

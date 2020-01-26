@@ -14,8 +14,13 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.math.RoundingMode;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 import edu.aucegypt.learningcentershub.data.Course;
 import edu.aucegypt.learningcentershub.data.Schedule;
@@ -35,16 +40,33 @@ public class scheduleAdapter extends RecyclerView.Adapter<scheduleAdapter.viewHo
 
     @Override
     public  viewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(context).inflate(R.layout.course_list_item, viewGroup, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.schedule_list_item, viewGroup, false);
         return new viewHolder(view);
     }
     @Override
     public  void onBindViewHolder(viewHolder viewHolder, int position) {
         viewHolder.day.setText(arrayList.get(position).getDay());
 
-        viewHolder.start_time.setText(arrayList.get(position).getStartTime());
+        SimpleDateFormat outputFormat = new SimpleDateFormat("hh:mm a");
+        DateFormat inputFormat = new SimpleDateFormat("HH:mm:ss");
 
-        viewHolder.end_time.setText(arrayList.get(position).getEndTime());
+        String inputText_StTime = arrayList.get(position).getStartTime();
+        String inputText_EndTime = arrayList.get(position).getEndTime();
+        Date StTime_date = null;
+        Date EndTime_date = null;
+        try {
+            StTime_date = inputFormat.parse(inputText_StTime);
+            EndTime_date = inputFormat.parse(inputText_EndTime);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        String StTime = outputFormat.format(StTime_date);
+        String EndTime = outputFormat.format(EndTime_date);
+
+
+        viewHolder.start_time.setText(StTime);
+        viewHolder.end_time.setText(EndTime);
 
     }
 
