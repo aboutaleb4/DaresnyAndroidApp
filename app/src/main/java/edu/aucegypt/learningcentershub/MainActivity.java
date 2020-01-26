@@ -1,5 +1,6 @@
 package edu.aucegypt.learningcentershub;
 
+import android.location.Location;
 import android.os.Bundle;
 import android.transition.ChangeBounds;
 import android.transition.TransitionManager;
@@ -21,6 +22,17 @@ public class MainActivity extends AppCompatActivity implements CoursesList_frag.
     FrameLayout filters_layout;
     ConstraintLayout main_layout;
 
+    protected static final String TAG = "main-activity";
+
+    protected static final String ADDRESS_REQUESTED_KEY = "address-request-pending";
+    protected static final String LOCATION_ADDRESS_KEY = "location-address";
+
+
+    protected Location mLastLocation;
+    protected boolean mAddressRequested;
+
+    protected String mAddressOutput;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +41,12 @@ public class MainActivity extends AppCompatActivity implements CoursesList_frag.
 
         filters_layout = (FrameLayout) findViewById(R.id.filters_layout);
         main_layout = (ConstraintLayout) findViewById(R.id.main_layout);
+
+
+        // Set defaults, then update using values stored in the Bundle.
+        mAddressRequested = false;
+        mAddressOutput = "";
+
 
 
         FragmentManager fragmentManager = this.getSupportFragmentManager();
@@ -41,9 +59,9 @@ public class MainActivity extends AppCompatActivity implements CoursesList_frag.
         fragmentTransaction.commit();
 
 
-
-
     }
+
+
 
     @Override
     public void onFiltersBtnClick() {

@@ -2,6 +2,15 @@ package edu.aucegypt.learningcentershub.data;
 
 public class Address {
     String Street, BuildingNo, FloorNo, AptNo, City, Long, Lat;
+    String Area;
+
+    public String getArea() {
+        return Area;
+    }
+
+    public void setArea(String area) {
+        Area = area;
+    }
 
     public Address() {
     }

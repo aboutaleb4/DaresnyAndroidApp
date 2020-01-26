@@ -32,6 +32,7 @@ import java.io.IOException;
 import edu.aucegypt.learningcentershub.Admin_home;
 import edu.aucegypt.learningcentershub.MainActivity;
 import edu.aucegypt.learningcentershub.MyAccount;
+import edu.aucegypt.learningcentershub.MyAccount_frag;
 import edu.aucegypt.learningcentershub.R;
 import edu.aucegypt.learningcentershub.rvadapter3;
 import okhttp3.Call;
@@ -181,11 +182,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                                     else {
                                                         uid = myResponseReader.getInt("UID");
                                                         mIntent = new Intent(LoginActivity.this, MainActivity.class);
-                                                        Log.d("hi","hi");
                                                         editor.putBoolean("status", true);
-                                                        Log.d("bye","bye");
                                                         editor.putInt("uid", uid);
-                                                        Log.d("b","b");
                                                         editor.commit();
                                                     }
                                                          startActivity(mIntent);
@@ -465,6 +463,45 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     try {
                         myResponseReader = new JSONObject(String.valueOf(new JSONArray(myResponse).getJSONObject(0)));
                         rvadapter3.message2[i][12] = String.valueOf(myResponseReader.getInt("COUNT(*)"));
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+
+            }});
+
+
+    }
+    private void Network_myaccount( String id){
+        String url2 = url+"myroute/userinfo?id="+ id;
+
+        OkHttpClient client = new OkHttpClient();
+        final MediaType JSON = MediaType.get("application/json; charset=utf-8");
+
+        final Request request = new Request.Builder()
+                .url(url2)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                if (response.isSuccessful()){
+                    final String myResponse = response.body().string();
+                    JSONObject myResponseReader;
+                    try {
+                        myResponseReader = new JSONObject(String.valueOf(new JSONArray(myResponse).getJSONObject(0)));
+                        MyAccount_frag.message[0] = myResponseReader.getString("Fname")+" "+ myResponseReader.getString("Lname");
+                        MyAccount_frag.message[1] = myResponseReader.getString("Email");
+                        MyAccount_frag.message[2] = myResponseReader.getString("PhoneNo");
+                        MyAccount_frag.message[3] = myResponseReader.getString("Prefrences");
+
 
                     } catch (JSONException e) {
                         e.printStackTrace();
