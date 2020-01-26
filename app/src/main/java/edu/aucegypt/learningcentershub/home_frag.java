@@ -23,7 +23,7 @@ public class home_frag extends Fragment{
         listView = view.findViewById(R.id.text_lc_home_actions);
         TextView textView = view.findViewById(R.id.text_lc_home_name);
         textView.setText(strtext);
-        String [] Data = {"Edit Information","Edit Courses"};
+        String [] Data = {"Edit Information","View/Edit Courses"};
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         listView.setLayoutManager(layoutManager);
         listView.setAdapter(new rvadapter3(getContext(), Data));

@@ -5,7 +5,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.VideoView;
 
@@ -46,7 +45,7 @@ public class Admin_home extends AppCompatActivity {
         fragmentTransaction.replace(R.id.fragment,navbar);
         fragmentTransaction.replace(R.id.fragment_2, hf);
         fragmentTransaction.commit();
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
+        //getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
 
 
     }
