@@ -6,6 +6,9 @@ import java.util.Date;
 
 public class Course implements Serializable {
 
+    int CID;
+    int LCID;
+
    String CourseName;
    String CourseImage;
    Double Price;
@@ -15,6 +18,14 @@ public class Course implements Serializable {
    Date EndDate;
    String Description;
    String CatName;
+    String LClogo;
+    String PhoneNo;
+    String Email;
+
+    String Street;
+    String BuildingNo;
+    String City;
+    String Area;
 
     public String getLClogo() {
         return LClogo;
@@ -72,17 +83,6 @@ public class Course implements Serializable {
         Area = area;
     }
 
-    String LClogo;
-   String PhoneNo;
-   String Email;
-
-   String Street;
-   String BuildingNo;
-   String City;
-   String Area;
-
-
-
     public Double getRegFees() {
         return RegFees;
     }
@@ -122,9 +122,6 @@ public class Course implements Serializable {
     public void setCatName(String catName) {
         CatName = catName;
     }
-
-    int CID;
-   int LCID;
 
     public Double getPrice() {
         return Price;

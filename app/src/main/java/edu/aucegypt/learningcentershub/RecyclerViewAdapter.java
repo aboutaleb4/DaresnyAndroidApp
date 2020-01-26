@@ -1,28 +1,15 @@
 package edu.aucegypt.learningcentershub;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
-import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import edu.aucegypt.learningcentershub.R;
 import edu.aucegypt.learningcentershub.data.Category;
 
 import static edu.aucegypt.learningcentershub.Network.APIcall.url;
@@ -86,25 +73,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 }
 */
 
-import android.content.Context;
-import android.content.Intent;
-import android.view.View;
-import android.view.LayoutInflater;
-import android.view.ViewGroup;
-import android.widget.Filter;
-import android.widget.Filterable;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import androidx.recyclerview.widget.RecyclerView;
-
-import java.util.ArrayList;
-
-import edu.aucegypt.learningcentershub.data.Category;
-
-import static edu.aucegypt.learningcentershub.Network.APIcall.url;
-
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.viewHolder> {
 
     Context context;
@@ -142,7 +110,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         RecyclerViewListner recyclerViewListner;
         public viewHolder(View itemView, RecyclerViewListner recyclerViewListner ) {
             super(itemView);
-            name = (TextView) itemView.findViewById(R.id.name_view);
+            name = (TextView) itemView.findViewById(R.id.Home_course_name_view);
             image = (ImageView) itemView.findViewById(R.id.image_view);
             this.recyclerViewListner = recyclerViewListner;
             itemView.setOnClickListener(this);

@@ -47,9 +47,7 @@ public class main_frag extends Fragment implements RecyclerViewAdapter.RecyclerV
 
     String[] Category;
     String[] Locations;
-    int[] categoryIcon = {R.drawable.science, R.drawable.programming, R.drawable.engineering, R.drawable.language};
     String[] LearningCenters;
-    int[] learningCentersIcon = {R.drawable.science, R.drawable.programming, R.drawable.engineering, R.drawable.language};
     String[] Courses;
     String[] Courses_learningCenter;
     String[] Courses_Price;
@@ -193,18 +191,11 @@ public class main_frag extends Fragment implements RecyclerViewAdapter.RecyclerV
             }
         });
 
-
-//        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-//        RecyclerView recyclerView_1 = view.findViewById(R.id.recyclerview_id_1);
- //       recyclerView_1.setLayoutManager(layoutManager);
-//        LearningCenterAdapter adapter_1 = new LearningCenterAdapter(getContext(), Courses_learningCenter, Category, Locations, coursesIcon);
- //       recyclerView_1.setAdapter(adapter_1);
-
-        LinearLayoutManager layoutManager_2 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        /*LinearLayoutManager layoutManager_2 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         RecyclerView recyclerView_2 = view.findViewById(R.id.recyclerview_id_2);
         recyclerView_2.setLayoutManager(layoutManager_2);
         CoursesAdapter adapter_2 = new CoursesAdapter(getContext(), Courses, Courses_learningCenter, Courses_Price, coursesIcon);
-        recyclerView_2.setAdapter(adapter_2);
+        recyclerView_2.setAdapter(adapter_2);*/
 
         //view = inflater.inflate(R.layout.activity_categories, container, false);
         seeAllCategories = (TextView) view.findViewById(R.id.seeallcategories);
