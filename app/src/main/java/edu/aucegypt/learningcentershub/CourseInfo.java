@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -34,6 +37,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import edu.aucegypt.learningcentershub.data.Course;
+import edu.aucegypt.learningcentershub.data.Schedule;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MediaType;
@@ -49,12 +53,15 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
 
     LinearLayout expandableLearningCenter;
     LinearLayout expandableCourseInfo;
+    LinearLayout expandableCourseSchedule;
 
     CardView cardViewLearningCenter;
     CardView cardViewCourseInfo;
+    CardView cardViewSchedule;
 
     Button arrowBtnLearningCenter;
     Button arrowBtnCourseInfo;
+    Button arrowBtnCourseSchedule;
     Button registerBtn;
     CheckBox favourite;
 
@@ -74,6 +81,12 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
 
     JSONObject myResponseReader;
     boolean isfavourite;
+
+
+    RecyclerView recyclerView_Schedule;
+
+    scheduleAdapter mScheduleAdapter;
+
     Course course;
 
     @Override
@@ -92,10 +105,14 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
 
         expandableLearningCenter = (LinearLayout) findViewById(R.id.expandableLearningCenter);
         expandableCourseInfo = (LinearLayout) findViewById(R.id.expandableCourseInfo);
+        expandableCourseSchedule = (LinearLayout) findViewById(R.id.expandableCourseSchedule);
         arrowBtnLearningCenter = (Button) findViewById(R.id.arrowBtnLearningCenter);
         arrowBtnCourseInfo = (Button) findViewById(R.id.arrowBtnCourseInfo);
+        arrowBtnCourseSchedule = (Button) findViewById(R.id.arrowBtnSchedule);
+
         cardViewLearningCenter = (CardView) findViewById(R.id.cardViewLearningCenter);
         cardViewCourseInfo = (CardView) findViewById(R.id.cardViewDescription);
+        cardViewSchedule = (CardView) findViewById(R.id.cardViewSchedule);
 
         tv_name = (TextView) findViewById(R.id.tv_name);
         tv_category = (TextView) findViewById(R.id.tv_category);
@@ -113,6 +130,11 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
 
         course_logo = (ImageView) findViewById(R.id.course_logo);
 
+        recyclerView_Schedule = (RecyclerView) findViewById(R.id.recyclerView_schedule);
+
+        recyclerView_Schedule.setLayoutManager(new LinearLayoutManager(CourseInfo.this, LinearLayoutManager.VERTICAL, false));
+        recyclerView_Schedule.setItemAnimator(new DefaultItemAnimator());
+
         registerBtn = (Button)findViewById(R.id.registerBtn);
         favourite = (CheckBox)findViewById(R.id.favourite);
 
@@ -126,6 +148,7 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
 
         arrowBtnLearningCenter.setOnClickListener(this);
         arrowBtnCourseInfo.setOnClickListener(this);
+        arrowBtnCourseSchedule.setOnClickListener(this);
 
         String url_api_1 = url + "myroute/checkFavorites?uid=37&cid="+Integer.toString(CID);
 
@@ -229,11 +252,18 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
 
         String url_api = url + "myroute/getCourseInfo?id="+Integer.toString(CID);
 
+        String url_api_schedule = url + "myroute/getCourseSchedule?id="+Integer.toString(CID);
+
+
         OkHttpClient client = new OkHttpClient();
         final MediaType JSON = MediaType.get("application/json; charset=utf-8");
 
         final Request request = new Request.Builder()
                 .url(url_api)
+                .build();
+
+        final Request request_schedule = new Request.Builder()
+                .url(url_api_schedule)
                 .build();
 
         client.newCall(request).enqueue(new Callback() {
@@ -278,6 +308,8 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
 
 
 
+
+
                                 }
                             }
                     );
@@ -294,6 +326,38 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
             }
         });
 
+        client.newCall(request_schedule).enqueue(new Callback() {
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    Gson gson = new Gson();
+                    Type scheduleListType = new TypeToken<ArrayList<Schedule>>(){}.getType();
+
+                    ArrayList<Schedule> scheduleArrayList = gson.fromJson(response.body().string(), scheduleListType);
+                    mScheduleAdapter = new scheduleAdapter(CourseInfo.this, scheduleArrayList);
+
+
+                    CourseInfo.this.runOnUiThread(
+                            new Runnable() {
+                                @Override
+                                public void run() {
+                                    recyclerView_Schedule.setAdapter(mScheduleAdapter);
+                                }
+                            }
+                    );
+
+
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+
+            }
+        });
 
 
 
@@ -332,6 +396,21 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
                     TransitionManager.beginDelayedTransition(cardViewCourseInfo,transition);
                     expandableCourseInfo.setVisibility(View.GONE);
                     arrowBtnCourseInfo.setBackgroundResource(R.drawable.ic_keyboard_arrow_down_black_24dp);
+
+                }
+                break;
+
+            case  R.id.arrowBtnSchedule:
+
+                if(expandableCourseSchedule.getVisibility()==View.GONE){
+                    TransitionManager.beginDelayedTransition(cardViewSchedule,transition);
+                    expandableCourseSchedule.setVisibility(View.VISIBLE);
+                    arrowBtnCourseSchedule.setBackgroundResource(R.drawable.ic_keyboard_arrow_up_black_24dp);
+
+                }else {
+                    TransitionManager.beginDelayedTransition(cardViewSchedule,transition);
+                    expandableCourseSchedule.setVisibility(View.GONE);
+                    arrowBtnCourseSchedule.setBackgroundResource(R.drawable.ic_keyboard_arrow_down_black_24dp);
 
                 }
                 break;
