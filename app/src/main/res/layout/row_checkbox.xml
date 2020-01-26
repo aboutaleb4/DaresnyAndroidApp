@@ -9,13 +9,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/row_text6"
+            android:id="@+id/row_text4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
@@ -30,36 +30,45 @@
     android:layout_height="wrap_content"
     android:layout_weight="1"
     android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <CheckBox
             android:id="@+id/checkBox1"
-            android:layout_width="wrap_content"
+            android:layout_width="152dp"
             android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
             android:layout_weight="1"
-            android:text="Sunday"
-            android:layout_marginRight="5dp"/>
+            android:text="Sunday" />
 
         <EditText
-            android:id ="@+id/sunTime"
-            android:focusableInTouchMode="false"
+            android:id="@+id/sunTime"
             android:layout_width="157dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:focusableInTouchMode="false" />
+        <EditText
+            android:id="@+id/sunTimeEnd"
+            android:layout_width="157dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:focusableInTouchMode="false" />
     </LinearLayout>
     <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-            <CheckBox
-                android:id="@+id/checkBox2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Monday"
-                android:layout_marginRight="5dp"/>
+
+        <CheckBox
+            android:id="@+id/checkBox2"
+            android:layout_width="152dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:text="Monday" />
 
             <EditText
                 android:id ="@+id/monTime"
@@ -67,40 +76,60 @@
                 android:layout_width="157dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
+        <EditText
+            android:id ="@+id/monTimeEnd"
+            android:focusableInTouchMode="false"
+            android:layout_width="157dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
         </LinearLayout>
     <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-                <CheckBox
-                    android:id="@+id/checkBox3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Tuesday"
-                    android:layout_marginRight="5dp"/>
 
-                <EditText
-                    android:id ="@+id/tueTime"
-                    android:focusableInTouchMode="false"
-                    android:layout_width="157dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+        <CheckBox
+            android:id="@+id/checkBox3"
+            android:layout_width="152dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:text="Tuesday" />
+
+        <EditText
+            android:id="@+id/tueTime"
+            android:layout_width="157dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:focusableInTouchMode="false" />
+        <EditText
+            android:id="@+id/tueTimeEnd"
+            android:layout_width="157dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:focusableInTouchMode="false" />
             </LinearLayout>
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
+
                     <CheckBox
                         android:id="@+id/checkBox4"
-                        android:layout_width="wrap_content"
+                        android:layout_width="152dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
                         android:layout_weight="1"
-                        android:text="Wednesday"
-                        android:layout_marginRight="5dp"/>
+                        android:text="Wednesday" />
 
                     <EditText
                         android:id ="@+id/wedTime"
+                        android:focusableInTouchMode="false"
+                        android:layout_width="157dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+                    <EditText
+                        android:id ="@+id/wedTimeEnd"
                         android:focusableInTouchMode="false"
                         android:layout_width="157dp"
                         android:layout_height="wrap_content"
@@ -113,34 +142,47 @@
                         android:orientation="horizontal">
                         <CheckBox
                             android:id="@+id/checkBox5"
-                            android:layout_width="wrap_content"
+                            android:layout_width="152dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="Thursday"
                             android:layout_marginRight="5dp"/>
 
                         <EditText
-                            android:id ="@+id/thuTime"
-                            android:focusableInTouchMode="false"
+                            android:id="@+id/thuTime"
                             android:layout_width="157dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1" />
+                            android:layout_weight="1"
+                            android:focusableInTouchMode="false" />
+                        <EditText
+                            android:id="@+id/thuTimeEnd"
+                            android:layout_width="157dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:focusableInTouchMode="false" />
                     </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
+
                             <CheckBox
                                 android:id="@+id/checkBox6"
-                                android:layout_width="wrap_content"
+                                android:layout_width="152dp"
                                 android:layout_height="wrap_content"
+                                android:layout_marginRight="5dp"
                                 android:layout_weight="1"
-                                android:text="Friday"
-                                android:layout_marginRight="5dp"/>
+                                android:text="Friday" />
 
                             <EditText
                                 android:id ="@+id/friTime"
+                                android:focusableInTouchMode="false"
+                                android:layout_width="157dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1" />
+                            <EditText
+                                android:id ="@+id/friTimeEnd"
                                 android:focusableInTouchMode="false"
                                 android:layout_width="157dp"
                                 android:layout_height="wrap_content"
@@ -152,18 +194,24 @@
                                 android:orientation="horizontal">
                                 <CheckBox
                                     android:id="@+id/checkBox7"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="152dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:text="Saturday"
                                     android:layout_marginRight="5dp"/>
 
                                 <EditText
-                                    android:id ="@+id/satTime"
+                                    android:id="@+id/satTime"
                                     android:layout_width="157dp"
-                                    android:focusableInTouchMode="false"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="1" />
+                                    android:layout_weight="1"
+                                    android:focusableInTouchMode="false" />
+                                <EditText
+                                    android:id="@+id/satTimeEnd"
+                                    android:layout_width="157dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:focusableInTouchMode="false" />
                             </LinearLayout>
     </LinearLayout>
     </LinearLayout>

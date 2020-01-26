@@ -22,7 +22,7 @@ public class rvadapter3 extends RecyclerView.Adapter<rvadapter3.ViewHolder3> imp
     public static ArrayList<Integer> cid = new ArrayList<>();
 
     public static String[] message = new String[14];
-    public static String[][] message2 = new String[10][13];
+    public static String[][] message2 = new String[100][13];
 
     public rvadapter3(Context context, String[] Names) {
         this.rows = Names;
