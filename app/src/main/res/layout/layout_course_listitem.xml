@@ -21,7 +21,7 @@
 
 
             <ImageView
-                android:id="@+id/course_image_view"
+                android:id="@+id/Home_course_image_view"
                 android:layout_width="170dp"
                 android:layout_height="90dp"
                 android:layout_centerHorizontal="true"
@@ -32,39 +32,39 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/name_view"
+                android:id="@+id/Home_course_name_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="12dp"
-                android:layout_below="@id/course_image_view"
+                android:layout_below="@id/Home_course_image_view"
                 android:gravity="left"
                 android:textColor="@color/applicationColor"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/course_image_view" />
+                app:layout_constraintTop_toBottomOf="@id/Home_course_image_view" />
 
             <TextView
-                android:id="@+id/learningcenter_view"
+                android:id="@+id/Home_learningcenter_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="12dp"
-                android:layout_below="@id/name_view"
+                android:layout_below="@id/Home_course_name_view"
                 android:gravity="left"
                 android:textColor="@color/grey"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/name_view" />
+                app:layout_constraintTop_toBottomOf="@id/Home_course_name_view" />
 
             <TextView
-                android:id="@+id/price_view"
+                android:id="@+id/Home_price_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16dp"
-                android:layout_below="@id/learningcenter_view"
+                android:layout_below="@id/Home_learningcenter_view"
                 android:layout_gravity="left"
                 android:textStyle="bold"
                 android:textColor="@color/applicationColor"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/learningcenter_view" />
+                app:layout_constraintTop_toBottomOf="@id/Home_learningcenter_view" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

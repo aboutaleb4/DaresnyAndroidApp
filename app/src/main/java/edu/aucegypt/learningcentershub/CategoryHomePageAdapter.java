@@ -5,11 +5,8 @@ package edu.aucegypt.learningcentershub;
         import android.view.View;
         import android.view.LayoutInflater;
         import android.view.ViewGroup;
-        import android.widget.Filter;
-        import android.widget.Filterable;
         import android.widget.ImageView;
         import android.widget.TextView;
-        import android.widget.Toast;
 
         import androidx.recyclerview.widget.RecyclerView;
 
@@ -54,7 +51,7 @@ public class CategoryHomePageAdapter extends RecyclerView.Adapter<CategoryHomePa
 
         public viewHolder(View itemView) {
             super(itemView);
-            name = (TextView) itemView.findViewById(R.id.name_view);
+            name = (TextView) itemView.findViewById(R.id.Home_course_name_view);
             image = (ImageView) itemView.findViewById(R.id.image_view);
             itemView.setOnClickListener(this);
 
