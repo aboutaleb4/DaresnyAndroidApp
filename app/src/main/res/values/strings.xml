@@ -34,20 +34,23 @@
         <item>Image</item>
         <item>Fees</item>
         <item>Registration Fees</item>
-        <item>Instructor (optional) </item>
+        <item>Instructor First name(optional) </item>
+        <item>Instructor Last name(optional) </item>
+        <item>Instructor Bio (optional) </item>
         <item>Start Date</item>
         <item>End Date</item>
         <item>Days</item>
         <item>Description</item>
         <item>Preview (optional)</item>
+        <item>Extra Information required: </item>
     </string-array>
     <string-array name="user_info">
         <item>Full Name</item>
-        <item>SSN</item>
         <item>Phone Number</item>
         <item>E-mail</item>
-        <item>Comments (optional) </item>
-        <item>Preferences</item>
+        <item>Knowledge Level </item>
+        <item>Area</item>
+        <item>City</item>
     </string-array>
     <string-array name="category_4">
         <item>Science</item>

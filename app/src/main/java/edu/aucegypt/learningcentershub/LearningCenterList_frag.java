@@ -120,8 +120,4 @@ public class LearningCenterList_frag extends Fragment {
 
     }
 
-
-
-
-
 }

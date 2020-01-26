@@ -1,10 +1,16 @@
 package edu.aucegypt.learningcentershub;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -13,7 +19,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -27,7 +35,9 @@ import static edu.aucegypt.learningcentershub.Network.APIcall.url;
 
 public class LearningCenterInfoAdmin extends AppCompatActivity implements View.OnClickListener {
     EditText name, desc, aptno, floor, city, area, build, street, phone,email;
+    ImageView logo;
     String id;
+    int LOAD_IMAGE = 1;
     @Override
     public void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +57,15 @@ public class LearningCenterInfoAdmin extends AppCompatActivity implements View.O
         String Longtitude = savedInstanceState.getString("Longtitude");
         String Latitude = savedInstanceState.getString("Latitude");
         id = savedInstanceState.getString("id");
+        logo = findViewById(R.id.lc_edit_logo);
+        logo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+                photoPickerIntent.setType("image/*");
+                startActivityForResult(photoPickerIntent, LOAD_IMAGE);
+            }
+        });
         name = findViewById(R.id.lc_edit_name);
         name.setText(LCname);
         desc = findViewById(R.id.lc_edit_desc);
@@ -84,6 +103,31 @@ public class LearningCenterInfoAdmin extends AppCompatActivity implements View.O
             e.printStackTrace();
         }
         finish();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != RESULT_OK) {
+            return;
+        }
+        if (requestCode == LOAD_IMAGE) {
+            final Bundle extras = data.getExtras();
+            if (extras != null) {
+                //Get image
+
+                final Uri imageUri = data.getData();
+                final InputStream imageStream  ;
+                try {
+                    imageStream = getContentResolver().openInputStream(imageUri);
+                    final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+                    logo.setImageBitmap(selectedImage);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }
     }
 
     private void Network() throws JSONException {

@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,14 +17,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -29,6 +37,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import edu.aucegypt.learningcentershub.data.Course;
+import edu.aucegypt.learningcentershub.data.Schedule;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MediaType;
@@ -40,16 +49,21 @@ import static edu.aucegypt.learningcentershub.Network.APIcall.url;
 import static edu.aucegypt.learningcentershub.utitlies.Utility.formatdouble;
 
 public class CourseInfo extends AppCompatActivity implements View.OnClickListener {
+    int CID;
 
     LinearLayout expandableLearningCenter;
     LinearLayout expandableCourseInfo;
+    LinearLayout expandableCourseSchedule;
 
     CardView cardViewLearningCenter;
     CardView cardViewCourseInfo;
+    CardView cardViewSchedule;
 
     Button arrowBtnLearningCenter;
     Button arrowBtnCourseInfo;
+    Button arrowBtnCourseSchedule;
     Button registerBtn;
+    CheckBox favourite;
 
     ImageView course_logo;
 
@@ -64,6 +78,15 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
     TextView tv_learningCenterAddress;
     TextView tv_learningCenterEmail;
 
+
+    JSONObject myResponseReader;
+    boolean isfavourite;
+
+
+    RecyclerView recyclerView_Schedule;
+
+    scheduleAdapter mScheduleAdapter;
+
     Course course;
 
     @Override
@@ -71,7 +94,6 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_info);
 
-        int CID=0;
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             CID = bundle.getInt("CID");
@@ -83,10 +105,14 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
 
         expandableLearningCenter = (LinearLayout) findViewById(R.id.expandableLearningCenter);
         expandableCourseInfo = (LinearLayout) findViewById(R.id.expandableCourseInfo);
+        expandableCourseSchedule = (LinearLayout) findViewById(R.id.expandableCourseSchedule);
         arrowBtnLearningCenter = (Button) findViewById(R.id.arrowBtnLearningCenter);
         arrowBtnCourseInfo = (Button) findViewById(R.id.arrowBtnCourseInfo);
+        arrowBtnCourseSchedule = (Button) findViewById(R.id.arrowBtnSchedule);
+
         cardViewLearningCenter = (CardView) findViewById(R.id.cardViewLearningCenter);
         cardViewCourseInfo = (CardView) findViewById(R.id.cardViewDescription);
+        cardViewSchedule = (CardView) findViewById(R.id.cardViewSchedule);
 
         tv_name = (TextView) findViewById(R.id.tv_name);
         tv_category = (TextView) findViewById(R.id.tv_category);
@@ -104,8 +130,13 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
 
         course_logo = (ImageView) findViewById(R.id.course_logo);
 
-        registerBtn = (Button)findViewById(R.id.registerBtn);
+        recyclerView_Schedule = (RecyclerView) findViewById(R.id.recyclerView_schedule);
 
+        recyclerView_Schedule.setLayoutManager(new LinearLayoutManager(CourseInfo.this, LinearLayoutManager.VERTICAL, false));
+        recyclerView_Schedule.setItemAnimator(new DefaultItemAnimator());
+
+        registerBtn = (Button)findViewById(R.id.registerBtn);
+        favourite = (CheckBox)findViewById(R.id.favourite);
 
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,16 +148,122 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
 
         arrowBtnLearningCenter.setOnClickListener(this);
         arrowBtnCourseInfo.setOnClickListener(this);
+        arrowBtnCourseSchedule.setOnClickListener(this);
+
+        String url_api_1 = url + "myroute/checkFavorites?uid=37&cid="+Integer.toString(CID);
+
+        OkHttpClient client_1 = new OkHttpClient();
+
+        final Request request_1 = new Request.Builder()
+                .url(url_api_1)
+                .build();
+
+        client_1.newCall(request_1).enqueue(new Callback() {
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    final String myResponse = response.body().string();
+
+                    if (myResponse != "") {
+
+                        CourseInfo.this.runOnUiThread(
+                                new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        try {
+                                            myResponseReader = new JSONObject(myResponse);
+                                            isfavourite = myResponseReader.getBoolean("status");
+                                            favourite.setChecked(isfavourite);
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+
+                                    }
+                                }
+                        );
+
+                    }
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+
+            }
+        });
+
+        favourite.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+                   @Override
+                   public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
+                       if(isChecked) {
+                           String url_api_1 = url + "myroute/addToFavorites?uid=37&cid="+Integer.toString(CID);
+
+                           OkHttpClient client_1 = new OkHttpClient();
+
+                           final Request request_1 = new Request.Builder()
+                                   .url(url_api_1)
+                                   .build();
+
+                           client_1.newCall(request_1).enqueue(new Callback() {
+
+                               @Override
+                               public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                               }
+
+                               @Override
+                               public void onFailure(@NotNull Call call, @NotNull IOException e) {
+
+                               }
+                           });
+
+                       }
+                       else
+                       {
+                           String url_api_1 = url + "myroute/removeFromFavorites?uid=37&cid="+Integer.toString(CID);
+
+                           OkHttpClient client_1 = new OkHttpClient();
+
+                           final Request request_1 = new Request.Builder()
+                                   .url(url_api_1)
+                                   .build();
+
+                           client_1.newCall(request_1).enqueue(new Callback() {
+
+                               @Override
+                               public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                               }
+
+                               @Override
+                               public void onFailure(@NotNull Call call, @NotNull IOException e) {
+
+                               }
+                           });
+
+                       }
+                   }
+               }
+        );
 
 
 
         String url_api = url + "myroute/getCourseInfo?id="+Integer.toString(CID);
+
+        String url_api_schedule = url + "myroute/getCourseSchedule?id="+Integer.toString(CID);
+
 
         OkHttpClient client = new OkHttpClient();
         final MediaType JSON = MediaType.get("application/json; charset=utf-8");
 
         final Request request = new Request.Builder()
                 .url(url_api)
+                .build();
+
+        final Request request_schedule = new Request.Builder()
+                .url(url_api_schedule)
                 .build();
 
         client.newCall(request).enqueue(new Callback() {
@@ -171,6 +308,8 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
 
 
 
+
+
                                 }
                             }
                     );
@@ -187,6 +326,38 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
             }
         });
 
+        client.newCall(request_schedule).enqueue(new Callback() {
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    Gson gson = new Gson();
+                    Type scheduleListType = new TypeToken<ArrayList<Schedule>>(){}.getType();
+
+                    ArrayList<Schedule> scheduleArrayList = gson.fromJson(response.body().string(), scheduleListType);
+                    mScheduleAdapter = new scheduleAdapter(CourseInfo.this, scheduleArrayList);
+
+
+                    CourseInfo.this.runOnUiThread(
+                            new Runnable() {
+                                @Override
+                                public void run() {
+                                    recyclerView_Schedule.setAdapter(mScheduleAdapter);
+                                }
+                            }
+                    );
+
+
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+
+            }
+        });
 
 
 
@@ -225,6 +396,21 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
                     TransitionManager.beginDelayedTransition(cardViewCourseInfo,transition);
                     expandableCourseInfo.setVisibility(View.GONE);
                     arrowBtnCourseInfo.setBackgroundResource(R.drawable.ic_keyboard_arrow_down_black_24dp);
+
+                }
+                break;
+
+            case  R.id.arrowBtnSchedule:
+
+                if(expandableCourseSchedule.getVisibility()==View.GONE){
+                    TransitionManager.beginDelayedTransition(cardViewSchedule,transition);
+                    expandableCourseSchedule.setVisibility(View.VISIBLE);
+                    arrowBtnCourseSchedule.setBackgroundResource(R.drawable.ic_keyboard_arrow_up_black_24dp);
+
+                }else {
+                    TransitionManager.beginDelayedTransition(cardViewSchedule,transition);
+                    expandableCourseSchedule.setVisibility(View.GONE);
+                    arrowBtnCourseSchedule.setBackgroundResource(R.drawable.ic_keyboard_arrow_down_black_24dp);
 
                 }
                 break;
