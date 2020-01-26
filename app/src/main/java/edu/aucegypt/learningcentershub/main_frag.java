@@ -247,23 +247,6 @@ public class main_frag extends Fragment implements RecyclerViewAdapter.RecyclerV
 
             }
         });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         //view = inflater.inflate(R.layout.activity_categories, container, false);
         seeAllCategories = (TextView) view.findViewById(R.id.seeallcategories);
         seeAllCategories.setOnClickListener(this);
