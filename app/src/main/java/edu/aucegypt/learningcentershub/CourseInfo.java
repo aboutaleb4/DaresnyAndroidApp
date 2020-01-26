@@ -14,14 +14,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -40,6 +45,7 @@ import static edu.aucegypt.learningcentershub.Network.APIcall.url;
 import static edu.aucegypt.learningcentershub.utitlies.Utility.formatdouble;
 
 public class CourseInfo extends AppCompatActivity implements View.OnClickListener {
+    int CID;
 
     LinearLayout expandableLearningCenter;
     LinearLayout expandableCourseInfo;
@@ -50,6 +56,7 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
     Button arrowBtnLearningCenter;
     Button arrowBtnCourseInfo;
     Button registerBtn;
+    CheckBox favourite;
 
     ImageView course_logo;
 
@@ -64,6 +71,9 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
     TextView tv_learningCenterAddress;
     TextView tv_learningCenterEmail;
 
+
+    JSONObject myResponseReader;
+    boolean isfavourite;
     Course course;
 
     @Override
@@ -71,7 +81,6 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_info);
 
-        int CID=0;
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             CID = bundle.getInt("CID");
@@ -105,7 +114,7 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
         course_logo = (ImageView) findViewById(R.id.course_logo);
 
         registerBtn = (Button)findViewById(R.id.registerBtn);
-
+        favourite = (CheckBox)findViewById(R.id.favourite);
 
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,6 +126,104 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
 
         arrowBtnLearningCenter.setOnClickListener(this);
         arrowBtnCourseInfo.setOnClickListener(this);
+
+        String url_api_1 = url + "myroute/checkFavorites?uid=37&cid="+Integer.toString(CID);
+
+        OkHttpClient client_1 = new OkHttpClient();
+
+        final Request request_1 = new Request.Builder()
+                .url(url_api_1)
+                .build();
+
+        client_1.newCall(request_1).enqueue(new Callback() {
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    final String myResponse = response.body().string();
+
+                    if (myResponse != "") {
+
+                        CourseInfo.this.runOnUiThread(
+                                new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        try {
+                                            myResponseReader = new JSONObject(myResponse);
+                                            isfavourite = myResponseReader.getBoolean("status");
+                                            favourite.setChecked(isfavourite);
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+
+                                    }
+                                }
+                        );
+
+                    }
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+
+            }
+        });
+
+        favourite.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+                   @Override
+                   public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
+                       if(isChecked) {
+                           String url_api_1 = url + "myroute/addToFavorites?uid=37&cid="+Integer.toString(CID);
+
+                           OkHttpClient client_1 = new OkHttpClient();
+
+                           final Request request_1 = new Request.Builder()
+                                   .url(url_api_1)
+                                   .build();
+
+                           client_1.newCall(request_1).enqueue(new Callback() {
+
+                               @Override
+                               public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                               }
+
+                               @Override
+                               public void onFailure(@NotNull Call call, @NotNull IOException e) {
+
+                               }
+                           });
+
+                       }
+                       else
+                       {
+                           String url_api_1 = url + "myroute/removeFromFavorites?uid=37&cid="+Integer.toString(CID);
+
+                           OkHttpClient client_1 = new OkHttpClient();
+
+                           final Request request_1 = new Request.Builder()
+                                   .url(url_api_1)
+                                   .build();
+
+                           client_1.newCall(request_1).enqueue(new Callback() {
+
+                               @Override
+                               public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                               }
+
+                               @Override
+                               public void onFailure(@NotNull Call call, @NotNull IOException e) {
+
+                               }
+                           });
+
+                       }
+                   }
+               }
+        );
 
 
 

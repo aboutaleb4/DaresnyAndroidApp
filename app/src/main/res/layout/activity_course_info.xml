@@ -7,9 +7,24 @@
     android:layout_height="match_parent"
     >
 
+
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
+        <CheckBox
+            android:id="@+id/favourite"
+            style="?android:attr/starStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="0dp"
+            android:paddingTop="30dp"
+            android:paddingRight="8dp"
+            android:scaleX="1.4"
+            android:scaleY="1.4" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -475,16 +490,11 @@
 
 
 
-
         </LinearLayout>
 
 
-
-
-
-
-
     </RelativeLayout>
+
 
 
 </ScrollView>
