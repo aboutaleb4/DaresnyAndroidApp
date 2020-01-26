@@ -176,7 +176,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                                     }
                                                     else
                                                          mIntent = new Intent(LoginActivity.this, MyAccount.class);
-                                                    Network_myaccount();
+                                                    //Network_myaccount();
                                                     startActivity(mIntent);
                                                 }
 
