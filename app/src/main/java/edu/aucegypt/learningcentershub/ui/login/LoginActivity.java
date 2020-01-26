@@ -48,6 +48,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private LoginViewModel loginViewModel;
     int uid;
     int lcid;
+    public static Boolean status = false;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -163,13 +164,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     if (myResponse != "") {
                                         try {
                                             myResponseReader = new JSONObject(myResponse);
-                                            Boolean status = myResponseReader.getBoolean("status");
+                                             status = myResponseReader.getBoolean("status");
                                             String message = myResponseReader.getString("message");
                                             int isadmin = myResponseReader.getInt("isadmin");
                                              lcid = myResponseReader.getInt("lcid");
                                              uid = myResponseReader.getInt("UID");
                                             if (status == true){
                                                 Intent mIntent;
+                                                Network_myaccount(String.valueOf(uid));
                                                     if (isadmin == 1) {
                                                         mIntent = new Intent(LoginActivity.this, Admin_home.class);
                                                         mIntent.putExtra("lcid",String.valueOf(lcid));
