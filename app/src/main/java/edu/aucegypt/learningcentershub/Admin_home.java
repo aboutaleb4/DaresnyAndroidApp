@@ -36,7 +36,7 @@ public class Admin_home extends AppCompatActivity {
         fragmentTransaction.replace(R.id.fragment_1, new TopBar());
         Bundle b = new Bundle();
         b.putString("LCname",message[0]);
-        Fragment hf = new add_course_frag();//home_frag();
+        Fragment hf = new home_frag();
         hf.setArguments(b);
         b = new Bundle();
         b.putString("LCID",lcid);

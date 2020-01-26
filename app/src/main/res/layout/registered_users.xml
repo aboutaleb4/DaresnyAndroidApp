@@ -5,34 +5,40 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <TextView
-        android:id="@+id/registred_users"
+    <FrameLayout
+        android:id = "@+id/Frame1_"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:text="Registered Users"
-        android:textColor="@color/applicationColor"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:ignore="MissingConstraints">
 
+        <androidx.appcompat.widget.Toolbar
+            android:id ="@+id/topbar5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/applicationColor"
+            />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/registred_users_users"
+        <ImageButton
+            android:id="@+id/buttonback2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:background="@color/applicationColor"
+            android:src="@drawable/back"
+            />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_gravity="top"
+            android:src="@drawable/logo4" />
+    </FrameLayout>
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scrollbarSize="3dp"
-        android:scrollbarStyle="outsideOverlay"
-        android:scrollbars="vertical"
-        android:scrollingCache="true"
-        android:smoothScrollbar="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/registred_users"
-        app:layout_constraintVertical_bias="0.0" />
+        android:id ="@+id/Frame_"
+        app:layout_constraintTop_toBottomOf="@id/Frame1_">
+
+</FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

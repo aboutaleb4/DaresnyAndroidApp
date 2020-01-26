@@ -22,7 +22,7 @@ public class rvadapter3 extends RecyclerView.Adapter<rvadapter3.ViewHolder3> imp
     public static ArrayList<Integer> cid = new ArrayList<>();
 
     public static String[] message = new String[14];
-    public static String[][] message2 = new String[10][11];
+    public static String[][] message2 = new String[10][13];
 
     public rvadapter3(Context context, String[] Names) {
         this.rows = Names;
@@ -94,12 +94,15 @@ public class rvadapter3 extends RecyclerView.Adapter<rvadapter3.ViewHolder3> imp
                 i.putExtra("Video",message2[r][8] );
                 i.putExtra("LCID",message2[r][9] );
                 i.putExtra("CatName",message2[r][10] );
-                mContext.startActivity(i);
+                i.putExtra("likes",message2[r][11] );
+            i.putExtra("enroll",message2[r][12] );
+
+            mContext.startActivity(i);
             }
             else {
                 Fragment selectedFragment = null;
                 selectedFragment = new user_info_frag();
-                ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment2_2, selectedFragment).commit();
+                ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction().replace(R.id.Frame_, selectedFragment).commit();
 
             }
     }

@@ -284,6 +284,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 rvadapter3.cname.add(jsonObject.getString("CourseName"));
                                 rvadapter3.cid.add(jsonObject.getInt("CID"));
                                 Network_course_info(i,String.valueOf(jsonObject.getInt("CID")));
+                                Network_course_likes(i,String.valueOf(jsonObject.getInt("CID")));
+                                Network_course_enrolls(i,String.valueOf(jsonObject.getInt("CID")));
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -395,4 +397,75 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
     }
+    private void Network_course_likes(final int i , String id){
+        String url2 = url+"myroute/LCcourselikes?id="+ id;
+
+        OkHttpClient client = new OkHttpClient();
+        final MediaType JSON = MediaType.get("application/json; charset=utf-8");
+
+        final Request request = new Request.Builder()
+                .url(url2)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                if (response.isSuccessful()){
+                    final String myResponse = response.body().string();
+                    JSONObject myResponseReader;
+                    try {
+                        myResponseReader = new JSONObject(String.valueOf(new JSONArray(myResponse).getJSONObject(0)));
+                        rvadapter3.message2[i][11] = String.valueOf(myResponseReader.getInt("COUNT(*)"));
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+
+            }});
+
+
+    }
+    private void Network_course_enrolls(final int i , String id){
+        String url2 = url+"myroute/LCcourseenroll?id="+ id;
+
+        OkHttpClient client = new OkHttpClient();
+        final MediaType JSON = MediaType.get("application/json; charset=utf-8");
+
+        final Request request = new Request.Builder()
+                .url(url2)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                if (response.isSuccessful()){
+                    final String myResponse = response.body().string();
+                    JSONObject myResponseReader;
+                    try {
+                        myResponseReader = new JSONObject(String.valueOf(new JSONArray(myResponse).getJSONObject(0)));
+                        rvadapter3.message2[i][12] = String.valueOf(myResponseReader.getInt("COUNT(*)"));
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+
+            }});
+
+
+    }
+
 }

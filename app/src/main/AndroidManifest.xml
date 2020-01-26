@@ -55,6 +55,7 @@
         <activity android:name=".LearningCenterInfoActivity" />
         <activity android:name=".LearningCenterInfoAdmin" />
         <activity android:name=".CourseInfoAdmin" />
+        <activity android:name=".Registered__users"/>
     </application>
 
 </manifest>

@@ -1,31 +1,44 @@
 package edu.aucegypt.learningcentershub;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.ImageButton;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
-public class Registered__users extends Fragment  {
-    RecyclerView listView;
+public class Registered__users extends AppCompatActivity implements View.OnClickListener {
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.registered_users, container, false);
-        listView = view.findViewById(R.id.registred_users_users);
-        String[] Data = {"User 1", "User 2"}; //comes from database
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-        listView.setLayoutManager(layoutManager);
-        listView.setAdapter(new rvadapter3(getContext(), Data));
-        listView.setNestedScrollingEnabled(false);
-        return view;
+    public void onCreate( Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.registered_users);
+
+        savedInstanceState=getIntent().getExtras();
+        String [] fnames = savedInstanceState.getStringArray("fnames");
+        String [] lnames = savedInstanceState.getStringArray("lnames");
+        FragmentManager fragmentManager = this.getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        Fragment fragment = new reg_user();
+        Bundle b = new Bundle();
+        b.putStringArray("fname",fnames);
+        b.putStringArray("lname",lnames);
+        fragment.setArguments(b);
+        fragmentTransaction.replace(R.id.Frame_, fragment);
+        fragmentTransaction.commit();
+        Toolbar myToolbar = findViewById(R.id.topbar5);
+        setSupportActionBar(myToolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        ImageButton button = findViewById(R.id.buttonback2);
+        button.setOnClickListener(this);
+    }
+    @Override
+    public void onClick(View view) {
+        finish();
     }
 
-
 }
-
 
