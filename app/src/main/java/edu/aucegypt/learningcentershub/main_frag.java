@@ -29,6 +29,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import edu.aucegypt.learningcentershub.data.Category;
+import edu.aucegypt.learningcentershub.data.Course;
 import edu.aucegypt.learningcentershub.data.LearningCenter;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -42,14 +43,14 @@ import static edu.aucegypt.learningcentershub.Network.APIcall.url;
 public class main_frag extends Fragment implements RecyclerViewAdapter.RecyclerViewListner, View.OnClickListener {
     CategoryHomePageAdapter adapter;
     LearningCenterAdapter adapter_1;
+    CoursesAdapter adapter_2;
     private RecyclerView recyclerView;
     private RecyclerView recyclerView_1;
+    private RecyclerView recyclerView_2;
 
     String[] Category;
     String[] Locations;
-    int[] categoryIcon = {R.drawable.science, R.drawable.programming, R.drawable.engineering, R.drawable.language};
     String[] LearningCenters;
-    int[] learningCentersIcon = {R.drawable.science, R.drawable.programming, R.drawable.engineering, R.drawable.language};
     String[] Courses;
     String[] Courses_learningCenter;
     String[] Courses_Price;
@@ -194,17 +195,74 @@ public class main_frag extends Fragment implements RecyclerViewAdapter.RecyclerV
         });
 
 
-//        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-//        RecyclerView recyclerView_1 = view.findViewById(R.id.recyclerview_id_1);
- //       recyclerView_1.setLayoutManager(layoutManager);
-//        LearningCenterAdapter adapter_1 = new LearningCenterAdapter(getContext(), Courses_learningCenter, Category, Locations, coursesIcon);
- //       recyclerView_1.setAdapter(adapter_1);
+
+
+
+
 
         LinearLayoutManager layoutManager_2 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        RecyclerView recyclerView_2 = view.findViewById(R.id.recyclerview_id_2);
+        recyclerView_2 = (RecyclerView) view.findViewById(R.id.recyclerview_id_2);
         recyclerView_2.setLayoutManager(layoutManager_2);
-        CoursesAdapter adapter_2 = new CoursesAdapter(getContext(), Courses, Courses_learningCenter, Courses_Price, coursesIcon);
-        recyclerView_2.setAdapter(adapter_2);
+
+
+        String url_api_2 = url + "myroute/getRecommendedCourses";
+        url_api_2 = url_api_2 + "?id=" + "37";
+
+        OkHttpClient client_2 = new OkHttpClient();
+
+        final Request request_2 = new Request.Builder()
+                .url(url_api_2)
+                .build();
+
+        client_2.newCall(request_2).enqueue(new Callback() {
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    Gson gson = new Gson();
+
+                    Type catListType = new TypeToken<ArrayList<edu.aucegypt.learningcentershub.data.Course>>(){}.getType();
+
+                    ArrayList<Course> CoursesArrayList = gson.fromJson(response.body().string(), catListType);
+                    adapter_2 = new CoursesAdapter(getContext(), CoursesArrayList);
+
+
+                    getActivity().runOnUiThread(
+                            new Runnable() {
+                                @Override
+                                public void run() {
+                                    recyclerView_2.setAdapter(adapter_2);
+                                }
+                            }
+                    );
+
+
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         //view = inflater.inflate(R.layout.activity_categories, container, false);
         seeAllCategories = (TextView) view.findViewById(R.id.seeallcategories);
@@ -273,8 +331,4 @@ public class main_frag extends Fragment implements RecyclerViewAdapter.RecyclerV
     public void RecyclerViewClick(int position) {
 
     }
-
-
-
-
 }

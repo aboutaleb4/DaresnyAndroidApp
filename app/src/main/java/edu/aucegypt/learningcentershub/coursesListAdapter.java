@@ -13,8 +13,6 @@ import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import edu.aucegypt.learningcentershub.data.Course;
@@ -69,7 +67,7 @@ public class coursesListAdapter extends RecyclerView.Adapter<coursesListAdapter.
             name = (TextView) itemView.findViewById(R.id.name);
             image = (ImageView) itemView.findViewById(R.id.image);
             LCname = (TextView) itemView.findViewById(R.id.lc_name);
-            Price = itemView.findViewById(R.id.price_view);
+            Price = itemView.findViewById(R.id.Home_price_view);
 
 
             itemView.setOnClickListener(this);
