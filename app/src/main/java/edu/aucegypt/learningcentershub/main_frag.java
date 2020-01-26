@@ -1,9 +1,11 @@
 package edu.aucegypt.learningcentershub;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,8 +19,31 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import org.jetbrains.annotations.NotNull;
+
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+
+import edu.aucegypt.learningcentershub.data.Category;
+import edu.aucegypt.learningcentershub.data.LearningCenter;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
+import static edu.aucegypt.learningcentershub.Network.APIcall.url;
 
 public class main_frag extends Fragment implements RecyclerViewAdapter.RecyclerViewListner, View.OnClickListener {
+    CategoryHomePageAdapter adapter;
+    LearningCenterAdapter adapter_1;
+    private RecyclerView recyclerView;
+    private RecyclerView recyclerView_1;
 
     String[] Category;
     String[] Locations;
@@ -64,20 +89,120 @@ public class main_frag extends Fragment implements RecyclerViewAdapter.RecyclerV
         Courses_Price = getResources().getStringArray(R.array.courses_price_4);
         Locations = getResources().getStringArray(R.array.locations_4);
 
-        RecyclerView recyclerView = view.findViewById(R.id.recyclerview_id);
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(),4));
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(getContext(), Category, categoryIcon, this);
-        recyclerView.setAdapter(adapter);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        RecyclerView recyclerView_1 = view.findViewById(R.id.recyclerview_id_1);
-        recyclerView_1.setLayoutManager(layoutManager);
-        LearningCenterAdapter adapter_1 = new LearningCenterAdapter(getContext(), Courses_learningCenter, Category, Locations, coursesIcon);
-        recyclerView_1.setAdapter(adapter_1);
+        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerview_id);
+        recyclerView.setLayoutManager(layoutManager);
+
+
+        String url_api = url + "myroute/getCategories";
+
+        OkHttpClient client = new OkHttpClient();
+
+        final Request request = new Request.Builder()
+                .url(url_api)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    Gson gson = new Gson();
+
+                    Type catListType = new TypeToken<ArrayList<edu.aucegypt.learningcentershub.data.Category>>(){}.getType();
+
+                    ArrayList<Category> categoryArrayList = gson.fromJson(response.body().string(), catListType);
+                    ArrayList<Category> categoryArrayList_4 = new ArrayList<Category>(4);
+                    for(int i = 0; i < 4; i++) {
+                        categoryArrayList_4.add(categoryArrayList.get(i));
+                    }
+                    adapter = new CategoryHomePageAdapter(getContext(), categoryArrayList_4);
+
+
+                    getActivity().runOnUiThread(
+                            new Runnable() {
+                                @Override
+                                public void run() {
+                                    recyclerView.setAdapter(adapter);
+                                }
+                            }
+                    );
+
+
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+
+            }
+        });
+
 
         LinearLayoutManager layoutManager_1 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        recyclerView_1 = (RecyclerView) view.findViewById(R.id.recyclerview_id_1);
+        recyclerView_1.setLayoutManager(layoutManager_1);
+
+
+        String url_api_1 = url + "myroute/getLearningCenters";
+
+        OkHttpClient client_1 = new OkHttpClient();
+
+        final Request request_1 = new Request.Builder()
+                .url(url_api_1)
+                .build();
+
+        client_1.newCall(request_1).enqueue(new Callback() {
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    Gson gson = new Gson();
+
+                    Type catListType = new TypeToken<ArrayList<edu.aucegypt.learningcentershub.data.LearningCenter>>(){}.getType();
+
+                    ArrayList<LearningCenter> LearningCentersArrayList = gson.fromJson(response.body().string(), catListType);
+                    ArrayList<LearningCenter> LearningCentersArrayList_4 = new ArrayList<LearningCenter>(4);
+                    for(int i = 0; i < 4; i++) {
+                        LearningCentersArrayList_4.add(LearningCentersArrayList.get(i));
+                    }
+                    adapter_1 = new LearningCenterAdapter(getContext(), LearningCentersArrayList_4);
+
+
+                    getActivity().runOnUiThread(
+                            new Runnable() {
+                                @Override
+                                public void run() {
+                                    recyclerView_1.setAdapter(adapter_1);
+                                }
+                            }
+                    );
+
+
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+
+            }
+        });
+
+
+//        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+//        RecyclerView recyclerView_1 = view.findViewById(R.id.recyclerview_id_1);
+ //       recyclerView_1.setLayoutManager(layoutManager);
+//        LearningCenterAdapter adapter_1 = new LearningCenterAdapter(getContext(), Courses_learningCenter, Category, Locations, coursesIcon);
+ //       recyclerView_1.setAdapter(adapter_1);
+
+        LinearLayoutManager layoutManager_2 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         RecyclerView recyclerView_2 = view.findViewById(R.id.recyclerview_id_2);
-        recyclerView_2.setLayoutManager(layoutManager_1);
+        recyclerView_2.setLayoutManager(layoutManager_2);
         CoursesAdapter adapter_2 = new CoursesAdapter(getContext(), Courses, Courses_learningCenter, Courses_Price, coursesIcon);
         recyclerView_2.setAdapter(adapter_2);
 
