@@ -1,5 +1,6 @@
 package edu.aucegypt.learningcentershub;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,8 +10,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
-
-import edu.aucegypt.learningcentershub.ui.login.LoginActivity;
 
 public class MyAccount_frag extends Fragment implements RecyclerViewAdapter.RecyclerViewListner {
 
@@ -22,6 +21,7 @@ public class MyAccount_frag extends Fragment implements RecyclerViewAdapter.Recy
     public static TextView name;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        final SharedPreferences.Editor editor = this.getActivity().getSharedPreferences("login_shared_preference", MODE_PRIVATE).edit();
         View view = inflater.inflate(R.layout.my_account_frag, container, false);
          name = view.findViewById(R.id.full_name);
         if (message[0]=="null null") message[0] = "";
@@ -36,11 +36,9 @@ public class MyAccount_frag extends Fragment implements RecyclerViewAdapter.Recy
         signout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (LoginActivity.status == true) {
-                    LoginActivity.status = !LoginActivity.status;
-                    cleanup();
-                    TopBar.button.setText("Login");
-                }
+                editor.putBoolean("status", false);
+                editor.putInt("uid", 0);
+                editor.apply();
             }
         });
         /*Category = getResources().getStringArray(R.array.category_4);

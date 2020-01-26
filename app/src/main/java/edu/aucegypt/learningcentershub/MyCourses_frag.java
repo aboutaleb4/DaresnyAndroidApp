@@ -1,5 +1,6 @@
 package edu.aucegypt.learningcentershub;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +31,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+import static android.content.Context.MODE_PRIVATE;
 import static edu.aucegypt.learningcentershub.Network.APIcall.url;
 
 public class MyCourses_frag extends Fragment{
@@ -39,54 +41,62 @@ public class MyCourses_frag extends Fragment{
     MyCoursesAdapter adapter_1;
     RecyclerView recyclerView_1;
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        SharedPreferences prefs = this.getActivity().getSharedPreferences("login_shared_preference", MODE_PRIVATE);
+        Boolean status = prefs.getBoolean("status", false);
+        int uid = prefs.getInt("uid", 0); //0 is the default value.
         View view = inflater.inflate(R.layout.my_courses_frag, container, false);
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerview_favourites);
-        recyclerView.setLayoutManager(layoutManager);
+        if (status) {
+            LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+            recyclerView = (RecyclerView) view.findViewById(R.id.recyclerview_favourites);
+            recyclerView.setLayoutManager(layoutManager);
 
-        String url_api = url + "myroute/getUserLikedCourses";
+            String url_api = url + "myroute/getUserLikedCourses";
 
-        url_api = url_api + "?id=" + "37";
+            url_api = url_api + "?id=" + Integer.toString(uid);
+            ;
 
-        OkHttpClient client = new OkHttpClient();
+            OkHttpClient client = new OkHttpClient();
 
-        final Request request = new Request.Builder()
-                .url(url_api)
-                .build();
+            final Request request = new Request.Builder()
+                    .url(url_api)
+                    .build();
 
-        client.newCall(request).enqueue(new Callback() {
+            client.newCall(request).enqueue(new Callback() {
 
-            @Override
-            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                if (response.isSuccessful()) {
-                    Gson gson = new Gson();
+                @Override
+                public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                    if (response.isSuccessful()) {
+                        Gson gson = new Gson();
 
-                    Type catListType = new TypeToken<ArrayList<Course>>(){}.getType();
+                        Type catListType = new TypeToken<ArrayList<Course>>() {
+                        }.getType();
 
-                    ArrayList<Course> FavouriteCoursesArrayList = gson.fromJson(response.body().string(), catListType);
-                    adapter = new MyCoursesAdapter(getContext(), FavouriteCoursesArrayList);
+                        ArrayList<Course> FavouriteCoursesArrayList = gson.fromJson(response.body().string(), catListType);
+                        adapter = new MyCoursesAdapter(getContext(), FavouriteCoursesArrayList);
 
 
-                    getActivity().runOnUiThread(
-                            new Runnable() {
-                                @Override
-                                public void run() {
-                                    recyclerView.setAdapter(adapter);
+                        getActivity().runOnUiThread(
+                                new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        recyclerView.setAdapter(adapter);
+                                    }
                                 }
-                            }
-                    );
+                        );
+                    }
+
                 }
 
-            }
+                @Override
+                public void onFailure(@NotNull Call call, @NotNull IOException e) {
 
-            @Override
-            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                }
+            });
 
-            }
-        });
         LinearLayoutManager layoutManager_1 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView_1 = (RecyclerView) view.findViewById(R.id.recyclerview_registered);
         recyclerView_1.setLayoutManager(layoutManager_1);
@@ -131,6 +141,7 @@ public class MyCourses_frag extends Fragment{
 
             }
         });
+        }
         return view;
     }
 }

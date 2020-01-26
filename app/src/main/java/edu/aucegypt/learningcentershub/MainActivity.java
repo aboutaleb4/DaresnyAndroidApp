@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements CoursesList_frag.
         fragmentTransaction.replace(R.id.fragment6_1, new TopBar());
         fragmentTransaction.replace(R.id.fragment6_2, new main_frag());
         fragmentTransaction.replace(R.id.filters_layout, new FiltersFragment());
-        //fragmentTransaction.replace(R.id.seealllearningcenters, new LearningCenter());
+        //fragmentTransaction.replace(R.id.fragment7_2, new course_frag());
         fragmentTransaction.commit();
 
 
@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements CoursesList_frag.
 
     public void onCourseListener()
     {
-        MainActivity.this.getSupportFragmentManager().beginTransaction().replace(R.id.fragment6_2, new LearningCenter_frag()).commit();
+        MainActivity.this.getSupportFragmentManager().beginTransaction().replace(R.id.fragment6_2, new CoursesList_frag()).commit();
     }
 }
 
