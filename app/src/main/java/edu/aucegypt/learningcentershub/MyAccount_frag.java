@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -14,6 +15,8 @@ public class MyAccount_frag extends Fragment implements RecyclerViewAdapter.Recy
     String[] Category;
     int[] categoryIcon = {R.drawable.science, R.drawable.programming, R.drawable.engineering, R.drawable.language};
     public static String [] message = new String[4];
+    Button signout;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -24,6 +27,12 @@ public class MyAccount_frag extends Fragment implements RecyclerViewAdapter.Recy
         email.setText(message[1]);
         EditText phone = view.findViewById(R.id.phonenumberedit);
         phone.setText(message[2]);
+        signout = view.findViewById(R.id.signout_myaccount);
+        signout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            }
+        });
         /*Category = getResources().getStringArray(R.array.category_4);
 
         RecyclerView recyclerView = view.findViewById(R.id.recyclerview_id_3);

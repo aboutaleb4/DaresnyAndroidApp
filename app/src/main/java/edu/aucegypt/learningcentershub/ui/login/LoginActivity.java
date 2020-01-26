@@ -2,6 +2,7 @@ package edu.aucegypt.learningcentershub.ui.login;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -45,6 +46,7 @@ import static edu.aucegypt.learningcentershub.Network.APIcall.url;
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     private LoginViewModel loginViewModel;
+    int uid;
     int lcid;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -165,6 +167,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                             String message = myResponseReader.getString("message");
                                             int isadmin = myResponseReader.getInt("isadmin");
                                              lcid = myResponseReader.getInt("lcid");
+                                             uid = myResponseReader.getInt("UID");
                                             if (status == true){
                                                 Intent mIntent;
                                                     if (isadmin == 1) {
@@ -174,10 +177,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                                         Network_course(String.valueOf(lcid));
                                                         Network_lcinfodisplay(String.valueOf(lcid));
                                                     }
-                                                    else
-                                                         mIntent = new Intent(LoginActivity.this, MyAccount.class);
-                                                    //Network_myaccount();
-                                                    startActivity(mIntent);
+                                                    else {
+                                                        mIntent = new Intent(LoginActivity.this, MyAccount.class);
+                                                        SharedPreferences.Editor editor = getSharedPreferences("login_shared_preference", MODE_PRIVATE).edit();
+                                                        editor.putBoolean("status", true);
+                                                        editor.putInt("idName", uid);
+                                                        editor.apply();
+                                                    }
+                                                         startActivity(mIntent);
                                                 }
 
                                         } catch (JSONException e) {
