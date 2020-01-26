@@ -22,6 +22,8 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
+import edu.aucegypt.learningcentershub.data.Address;
+import edu.aucegypt.learningcentershub.data.Course;
 import edu.aucegypt.learningcentershub.data.LearningCenter;
 import edu.aucegypt.learningcentershub.ui.login.LoginActivity;
 import okhttp3.Call;
@@ -40,7 +42,10 @@ public class LearningCenterInfoActivity extends AppCompatActivity {
     TextView phone;
     TextView address;
     JSONObject myResponseReader;
+    JSONObject myResponseReader1;
     ImageView logo;
+
+    Address addressObject;
     @Override
     public void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +54,7 @@ public class LearningCenterInfoActivity extends AppCompatActivity {
         description = (TextView) findViewById(R.id.learningcenter_info_description);
         phone = (TextView) findViewById(R.id.learningcenter_info_phonenumber);
         logo = (ImageView) findViewById(R.id.learningcenter_info_image);
-        address = (TextView) findViewById(R.id.learningcenter_info_address);
+        address = (TextView) findViewById(R.id.learningcenter_info_address1);
 
         String url_api = url + "myroute/LCinfo";
 
@@ -76,6 +81,8 @@ public class LearningCenterInfoActivity extends AppCompatActivity {
                                         @Override
                                         public void run() {
                                             try {
+
+
                                                 myResponseReader = new JSONObject(myResponse);
                                                 name.setText(myResponseReader.getString("LCname"));
                                                 description.setText(myResponseReader.getString("Description"));
@@ -89,6 +96,66 @@ public class LearningCenterInfoActivity extends AppCompatActivity {
                                         }
                                     }
                             );
+
+                    }
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+
+            }
+        });
+
+        String url_api_getAddress = url + "myroute/getAddress";
+
+        url_api_getAddress = url_api_getAddress + "?id=" + Integer.toString(mBundle.getInt("LCID"));
+
+        OkHttpClient client_1 = new OkHttpClient();
+
+        final Request request_1 = new Request.Builder()
+                .url(url_api_getAddress)
+                .build();
+
+        client_1.newCall(request_1).enqueue(new Callback() {
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull final Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    final String myResponse1 = response.body().string();
+                    Gson gson = new Gson();
+
+                    final Type typeAddress = new TypeToken<Address>(){}.getType();
+
+                    addressObject = gson.fromJson(myResponse1, typeAddress);
+
+                    if (myResponse1 != "") {
+
+                        LearningCenterInfoActivity.this.runOnUiThread(
+                                new Runnable() {
+                                    @Override
+                                    public void run() {
+
+                                        if(addressObject.getFloorNo() == null || addressObject.getAptNo() == null)
+                                        {
+                                            address.setText(addressObject.getBuildingNo()+" "+
+                                                    addressObject.getStreet()+" ,"+
+                                                    addressObject.getArea()+" ,"+
+                                                    addressObject.getCity());
+                                        }
+                                        else{
+                                            address.setText(addressObject.getBuildingNo()+" "+
+                                                    addressObject.getStreet()+" ,"+
+                                                    addressObject.getArea()+" ,"+
+                                                    addressObject.getCity()+"\n"+"Floor: "+
+                                                    addressObject.getFloorNo()+"\n"+"Apartment: "+
+                                                    addressObject.getAptNo());
+                                        }
+                                    }
+                                }
+                        );
 
                     }
 
