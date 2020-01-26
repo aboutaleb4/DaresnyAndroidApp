@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -29,6 +30,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 
 import edu.aucegypt.learningcentershub.Admin_home;
+import edu.aucegypt.learningcentershub.MainActivity;
 import edu.aucegypt.learningcentershub.MyAccount;
 import edu.aucegypt.learningcentershub.R;
 import edu.aucegypt.learningcentershub.rvadapter3;
@@ -49,6 +51,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     int lcid;
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        final SharedPreferences.Editor editor = getSharedPreferences("login_shared_preference", MODE_PRIVATE).edit();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
@@ -165,11 +168,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                             Boolean status = myResponseReader.getBoolean("status");
                                             String message = myResponseReader.getString("message");
                                             int isadmin = myResponseReader.getInt("isadmin");
-                                             lcid = myResponseReader.getInt("lcid");
-                                             uid = myResponseReader.getInt("UID");
                                             if (status == true){
                                                 Intent mIntent;
                                                     if (isadmin == 1) {
+                                                        lcid = myResponseReader.getInt("lcid");
                                                         mIntent = new Intent(LoginActivity.this, Admin_home.class);
                                                         mIntent.putExtra("lcid",String.valueOf(lcid));
                                                         Network_lcinfo(String.valueOf(lcid));
@@ -177,11 +179,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                                         Network_lcinfodisplay(String.valueOf(lcid));
                                                     }
                                                     else {
-                                                        mIntent = new Intent(LoginActivity.this, MyAccount.class);
-                                                        SharedPreferences.Editor editor = getSharedPreferences("login_shared_preference", MODE_PRIVATE).edit();
+                                                        uid = myResponseReader.getInt("UID");
+                                                        mIntent = new Intent(LoginActivity.this, MainActivity.class);
+                                                        Log.d("hi","hi");
                                                         editor.putBoolean("status", true);
-                                                        editor.putInt("idName", uid);
-                                                        editor.apply();
+                                                        Log.d("bye","bye");
+                                                        editor.putInt("uid", uid);
+                                                        Log.d("b","b");
+                                                        editor.commit();
                                                     }
                                                          startActivity(mIntent);
                                                 }

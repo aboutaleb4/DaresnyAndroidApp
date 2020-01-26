@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,6 +39,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+import static android.content.Context.MODE_PRIVATE;
 import static edu.aucegypt.learningcentershub.Network.APIcall.url;
 
 public class main_frag extends Fragment implements RecyclerViewAdapter.RecyclerViewListner, View.OnClickListener {
@@ -81,6 +83,9 @@ public class main_frag extends Fragment implements RecyclerViewAdapter.RecyclerV
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        SharedPreferences prefs = this.getActivity().getSharedPreferences("login_shared_preference", MODE_PRIVATE);
+        Boolean status = prefs.getBoolean("status", false);
+        int uid = prefs.getInt("uid", 0); //0 is the default value.
         View view = inflater.inflate(R.layout.main_frag, container, false);
 
         Category = getResources().getStringArray(R.array.category_4);
@@ -199,54 +204,55 @@ public class main_frag extends Fragment implements RecyclerViewAdapter.RecyclerV
 
 
 
-
-        LinearLayoutManager layoutManager_2 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        recyclerView_2 = (RecyclerView) view.findViewById(R.id.recyclerview_id_2);
-        recyclerView_2.setLayoutManager(layoutManager_2);
-
-
-        String url_api_2 = url + "myroute/getRecommendedCourses";
-        url_api_2 = url_api_2 + "?id=" + "37";
-
-        OkHttpClient client_2 = new OkHttpClient();
-
-        final Request request_2 = new Request.Builder()
-                .url(url_api_2)
-                .build();
-
-        client_2.newCall(request_2).enqueue(new Callback() {
-
-            @Override
-            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                if (response.isSuccessful()) {
-                    Gson gson = new Gson();
-
-                    Type catListType = new TypeToken<ArrayList<edu.aucegypt.learningcentershub.data.Course>>(){}.getType();
-
-                    ArrayList<Course> CoursesArrayList = gson.fromJson(response.body().string(), catListType);
-                    adapter_2 = new CoursesAdapter(getContext(), CoursesArrayList);
+if (status) {
+    LinearLayoutManager layoutManager_2 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+    recyclerView_2 = (RecyclerView) view.findViewById(R.id.recyclerview_id_2);
+    recyclerView_2.setLayoutManager(layoutManager_2);
 
 
-                    getActivity().runOnUiThread(
-                            new Runnable() {
-                                @Override
-                                public void run() {
-                                    recyclerView_2.setAdapter(adapter_2);
-                                }
+    String url_api_2 = url + "myroute/getRecommendedCourses";
+    url_api_2 = url_api_2 + "?id=" + Integer.toString(uid);
+
+    OkHttpClient client_2 = new OkHttpClient();
+
+    final Request request_2 = new Request.Builder()
+            .url(url_api_2)
+            .build();
+
+    client_2.newCall(request_2).enqueue(new Callback() {
+
+        @Override
+        public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+            if (response.isSuccessful()) {
+                Gson gson = new Gson();
+
+                Type catListType = new TypeToken<ArrayList<edu.aucegypt.learningcentershub.data.Course>>() {
+                }.getType();
+
+                ArrayList<Course> CoursesArrayList = gson.fromJson(response.body().string(), catListType);
+                adapter_2 = new CoursesAdapter(getContext(), CoursesArrayList);
+
+
+                getActivity().runOnUiThread(
+                        new Runnable() {
+                            @Override
+                            public void run() {
+                                recyclerView_2.setAdapter(adapter_2);
                             }
-                    );
+                        }
+                );
 
-
-
-                }
 
             }
 
-            @Override
-            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+        }
 
-            }
-        });
+        @Override
+        public void onFailure(@NotNull Call call, @NotNull IOException e) {
+
+        }
+    });
+}
         //view = inflater.inflate(R.layout.activity_categories, container, false);
         seeAllCategories = (TextView) view.findViewById(R.id.seeallcategories);
         seeAllCategories.setOnClickListener(this);

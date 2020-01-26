@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,11 +22,15 @@ public class MyAccount_frag extends Fragment implements RecyclerViewAdapter.Recy
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        final SharedPreferences.Editor editor = this.getActivity().getSharedPreferences("login_shared_preference", MODE_PRIVATE).edit();
         View view = inflater.inflate(R.layout.my_account_frag, container, false);
         signout = view.findViewById(R.id.signout_myaccount);
         signout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                editor.putBoolean("status", false);
+                editor.putInt("uid", 0);
+                editor.apply();
             }
         });
         /*Category = getResources().getStringArray(R.array.category_4);

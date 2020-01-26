@@ -57,8 +57,8 @@ public class MyCoursesAdapter extends RecyclerView.Adapter<MyCoursesAdapter.view
 
         public void onClick(View view){
             int itemPosition = getAdapterPosition();
-            Intent toCatCourses = new Intent(context, LearningCenterInfoActivity.class);
-            toCatCourses.putExtra("LCID", arrayList.get(itemPosition).getLCID());
+            Intent toCatCourses = new Intent(context, CourseInfo.class);
+            toCatCourses.putExtra("CID", arrayList.get(itemPosition).getCID());
             context.startActivity(toCatCourses);
         }
     }
