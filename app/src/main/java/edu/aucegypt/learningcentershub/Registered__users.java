@@ -14,18 +14,27 @@ public class Registered__users extends AppCompatActivity implements View.OnClick
 
     @Override
     public void onCreate( Bundle savedInstanceState) {
+        savedInstanceState=getIntent().getExtras();
+        String [] fnames = new String[0];
+        String [] lnames = new String[0];
+        String extra = null;
+    if (savedInstanceState != null) {
+            fnames =  savedInstanceState.getStringArray("fnames");
+             lnames = savedInstanceState.getStringArray("lnames");
+             extra =  getIntent().getStringExtra("data");
+
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.registered_users);
 
-        savedInstanceState=getIntent().getExtras();
-        String [] fnames = savedInstanceState.getStringArray("fnames");
-        String [] lnames = savedInstanceState.getStringArray("lnames");
+
         FragmentManager fragmentManager = this.getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         Fragment fragment = new reg_user();
         Bundle b = new Bundle();
         b.putStringArray("fname",fnames);
         b.putStringArray("lname",lnames);
+        b.putString("data",extra);
         fragment.setArguments(b);
         fragmentTransaction.replace(R.id.Frame_, fragment);
         fragmentTransaction.commit();

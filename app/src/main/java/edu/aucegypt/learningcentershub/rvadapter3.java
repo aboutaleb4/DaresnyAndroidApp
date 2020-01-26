@@ -71,7 +71,7 @@ public class rvadapter3 extends RecyclerView.Adapter<rvadapter3.ViewHolder3> imp
             mContext.startActivity(i);
 
         }
-        else if (((TextView)view).getText().toString()=="Edit Courses"){
+        else if (((TextView)view).getText().toString()=="View/Edit Courses"){
             Fragment selectedFragment = null;
             selectedFragment = new learningCentersFrag();
             Bundle b = new Bundle();
@@ -100,9 +100,20 @@ public class rvadapter3 extends RecyclerView.Adapter<rvadapter3.ViewHolder3> imp
             mContext.startActivity(i);
             }
             else {
+            String[] fname  = ((TextView)view).getText().toString().split(" ");
+            int r = CourseInfoAdmin.message_f.indexOf(fname[0]);
                 Fragment selectedFragment = null;
                 selectedFragment = new user_info_frag();
-                ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction().replace(R.id.Frame_, selectedFragment).commit();
+                Bundle b = new Bundle();
+                b.putString("KLevel",CourseInfoAdmin.message_o.get(r).get(0));
+            b.putString("Area",CourseInfoAdmin.message_o.get(r).get(1));
+            b.putString("City",CourseInfoAdmin.message_o.get(r).get(2));
+            b.putString("Fname",CourseInfoAdmin.message_o.get(r).get(3));
+            b.putString("Lname",CourseInfoAdmin.message_o.get(r).get(4));
+            b.putString("Email",CourseInfoAdmin.message_o.get(r).get(5));
+            b.putString("PhoneNo",CourseInfoAdmin.message_o.get(r).get(6));
+            selectedFragment.setArguments(b);
+            ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction().replace(R.id.Frame_, selectedFragment).commit();
 
             }
     }

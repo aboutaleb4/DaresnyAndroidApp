@@ -154,6 +154,11 @@ class rvadapter2 extends RecyclerView.Adapter<rvadapter2.ViewHolder3> implements
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_video, parent, false);
             return new ViewHolder3(view);
         }
+        if (viewType == 5)
+        {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_checkbox2, parent, false);
+            return new ViewHolder3(view);
+        }
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row, parent, false);
         return new ViewHolder3(view);
     }
@@ -358,6 +363,11 @@ class rvadapter2 extends RecyclerView.Adapter<rvadapter2.ViewHolder3> implements
             holder.imageButton2.setOnClickListener(this);
             holder.videoview.setVideoURI(null);
         }
+        else if (position == 11)
+        {
+            holder.text6.setText(rows[position]);
+
+        }
         else {
             holder.text1.setText(rows[position]);
             holder.editText.addTextChangedListener(new TextWatcher() {
@@ -398,6 +408,8 @@ class rvadapter2 extends RecyclerView.Adapter<rvadapter2.ViewHolder3> implements
             return 3;
         if (position==10)
             return 4;
+        if (position == 11)
+            return 5;
         return 0;
     }
     @Override
@@ -423,7 +435,7 @@ class rvadapter2 extends RecyclerView.Adapter<rvadapter2.ViewHolder3> implements
 
     public class ViewHolder3 extends RecyclerView.ViewHolder{
 
-        TextView text1, text2, text3, text4,text5;
+        TextView text1, text2, text3, text4,text5, text6;
         Spinner spinner;
         ImageButton imageButton, imageButton2;
         VideoView videoview;
@@ -449,6 +461,7 @@ class rvadapter2 extends RecyclerView.Adapter<rvadapter2.ViewHolder3> implements
             cbsat = itemView.findViewById(R.id.satTime);
             videoview = itemView.findViewById(R.id.row_edit4);
             text5 = itemView.findViewById(R.id.row_text5);
+            text6 = itemView.findViewById(R.id.row_text6);
             imageButton2 = itemView.findViewById(R.id.row_select2);
 
 

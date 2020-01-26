@@ -19,7 +19,6 @@
 android:id="@+id/registred_users_users"
 android:layout_width="match_parent"
 android:layout_height="wrap_content"
-android:layout_marginTop="73dp"
 android:scrollbarSize="3dp"
 android:scrollbarStyle="outsideOverlay"
 android:scrollbars="vertical"
