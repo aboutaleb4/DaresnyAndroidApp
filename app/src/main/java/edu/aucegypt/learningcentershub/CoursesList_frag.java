@@ -65,13 +65,6 @@ public class CoursesList_frag extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.activity_courses_list, container, false);
 
-        String [] name = getResources().getStringArray(R.array.courses_4);
-
-        int [] image = {R.drawable.science,
-                R.drawable.programming,
-                R.drawable.engineering,
-                R.drawable.language};
-
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         searchView = (SearchView) view.findViewById(R.id.searchView);
         filters_layout = (FrameLayout) view.findViewById(R.id.filters_layout);
@@ -84,13 +77,6 @@ public class CoursesList_frag extends Fragment implements View.OnClickListener {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-//        for (int i = 0; i < image.length; i++) {
-//            Course itemModel = new Course();
-//            itemModel.setCourseName(name[i]);
-//            itemModel.setImage(image[i]);
-//            arrayList.add(itemModel);
-//
-//        }
 
 
         String url_api = url + "myroute/getCourses";
@@ -137,8 +123,6 @@ public class CoursesList_frag extends Fragment implements View.OnClickListener {
         });
 
 
-        adapter = new coursesListAdapter(getContext(), arrayList);
-        recyclerView.setAdapter(adapter);
 
 
         searchView.setOnQueryTextListener(new OnQueryTextListener() {

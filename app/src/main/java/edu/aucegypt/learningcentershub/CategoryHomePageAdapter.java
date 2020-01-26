@@ -16,31 +16,30 @@ package edu.aucegypt.learningcentershub;
         import java.util.ArrayList;
 
         import edu.aucegypt.learningcentershub.data.Category;
-        import edu.aucegypt.learningcentershub.data.LearningCenter;
 
         import static edu.aucegypt.learningcentershub.Network.APIcall.url;
 
-public class LearningCenterAdapter extends RecyclerView.Adapter<LearningCenterAdapter.viewHolder>{
+public class CategoryHomePageAdapter extends RecyclerView.Adapter<CategoryHomePageAdapter.viewHolder>{
 
     Context context;
-    ArrayList<LearningCenter> arrayList;
+    ArrayList<Category> arrayList;
 
-    public LearningCenterAdapter(Context context, ArrayList<LearningCenter> arrayList) {
+    public CategoryHomePageAdapter(Context context, ArrayList<Category> arrayList) {
         this.context = context;
         this.arrayList = arrayList;
     }
 
     @Override
     public  viewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(context).inflate(R.layout.layout_learningcenter_listitem, viewGroup, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.layout_listitem, viewGroup, false);
         return new viewHolder(view);
     }
     @Override
     public  void onBindViewHolder(viewHolder viewHolder, int position) {
-        viewHolder.name.setText(arrayList.get(position).getLCname());
-        viewHolder.category.setText(arrayList.get(position).getCatName());
+        viewHolder.name.setText(arrayList.get(position).getCatName());
+
         new DownloadImageTask(viewHolder.image)
-                .execute(url+"images/"+ arrayList.get(position).getLogo());
+                .execute(url+"images/"+ arrayList.get(position).getCatImage());
 
     }
 
@@ -51,23 +50,20 @@ public class LearningCenterAdapter extends RecyclerView.Adapter<LearningCenterAd
 
     public class viewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView name;
-        TextView category;
         ImageView image;
 
         public viewHolder(View itemView) {
             super(itemView);
-            name = (TextView) itemView.findViewById(R.id.learningcenter_name_view);
-            category = (TextView) itemView.findViewById(R.id.learningcenter_category_view);
-            image = (ImageView) itemView.findViewById(R.id.learningcenter_image_view);
+            name = (TextView) itemView.findViewById(R.id.name_view);
+            image = (ImageView) itemView.findViewById(R.id.image_view);
             itemView.setOnClickListener(this);
 
         }
 
         public void onClick(View view){
 //            name.getText();
-            int itemPosition = getAdapterPosition();
-            Intent toCatCourses = new Intent(context, LearningCenterInfoActivity.class);
-            toCatCourses.putExtra("LCID", arrayList.get(itemPosition).getLCID());
+            Intent toCatCourses = new Intent(context, CatCoursesActivity.class);
+            toCatCourses.putExtra("CatName", name.getText());
             context.startActivity(toCatCourses);
         }
     }

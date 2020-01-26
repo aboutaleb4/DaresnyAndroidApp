@@ -19,23 +19,27 @@
     <string name="invalid_password">Password must be > 5 characters</string>
     <string name="login_failed">"Login Failed"</string>
     <string-array name="category">
-        <item>Science</item>
-        <item>Programming</item>
-        <item>Engineering</item>
-        <item>Language</item>
         <item>Business</item>
-        <item>Music</item>
-        <item>Graphic Design</item>
         <item>Cooking</item>
+        <item>Engineering</item>
+        <item>Graphic Design</item>
+        <item>Language</item>
+        <item>Music</item>
+        <item>Programming</item>
+        <item>Science</item>
     </string-array>
     <string-array name="course_info">
         <item>Name</item>
         <item>Category</item>
+        <item>Image</item>
         <item>Fees</item>
         <item>Registration Fees</item>
+        <item>Instructor (optional) </item>
         <item>Start Date</item>
         <item>End Date</item>
         <item>Days</item>
+        <item>Description</item>
+        <item>Preview (optional)</item>
     </string-array>
     <string-array name="user_info">
         <item>Full Name</item>

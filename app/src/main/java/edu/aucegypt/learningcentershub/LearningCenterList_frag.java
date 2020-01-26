@@ -1,16 +1,19 @@
 package edu.aucegypt.learningcentershub;
 
+import android.content.Context;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
-import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.widget.Button;
-import android.widget.FrameLayout;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -21,7 +24,9 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
-import edu.aucegypt.learningcentershub.data.Course;
+import edu.aucegypt.learningcentershub.data.Category;
+import edu.aucegypt.learningcentershub.data.LearningCenter;
+import edu.aucegypt.learningcentershub.data.User;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MediaType;
@@ -31,41 +36,31 @@ import okhttp3.Response;
 
 import static edu.aucegypt.learningcentershub.Network.APIcall.url;
 
-public class CatCoursesActivity extends AppCompatActivity {
-    RecyclerView recyclerView;
-    SearchView searchView;
-    ArrayList<Course> arrayList;
+public class LearningCenterList_frag extends Fragment {
 
-
-    coursesListAdapter adapter;
-
+    // private categoriesOnClickListener listener;
+    LearningCenterListAdapter adapter;
+    private RecyclerView recyclerView;
+    private SearchView searchView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cat_courses);
+    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    {
+        View view = inflater.inflate(R.layout.activity_learningcenters, container, false);
 
-        String CatName ="";
-        Bundle bundle = getIntent().getExtras();
-        if (bundle != null) {
-            CatName = bundle.getString("CatName");
-            setTitle(CatName);
-        }
+        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView_lc);
+        searchView = view.findViewById(R.id.searchView_lc);
 
-        assert getSupportActionBar() != null;   //null check
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);   //show back button
+        recyclerView.setHasFixedSize(true);
 
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-        searchView = (SearchView) findViewById(R.id.searchView);
-
-
-        arrayList = new ArrayList<>();
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
+        recyclerView.setNestedScrollingEnabled(false);
 
 
-        String url_api = url + "myroute/getCoursesInCategory?CatName="+CatName;
+
+        String url_api = url + "myroute/getLearningCenters";
 
         OkHttpClient client = new OkHttpClient();
         final MediaType JSON = MediaType.get("application/json; charset=utf-8");
@@ -81,13 +76,13 @@ public class CatCoursesActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     Gson gson = new Gson();
 
-                    Type courseListType = new TypeToken<ArrayList<Course>>(){}.getType();
+                    Type catListType = new TypeToken<ArrayList<LearningCenter>>(){}.getType();
 
-                    ArrayList<Course> courseArrayList = gson.fromJson(response.body().string(), courseListType);
-                    adapter = new coursesListAdapter(CatCoursesActivity.this, courseArrayList);
+                    ArrayList<LearningCenter> categoryArrayList = gson.fromJson(response.body().string(), catListType);
+                    adapter = new LearningCenterListAdapter(getContext(), categoryArrayList);
 
 
-                    CatCoursesActivity.this.runOnUiThread(
+                    getActivity().runOnUiThread(
                             new Runnable() {
                                 @Override
                                 public void run() {
@@ -108,7 +103,6 @@ public class CatCoursesActivity extends AppCompatActivity {
             }
         });
 
-
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -122,11 +116,12 @@ public class CatCoursesActivity extends AppCompatActivity {
             }
         });
 
+        return view;
+
     }
 
-    @Override
-    public boolean onSupportNavigateUp(){
-        finish();
-        return true;
-    }
+
+
+
+
 }

@@ -49,14 +49,15 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".Admin_home" >
-        </activity>
-        <activity android:name=".CourseInfo" />
+        <activity android:name=".Admin_home" />
+        <activity android:name=".CourseInfo"
+            android:theme="@style/ActionBarTheme"/>
         <activity android:name=".MyAccount" />
         <activity android:name=".Payment" />
         <activity android:name=".LearningCenterInfoActivity" />
         <activity android:name=".LearningCenterInfoAdmin" />
         <activity android:name=".CourseInfoAdmin" />
+        <activity android:name=".Registered__users"/>
     </application>
 
 </manifest>

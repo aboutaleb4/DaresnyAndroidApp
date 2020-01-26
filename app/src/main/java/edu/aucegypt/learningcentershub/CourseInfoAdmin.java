@@ -1,8 +1,8 @@
 package edu.aucegypt.learningcentershub;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.cardview.widget.CardView;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
@@ -19,6 +18,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -32,21 +32,26 @@ import static edu.aucegypt.learningcentershub.Network.APIcall.url;
 
 public class CourseInfoAdmin extends AppCompatActivity implements View.OnClickListener {
 
-    LinearLayout expandableLearningCenter;
-    Button arrowBtnLearningCenter;
-    CardView cardViewLearningCenter;
-    Button registerBtn;
     EditText name, desc, video,std, end, price, reg;
     TextView cat;
     ImageView imageView;
     String CID;
+    public static ArrayList<String> message_f = new ArrayList<>();
+    public static ArrayList<String> message_l = new ArrayList<>();
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_course_info_admin);
 
         savedInstanceState=getIntent().getExtras();
          CID = savedInstanceState.getString("CID");
+        try {
+            Network_users();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_course_info_admin);
+
         String CourseName = savedInstanceState.getString("CourseName");
         String CourseImage = savedInstanceState.getString("CourseImage");
         String Price = savedInstanceState.getString("Price");
@@ -56,6 +61,8 @@ public class CourseInfoAdmin extends AppCompatActivity implements View.OnClickLi
         String Description = savedInstanceState.getString("Description");
         String Video = savedInstanceState.getString("Video");
         String LCID = savedInstanceState.getString("LCID");
+        String likes = savedInstanceState.getString("likes");
+        String enroll = savedInstanceState.getString("enroll");
 
         String CatName = savedInstanceState.getString("CatName");
         name = findViewById(R.id.crseName);
@@ -77,8 +84,25 @@ public class CourseInfoAdmin extends AppCompatActivity implements View.OnClickLi
         reg = findViewById(R.id.crsereg);
         reg.setText(RegFees);
 
-        Toolbar myToolbar = findViewById(R.id.topbar4);
+        TextView faves = findViewById(R.id.crseLikes);
+        faves.setText(likes);
 
+        TextView reg = findViewById(R.id.crseuser);
+        reg.setText(enroll);
+
+        LinearLayout linearLayout = findViewById(R.id.reg_click);
+        linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(),Registered__users.class);
+                i.putExtra("fnames",message_f.toArray());
+                i.putExtra("lnames",message_l.toArray());
+                startActivity(i);
+
+            }
+        });
+
+        Toolbar myToolbar = findViewById(R.id.topbar4);
         setSupportActionBar(myToolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         ImageButton button = findViewById(R.id.buttonback);
@@ -97,7 +121,7 @@ public class CourseInfoAdmin extends AppCompatActivity implements View.OnClickLi
         finish();
     }
     private void Network() throws JSONException {
-        String url2 = url+"/myroute/Courseupdate";
+        String url2 = url+"myroute/Courseupdate";
 
         OkHttpClient client = new OkHttpClient();
         final MediaType JSON = MediaType.get("application/json; charset=utf-8");
@@ -125,6 +149,48 @@ public class CourseInfoAdmin extends AppCompatActivity implements View.OnClickLi
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+
+            }});
+
+
+    }
+    private void Network_users() throws JSONException {
+        String url2 = url+"myroute/LCcourseenrollnames?id="+CID;
+
+        OkHttpClient client = new OkHttpClient();
+        final MediaType JSON = MediaType.get("application/json; charset=utf-8");
+
+        final Request request = new Request.Builder()
+                .url(url2)
+                .build();
+
+
+        client.newCall(request).enqueue(new Callback() {
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                if (response.isSuccessful()){
+                    final String myResponse = response.body().string();
+                    JSONArray myResponseReader;
+                    if (myResponse != "") {
+                        try {
+                            myResponseReader = new JSONArray(myResponse);
+                            for (int i = 0; i<myResponseReader.length();i++) {
+                                JSONObject jsonObject = myResponseReader.getJSONObject(i);
+                                message_f.add(jsonObject.getString("Fname"));
+                                message_l.add(jsonObject.getString("Lname"));
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
                     }
                 }
 
