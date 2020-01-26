@@ -632,26 +632,38 @@ class rvadapter2 extends RecyclerView.Adapter<rvadapter2.ViewHolder3> implements
          }
          if (monday)
          {
+             if (dt != "")
+                 dt+=",";
              dt +="\"mon\":[\""+mon+"\",\""+mon1+"\"]";
          }
          if (tuesday)
          {
+             if (dt != "")
+                 dt+=",";
              dt +="\"tue\":[\""+tue+"\",\""+tue1+"\"]";
          }
          if (wednesday)
          {
+             if (dt != "")
+                 dt+=",";
              dt +="\"wed\":[\""+wed+"\",\""+wed1+"\"]";
          }
          if (thursay)
          {
+             if (dt != "")
+                 dt+=",";
              dt +="\"thu\":[\""+thu+"\",\""+thu1+"\"]";
          }
          if (friday)
          {
+             if (dt != "")
+                 dt+=",";
              dt +="\"fri\":[\""+sun+"\",\""+fri1+"\"]";
          }
          if (saturday)
          {
+             if (dt != "")
+                 dt+=",";
              dt +="\"sat\":[\""+sat+"\",\""+sat1+"\"]";
          }
          final MediaType JSON = MediaType.get("application/json; charset=utf-8");
