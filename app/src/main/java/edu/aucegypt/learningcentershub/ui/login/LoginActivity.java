@@ -164,38 +164,38 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             if (response.isSuccessful()){
                                 final String myResponse = response.body().string();
                                 JSONObject myResponseReader;
-                                    if (myResponse != "") {
-                                        try {
-                                            myResponseReader = new JSONObject(myResponse);
-                                             status = myResponseReader.getBoolean("status");
-                                            String message = myResponseReader.getString("message");
-                                            int isadmin = myResponseReader.getInt("isadmin");
-                                            if (status == true){
-                                                Intent mIntent;
-                                                Network_myaccount(String.valueOf(uid));
-                                                    if (isadmin == 1) {
-                                                        lcid = myResponseReader.getInt("lcid");
-                                                        mIntent = new Intent(LoginActivity.this, Admin_home.class);
-                                                        mIntent.putExtra("lcid",String.valueOf(lcid));
-                                                        Network_lcinfo(String.valueOf(lcid));
-                                                        Network_course(String.valueOf(lcid));
-                                                        Network_lcinfodisplay(String.valueOf(lcid));
-                                                    }
-                                                    else {
-                                                        uid = myResponseReader.getInt("UID");
-                                                        mIntent = new Intent(LoginActivity.this, MainActivity.class);
-                                                        editor.putBoolean("status", true);
-                                                        editor.putInt("uid", uid);
-                                                        editor.commit();
-                                                    }
-                                                         startActivity(mIntent);
-                                                }
-
-                                        } catch (JSONException e) {
-                                            e.printStackTrace();
+                                if (myResponse != "") {
+                                    try {
+                                        myResponseReader = new JSONObject(myResponse);
+                                        status = myResponseReader.getBoolean("status");
+                                        String message = myResponseReader.getString("message");
+                                        int isadmin = myResponseReader.getInt("isadmin");
+                                        if (status == true){
+                                            Intent mIntent;
+                                            Network_myaccount(String.valueOf(uid));
+                                            if (isadmin == 1) {
+                                                lcid = myResponseReader.getInt("lcid");
+                                                mIntent = new Intent(LoginActivity.this, Admin_home.class);
+                                                mIntent.putExtra("lcid",String.valueOf(lcid));
+                                                Network_lcinfo(String.valueOf(lcid));
+                                                Network_course(String.valueOf(lcid));
+                                                Network_lcinfodisplay(String.valueOf(lcid));
+                                            }
+                                            else {
+                                                uid = myResponseReader.getInt("UID");
+                                                mIntent = new Intent(LoginActivity.this, MainActivity.class);
+                                                editor.putBoolean("status", true);
+                                                editor.putInt("uid", uid);
+                                                editor.commit();
+                                            }
+                                            startActivity(mIntent);
                                         }
 
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
                                     }
+
+                                }
                             }
 
                         }
