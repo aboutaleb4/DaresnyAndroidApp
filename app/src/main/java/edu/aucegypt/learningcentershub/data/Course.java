@@ -27,6 +27,16 @@ public class Course implements Serializable {
     String City;
     String Area;
 
+    Boolean addToFilteredList;
+
+    public Boolean getAddToFilteredList() {
+        return addToFilteredList;
+    }
+
+    public void setAddToFilteredList(Boolean addToFilteredList) {
+        this.addToFilteredList = addToFilteredList;
+    }
+
     public String getLClogo() {
         return LClogo;
     }

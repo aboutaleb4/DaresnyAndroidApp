@@ -50,6 +50,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private LoginViewModel loginViewModel;
     int uid;
     int lcid;
+    public static Boolean status = false;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         final SharedPreferences.Editor editor = getSharedPreferences("login_shared_preference", MODE_PRIVATE).edit();
@@ -166,11 +167,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     if (myResponse != "") {
                                         try {
                                             myResponseReader = new JSONObject(myResponse);
-                                            Boolean status = myResponseReader.getBoolean("status");
+                                             status = myResponseReader.getBoolean("status");
                                             String message = myResponseReader.getString("message");
                                             int isadmin = myResponseReader.getInt("isadmin");
                                             if (status == true){
                                                 Intent mIntent;
+                                                Network_myaccount(String.valueOf(uid));
                                                     if (isadmin == 1) {
                                                         lcid = myResponseReader.getInt("lcid");
                                                         mIntent = new Intent(LoginActivity.this, Admin_home.class);

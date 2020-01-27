@@ -104,6 +104,7 @@ class rvadapter2 extends RecyclerView.Adapter<rvadapter2.ViewHolder3> implements
      public rvadapter2(Context context, String[] Names) {
         this.rows = Names;
         this.mContext = context;
+         setHasStableIds(true);
         String [] categories = mContext.getResources().getStringArray(R.array.category_4);
         dataAdapter = new ArrayAdapter<>(mContext, android.R.layout.simple_spinner_item, categories);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

@@ -65,6 +65,8 @@ public class main_frag extends Fragment implements RecyclerViewAdapter.RecyclerV
     TextView seeAllLearningCenters;
     TextView seeAllCourses;
 
+    TextView courses;
+
     public interface categoriesOnClickListener
     {
          void onCategoriesListener();
@@ -100,8 +102,12 @@ public class main_frag extends Fragment implements RecyclerViewAdapter.RecyclerV
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerview_id);
         recyclerView.setLayoutManager(layoutManager);
 
+        courses = (TextView) view.findViewById(R.id.courses);
+
 
         String url_api = url + "myroute/getCategories";
+
+
 
         OkHttpClient client = new OkHttpClient();
 
@@ -209,9 +215,61 @@ if (status) {
     recyclerView_2 = (RecyclerView) view.findViewById(R.id.recyclerview_id_2);
     recyclerView_2.setLayoutManager(layoutManager_2);
 
+    courses.setText("Recommended Courses");
+
 
     String url_api_2 = url + "myroute/getRecommendedCourses";
     url_api_2 = url_api_2 + "?id=" + Integer.toString(uid);
+
+    OkHttpClient client_2 = new OkHttpClient();
+
+    final Request request_2 = new Request.Builder()
+            .url(url_api_2)
+            .build();
+
+    client_2.newCall(request_2).enqueue(new Callback() {
+
+        @Override
+        public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+            if (response.isSuccessful()) {
+                Gson gson = new Gson();
+
+                Type catListType = new TypeToken<ArrayList<edu.aucegypt.learningcentershub.data.Course>>() {
+                }.getType();
+
+                ArrayList<Course> CoursesArrayList = gson.fromJson(response.body().string(), catListType);
+                adapter_2 = new CoursesAdapter(getContext(), CoursesArrayList);
+
+
+                getActivity().runOnUiThread(
+                        new Runnable() {
+                            @Override
+                            public void run() {
+                                recyclerView_2.setAdapter(adapter_2);
+                            }
+                        }
+                );
+
+
+            }
+
+        }
+
+        @Override
+        public void onFailure(@NotNull Call call, @NotNull IOException e) {
+
+        }
+    });
+}else {
+    LinearLayoutManager layoutManager_2 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+    recyclerView_2 = (RecyclerView) view.findViewById(R.id.recyclerview_id_2);
+    recyclerView_2.setLayoutManager(layoutManager_2);
+
+    courses.setText("Courses");
+
+
+    String url_api_2 = url + "myroute/getCourses";
+   // url_api_2 = url_api_2 + "?id=" + Integer.toString(uid);
 
     OkHttpClient client_2 = new OkHttpClient();
 

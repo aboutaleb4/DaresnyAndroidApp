@@ -12,5 +12,6 @@
 
 <color name="grey">#808080</color>
     <color name="heading2">#696969</color>
+    <color name="yellow">#ffff00</color>
 
 </resources>

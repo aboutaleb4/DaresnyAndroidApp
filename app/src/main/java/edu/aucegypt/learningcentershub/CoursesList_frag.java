@@ -48,9 +48,18 @@ public class CoursesList_frag extends Fragment implements View.OnClickListener {
     FrameLayout filters_layout;
     ConstraintLayout main_layout;
     Button filterBtn;
+    ArrayList<Course> courseArrayList;
+    ArrayList<Course> courseArrayListFiltered = new ArrayList<Course>();
+    ArrayList<Course> courseArrayListFilteredArea = new ArrayList<Course>();
+    ArrayList<Course> courseArrayListFilteredPrice = new ArrayList<Course>();
 
 
     coursesListAdapter adapter;
+    ArrayList<String> CatNamesFilters;
+    ArrayList<String> AreaNamesFilters;
+
+    int PriceFilter = 0;
+
     private coursesFragOnClickListener listener;
 
     public interface coursesFragOnClickListener {
@@ -64,6 +73,17 @@ public class CoursesList_frag extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.activity_courses_list, container, false);
+        if(getArguments().getBoolean("isFilter")) {
+            if (getArguments().getBoolean("isFilterCat"))
+                CatNamesFilters = (ArrayList<String>) getArguments().getSerializable("CatNames");
+            if(getArguments().getBoolean("isFilterArea"))
+                AreaNamesFilters = (ArrayList<String>) getArguments().getSerializable("AreaNames");
+            if(getArguments().getBoolean("isFilterPrice")){
+                PriceFilter = getArguments().getInt("Price");
+            }
+
+        }
+
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         searchView = (SearchView) view.findViewById(R.id.searchView);
@@ -88,41 +108,88 @@ public class CoursesList_frag extends Fragment implements View.OnClickListener {
                 .url(url_api)
                 .build();
 
-        client.newCall(request).enqueue(new Callback() {
+      //  if(courseArrayList == null) {
+            client.newCall(request).enqueue(new Callback() {
 
-            @Override
-            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                if (response.isSuccessful()) {
-                    Gson gson = new Gson();
+                @Override
+                public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                    if (response.isSuccessful()) {
 
-                    Type courseListType = new TypeToken<ArrayList<Course>>(){}.getType();
+                        Gson gson = new Gson();
 
-                    ArrayList<Course> courseArrayList = gson.fromJson(response.body().string(), courseListType);
-                    adapter = new coursesListAdapter(getContext(), courseArrayList);
+                        Type courseListType = new TypeToken<ArrayList<Course>>() {
+                        }.getType();
 
+                        if(courseArrayList != null)
+                            courseArrayList.clear();
 
-                    getActivity().runOnUiThread(
-                            new Runnable() {
-                                @Override
-                                public void run() {
-                                    recyclerView.setAdapter(adapter);
-                                }
+                        courseArrayList = gson.fromJson(response.body().string(), courseListType);
+
+                        if (getArguments().getBoolean("isFilter")) {
+
+                            if (CatNamesFilters != null) {
+                                filterCategory(courseArrayList);
+                                adapter = new coursesListAdapter(getContext(), courseArrayListFiltered);
                             }
-                    );
+
+                            if (AreaNamesFilters != null) {
+
+                                if (CatNamesFilters != null) {
+                                    filterArea(courseArrayListFiltered);
+                                } else {
+                                    filterArea(courseArrayList);
+                                }
+                                adapter = new coursesListAdapter(getContext(), courseArrayListFilteredArea);
+
+                            }
 
 
+                            if (PriceFilter != 0) {
+
+                                if (AreaNamesFilters == null && CatNamesFilters == null) {
+                                    filterPrice(courseArrayList);
+                                } else if (AreaNamesFilters == null && CatNamesFilters != null){
+                                    filterPrice(courseArrayListFiltered);
+                                }else if (AreaNamesFilters != null && CatNamesFilters != null){
+                                    filterPrice(courseArrayListFilteredArea);
+
+                                }
+                                adapter = new coursesListAdapter(getContext(), courseArrayListFilteredPrice);
+
+                            }
+
+
+
+                        } else {
+                            adapter = new coursesListAdapter(getContext(), courseArrayList);
+                        }
+
+
+                        getActivity().runOnUiThread(
+                                new Runnable() {
+                                    @Override
+                                    public void run() {
+
+
+                                        //  courseArrayListFiltered = filterCategory(CatNamesFilters, courseArrayList);
+
+                                        recyclerView.setAdapter(adapter);
+                                    }
+                                }
+                        );
+
+
+                    }
 
                 }
 
-            }
+                @Override
+                public void onFailure(@NotNull Call call, @NotNull IOException e) {
 
-            @Override
-            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                }
+            });
 
-            }
-        });
-
-
+       // }
 
 
         searchView.setOnQueryTextListener(new OnQueryTextListener() {
@@ -138,6 +205,36 @@ public class CoursesList_frag extends Fragment implements View.OnClickListener {
             }
         });
         return  view;
+    }
+
+    public void filterCategory(ArrayList<Course> courseArrayList){
+
+        for (Course itemModel : courseArrayList) {
+            if (CatNamesFilters.contains(itemModel.getCatName())) {
+                courseArrayListFiltered.add(itemModel);
+            }
+        }
+    }
+
+    public void filterArea(ArrayList<Course> courseArrayList){
+
+        for (Course itemModel : courseArrayList) {
+            if (AreaNamesFilters.contains(itemModel.getArea())) {
+                if(!courseArrayListFilteredArea.contains(itemModel))
+                    courseArrayListFilteredArea.add(itemModel);
+            }
+        }
+    }
+
+
+    public void filterPrice(ArrayList<Course> courseArrayList){
+
+        for (Course itemModel : courseArrayList) {
+            if (itemModel.getPrice()<= PriceFilter) {
+                if(!courseArrayListFilteredPrice.contains(itemModel))
+                    courseArrayListFilteredPrice.add(itemModel);
+            }
+        }
     }
 
     public void onAttach(Context context){

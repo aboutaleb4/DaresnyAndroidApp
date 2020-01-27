@@ -121,33 +121,24 @@
     </string-array>
 
     <string-array name="categories">
-        <item>Science</item>
-        <item>Programming</item>
+        <item>Business</item>
+        <item>Cooking</item>
         <item>Engineering</item>
+        <item>Graphic Design</item>
         <item>Language</item>
-        <item>Science</item>
+        <item>Music</item>
         <item>Programming</item>
-        <item>Engineering</item>
-        <item>Language</item>
         <item>Science</item>
-        <item>Programming</item>
-        <item>Engineering</item>
-        <item>Language</item>
     </string-array>
 
     <string-array name="Areas">
-        <item>Science</item>
-        <item>Programming</item>
-        <item>Engineering</item>
-        <item>Language</item>
-        <item>Science</item>
-        <item>Programming</item>
-        <item>Engineering</item>
-        <item>Language</item>
-        <item>Science</item>
-        <item>Programming</item>
-        <item>Engineering</item>
-        <item>Language</item>
+        <item>Maadi</item>
+        <item>5th Settlement</item>
+        <item>Nasr City</item>
+        <item>Haram</item>
+        <item>Heliopolis</item>
+        <item>Zamalek</item>
+        <item>Mohandeseen</item>
     </string-array>
 
 </resources>

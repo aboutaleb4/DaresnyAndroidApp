@@ -15,6 +15,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import java.util.ArrayList;
+
 import edu.aucegypt.learningcentershub.data.LearningCenter;
 
 public class MainActivity extends AppCompatActivity implements CoursesList_frag.coursesFragOnClickListener, FiltersFragment.filtersFragmentOnClickListener, main_frag.categoriesOnClickListener, main_frag.learningCenterOnClickListener, main_frag.courseOnClickListener{
@@ -74,8 +76,6 @@ public class MainActivity extends AppCompatActivity implements CoursesList_frag.
         }
     }
 
-
-
     public void onClickClose(){
         final ChangeBounds transition = new ChangeBounds();
         transition.setDuration(100L);                       // Sets a duration of 100 millisecondss
@@ -101,6 +101,49 @@ public class MainActivity extends AppCompatActivity implements CoursesList_frag.
     public void onCourseListener()
     {
         MainActivity.this.getSupportFragmentManager().beginTransaction().replace(R.id.fragment6_2, new CoursesList_frag()).commit();
+    }
+
+    @Override
+    public void onClickApply(ArrayList<String> CatNames, ArrayList<String> AreaNames, int Price) {
+
+        Bundle bundle=new Bundle();
+        CoursesList_frag coursesList_frag = new CoursesList_frag();
+        bundle.putBoolean("isFilter", false);
+
+        if(!CatNames.isEmpty())
+        {
+            bundle.putSerializable("CatNames", CatNames);
+            bundle.putBoolean("isFilter", true);
+            bundle.putBoolean("isFilterCat", true);
+        }
+
+        if(!AreaNames.isEmpty()){
+            bundle.putSerializable("AreaNames", AreaNames);
+            bundle.putBoolean("isFilterArea", true);
+            bundle.putBoolean("isFilter", true);
+        }
+
+        if(Price != 0){
+            bundle.putInt("Price", Price);
+            bundle.putBoolean("isFilterPrice", true);
+            bundle.putBoolean("isFilter", true);
+        }
+
+
+        coursesList_frag.setArguments(bundle);
+
+        MainActivity.this.getSupportFragmentManager().beginTransaction().replace(R.id.fragment6_2,coursesList_frag).commit();
+
+
+        final ChangeBounds transition = new ChangeBounds();
+        transition.setDuration(100L);                       // Sets a duration of 100 millisecondss
+
+        if(filters_layout.getVisibility()!= View.GONE){
+            TransitionManager.beginDelayedTransition(main_layout,transition);
+            filters_layout.setVisibility(View.GONE);
+        }
+
+
     }
 }
 
