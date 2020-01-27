@@ -193,7 +193,6 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
                 public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                     if (response.isSuccessful()) {
                         final String myResponse = response.body().string();
-
                         if (myResponse != "") {
 
                             CourseInfo.this.runOnUiThread(
@@ -227,52 +226,52 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
             favourite.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
                                                      @Override
-                                                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                                                         if (isChecked) {
-                                                             String url_api_1 = url + "myroute/addToFavorites?uid=" + Integer.toString(uid) + "&cid=" + Integer.toString(CID);
+                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                     if (isChecked) {
+                         String url_api_1 = url + "myroute/addToFavorites?uid=" + Integer.toString(uid) + "&cid=" + Integer.toString(CID);
 
-                                                             OkHttpClient client_1 = new OkHttpClient();
+                         OkHttpClient client_1 = new OkHttpClient();
 
-                                                             final Request request_1 = new Request.Builder()
-                                                                     .url(url_api_1)
-                                                                     .build();
+                         final Request request_1 = new Request.Builder()
+                                 .url(url_api_1)
+                                 .build();
 
-                                                             client_1.newCall(request_1).enqueue(new Callback() {
+                         client_1.newCall(request_1).enqueue(new Callback() {
 
-                                                                 @Override
-                                                                 public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                                                                 }
+                             @Override
+                             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                             }
 
-                                                                 @Override
-                                                                 public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                             @Override
+                             public void onFailure(@NotNull Call call, @NotNull IOException e) {
 
-                                                                 }
-                                                             });
+                             }
+                         });
 
-                                                         } else {
-                                                             String url_api_1 = url + "myroute/removeFromFavorites?uid=" + Integer.toString(uid) + "&cid=" + Integer.toString(CID);
+                     } else {
+                         String url_api_1 = url + "myroute/removeFromFavorites?uid=" + Integer.toString(uid) + "&cid=" + Integer.toString(CID);
 
-                                                             OkHttpClient client_1 = new OkHttpClient();
+                         OkHttpClient client_1 = new OkHttpClient();
 
-                                                             final Request request_1 = new Request.Builder()
-                                                                     .url(url_api_1)
-                                                                     .build();
+                         final Request request_1 = new Request.Builder()
+                                 .url(url_api_1)
+                                 .build();
 
-                                                             client_1.newCall(request_1).enqueue(new Callback() {
+                         client_1.newCall(request_1).enqueue(new Callback() {
 
-                                                                 @Override
-                                                                 public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                                                                 }
+                             @Override
+                             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                             }
 
-                                                                 @Override
-                                                                 public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                             @Override
+                             public void onFailure(@NotNull Call call, @NotNull IOException e) {
 
-                                                                 }
-                                                             });
+                             }
+                         });
 
-                                                         }
-                                                     }
-                                                 }
+                     }
+                 }
+             }
             );
         }
 
@@ -283,7 +282,6 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
 
 
             OkHttpClient client = new OkHttpClient();
-            final MediaType JSON = MediaType.get("application/json; charset=utf-8");
 
             final Request request = new Request.Builder()
                     .url(url_api)
@@ -298,47 +296,50 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
                 @Override
                 public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                     if (response.isSuccessful()) {
-                        Gson gson = new Gson();
+                        final String myResponse = response.body().string();
+                        if (myResponse != "") {
+                            Gson gson = new Gson();
 
-                        final Type courseType = new TypeToken<Course>() {
-                        }.getType();
+                            final Type courseType = new TypeToken<Course>() {
+                            }.getType();
 
-                        course = gson.fromJson(response.body().string(), courseType);
-
-
-                        CourseInfo.this.runOnUiThread(
-                                new Runnable() {
-                                    @Override
-                                    public void run() {
-
-                                        new DownloadImageTask(course_logo)
-                                                .execute(url + "images/" + course.getCourseImage());
-
-                                        tv_name.setText(course.getCourseName());
-                                        tv_category.setText(course.getCatName());
-
-                                        tv_learningCenterName.setText(course.getLCname());
-                                        tv_learningCenterPhone.setText(course.getPhoneNo());
-                                        tv_learningCenterEmail.setText(course.getEmail());
+                            course = gson.fromJson(response.body().string(), courseType);
 
 
-                                        tv_course_description.setText(course.getDescription());
-                                        tv_reg_fees.setText("EGP " + formatdouble(course.getRegFees()));
+                            CourseInfo.this.runOnUiThread(
+                                    new Runnable() {
+                                        @Override
+                                        public void run() {
+
+                                            new DownloadImageTask(course_logo)
+                                                    .execute(url + "images/" + course.getCourseImage());
+
+                                            tv_name.setText(course.getCourseName());
+                                            tv_category.setText(course.getCatName());
+
+                                            tv_learningCenterName.setText(course.getLCname());
+                                            tv_learningCenterPhone.setText(course.getPhoneNo());
+                                            tv_learningCenterEmail.setText(course.getEmail());
 
 
-                                        SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE, MMMM F, yyyy");
-                                        String StDate = dateFormat.format(course.getStDate());
-                                        tv_stdate.setText(StDate);
-
-                                        String EndDate = dateFormat.format(course.getEndDate());
-                                        tv_enddate.setText(EndDate);
+                                            tv_course_description.setText(course.getDescription());
+                                            tv_reg_fees.setText("EGP " + formatdouble(course.getRegFees()));
 
 
+                                            SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE, MMMM F, yyyy");
+                                            String StDate = dateFormat.format(course.getStDate());
+                                            tv_stdate.setText(StDate);
+
+                                            String EndDate = dateFormat.format(course.getEndDate());
+                                            tv_enddate.setText(EndDate);
+
+
+                                        }
                                     }
-                                }
-                        );
+                            );
 
 
+                        }
                     }
 
                 }
@@ -355,23 +356,26 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
                 @Override
                 public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                     if (response.isSuccessful()) {
-                        Gson gson = new Gson();
-                        Type scheduleListType = new TypeToken<ArrayList<Schedule>>() {
-                        }.getType();
+                            final String myResponse = response.body().string();
+                            if (myResponse != "") {
+                            Gson gson = new Gson();
+                            Type scheduleListType = new TypeToken<ArrayList<Schedule>>() {
+                            }.getType();
 
-                        ArrayList<Schedule> scheduleArrayList = gson.fromJson(response.body().string(), scheduleListType);
-                        mScheduleAdapter = new scheduleAdapter(CourseInfo.this, scheduleArrayList);
+                            ArrayList<Schedule> scheduleArrayList = gson.fromJson(response.body().string(), scheduleListType);
+                            mScheduleAdapter = new scheduleAdapter(CourseInfo.this, scheduleArrayList);
 
 
-                        CourseInfo.this.runOnUiThread(
-                                new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        recyclerView_Schedule.setAdapter(mScheduleAdapter);
+                            CourseInfo.this.runOnUiThread(
+                                    new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            recyclerView_Schedule.setAdapter(mScheduleAdapter);
+                                        }
                                     }
-                                }
-                        );
+                            );
 
+                        }
 
                     }
 
