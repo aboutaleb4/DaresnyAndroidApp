@@ -39,6 +39,7 @@ import java.util.ArrayList;
 
 import edu.aucegypt.learningcentershub.data.Address;
 import edu.aucegypt.learningcentershub.data.Course;
+import edu.aucegypt.learningcentershub.data.Instructor;
 import edu.aucegypt.learningcentershub.data.Schedule;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -56,15 +57,18 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
     LinearLayout expandableLearningCenter;
     LinearLayout expandableCourseInfo;
     LinearLayout expandableCourseSchedule;
+    LinearLayout expandableInstructor;
 
     CardView cardViewLearningCenter;
     CardView cardViewCourseInfo;
     CardView cardViewSchedule;
+    CardView cardViewInstructor;
 
     Button arrowBtnLearningCenter;
     Button arrowBtnCourseInfo;
     Button arrowBtnCourseSchedule;
     Button registerBtn;
+    Button arrowBtnInstructor;
     CheckBox favourite;
 
     ImageView course_logo;
@@ -79,13 +83,17 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
     TextView tv_learningCenterPhone;
     TextView tv_learningCenterAddress;
     TextView tv_learningCenterEmail;
-    TextView address;
+    TextView tv_instructor_name;
+    TextView tv_insstructor_bio;
+
+   // TextView address;
 
 
     JSONObject myResponseReader;
     boolean isfavourite;
 
     Address addressObject;
+    Instructor instructor;
 
 
     RecyclerView recyclerView_Schedule;
@@ -114,13 +122,17 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
         expandableLearningCenter = (LinearLayout) findViewById(R.id.expandableLearningCenter);
         expandableCourseInfo = (LinearLayout) findViewById(R.id.expandableCourseInfo);
         expandableCourseSchedule = (LinearLayout) findViewById(R.id.expandableCourseSchedule);
+        expandableInstructor = (LinearLayout) findViewById(R.id.expandableInstructor);
+
         arrowBtnLearningCenter = (Button) findViewById(R.id.arrowBtnLearningCenter);
         arrowBtnCourseInfo = (Button) findViewById(R.id.arrowBtnCourseInfo);
         arrowBtnCourseSchedule = (Button) findViewById(R.id.arrowBtnSchedule);
+        arrowBtnInstructor = (Button) findViewById(R.id.arrowBtnInstructor);
 
         cardViewLearningCenter = (CardView) findViewById(R.id.cardViewLearningCenter);
         cardViewCourseInfo = (CardView) findViewById(R.id.cardViewDescription);
         cardViewSchedule = (CardView) findViewById(R.id.cardViewSchedule);
+        cardViewInstructor = (CardView) findViewById(R.id.cardViewInstructor);
 
         tv_name = (TextView) findViewById(R.id.tv_name);
         tv_category = (TextView) findViewById(R.id.tv_category);
@@ -130,6 +142,8 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
         tv_learningCenterAddress =(TextView) findViewById(R.id.tv_learningCenterAddress);
         tv_learningCenterPhone =(TextView) findViewById(R.id.tv_learningCenterPhone);
         tv_learningCenterEmail = (TextView) findViewById(R.id.tv_learningCenterEmail);
+        tv_instructor_name = (TextView) findViewById(R.id.tv_instructor_name);
+        tv_insstructor_bio = (TextView) findViewById(R.id.tv_instructor_bio);
 
         tv_course_description = (TextView) findViewById(R.id.tv_course_description);
         tv_reg_fees = (TextView) findViewById(R.id.tv_reg_fees);
@@ -162,6 +176,8 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
         arrowBtnLearningCenter.setOnClickListener(this);
         arrowBtnCourseInfo.setOnClickListener(this);
         arrowBtnCourseSchedule.setOnClickListener(this);
+        arrowBtnInstructor.setOnClickListener(this);
+
         if (status) {
             String url_api_1 = url + "myroute/checkFavorites?uid=" + Integer.toString(uid) + "&cid=" + Integer.toString(CID);
 
@@ -400,13 +416,13 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
 
                                         if(addressObject.getFloorNo() == null || addressObject.getAptNo() == null)
                                         {
-                                            address.setText(addressObject.getBuildingNo()+" "+
+                                            tv_learningCenterAddress.setText(addressObject.getBuildingNo()+" "+
                                                     addressObject.getStreet()+" ,"+
                                                     addressObject.getArea()+" ,"+
                                                     addressObject.getCity());
                                         }
                                         else{
-                                            address.setText(addressObject.getBuildingNo()+" "+
+                                            tv_learningCenterAddress.setText(addressObject.getBuildingNo()+" "+
                                                     addressObject.getStreet()+" ,"+
                                                     addressObject.getArea()+" ,"+
                                                     addressObject.getCity()+"\n"+"Floor: "+
@@ -428,6 +444,57 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
 
             }
         });
+
+
+        String url_api_getInstructor = url + "myroute/getInstructor";
+
+        url_api_getInstructor = url_api_getInstructor + "?id=" + Integer.toString(mBundle.getInt("CID"));
+
+
+        final Request request_getInstructor = new Request.Builder()
+                .url(url_api_getInstructor)
+                .build();
+
+        client_2.newCall(request_getInstructor).enqueue(new Callback() {
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull final Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    final String myResponse1 = response.body().string();
+                    Gson gson = new Gson();
+
+                    final Type typeInstructor = new TypeToken<Instructor>(){}.getType();
+
+                    instructor = gson.fromJson(myResponse1, typeInstructor);
+
+                    if (myResponse1 != "") {
+
+                        CourseInfo.this.runOnUiThread(
+                                new Runnable() {
+                                    @Override
+                                    public void run() {
+
+                                        tv_instructor_name.setText(instructor.getFname() + "  "+instructor.getLname());
+                                        tv_insstructor_bio.setText(instructor.getBio());
+
+                                    }
+                                }
+                        );
+
+                    }
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+
+            }
+        });
+
+
+
 
 
 
@@ -481,6 +548,20 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
                     TransitionManager.beginDelayedTransition(cardViewSchedule,transition);
                     expandableCourseSchedule.setVisibility(View.GONE);
                     arrowBtnCourseSchedule.setBackgroundResource(R.drawable.ic_keyboard_arrow_down_black_24dp);
+
+                }
+                break;
+
+            case R.id.arrowBtnInstructor:
+                if(expandableInstructor.getVisibility()==View.GONE){
+                    TransitionManager.beginDelayedTransition(cardViewInstructor,transition);
+                    expandableInstructor.setVisibility(View.VISIBLE);
+                    arrowBtnInstructor.setBackgroundResource(R.drawable.ic_keyboard_arrow_up_black_24dp);
+
+                }else {
+                    TransitionManager.beginDelayedTransition(cardViewInstructor,transition);
+                    expandableInstructor.setVisibility(View.GONE);
+                    arrowBtnInstructor.setBackgroundResource(R.drawable.ic_keyboard_arrow_down_black_24dp);
 
                 }
                 break;

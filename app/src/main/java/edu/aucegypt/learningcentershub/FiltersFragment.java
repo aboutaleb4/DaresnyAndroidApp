@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -39,6 +40,8 @@ public class FiltersFragment extends Fragment implements View.OnClickListener {
 
     SeekBar seekBar;
     TextView textView;
+
+    CheckBox cbBox1, cbBox2, cbBox3, cbBox4;
 
     int seekBarVal=0;
 
@@ -77,6 +80,12 @@ public class FiltersFragment extends Fragment implements View.OnClickListener {
 
         seekBar = view.findViewById(R.id.sbId);
         textView = view.findViewById(R.id.price_txt);
+
+        cbBox1 = (CheckBox) view.findViewById(R.id.cbBox1);
+        cbBox2 = (CheckBox) view.findViewById(R.id.cbBox2);
+        cbBox3 = (CheckBox) view.findViewById(R.id.cbBox3);
+        cbBox4 = (CheckBox) view.findViewById(R.id.cbBox4);
+
 
         closeBtn.setOnClickListener(this);
         applyBtn.setOnClickListener(this);
@@ -175,6 +184,22 @@ public class FiltersFragment extends Fragment implements View.OnClickListener {
             case R.id.applyBtn:
                 listener.onClickApply(CatNames, AreaNames, seekBarVal);
                 break;
+
+
+            case R.id.cbBox1:
+                break;
+
+            case R.id.cbBox2:
+                break;
+
+            case R.id.cbBox3:
+                break;
+
+
+            case R.id.cbBox4:
+                break;
+
+
 
 
         }
