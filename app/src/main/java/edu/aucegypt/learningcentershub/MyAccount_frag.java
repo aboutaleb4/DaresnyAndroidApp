@@ -43,6 +43,7 @@ public class MyAccount_frag extends Fragment implements RecyclerViewAdapter.Recy
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final SharedPreferences.Editor editor = this.getActivity().getSharedPreferences("login_shared_preference", MODE_PRIVATE).edit();
+
         View view = inflater.inflate(R.layout.my_account_frag, container, false);
          name = view.findViewById(R.id.full_name);
         if (message[0]=="null null") message[0] = "";
@@ -137,10 +138,9 @@ public class MyAccount_frag extends Fragment implements RecyclerViewAdapter.Recy
     public void RecyclerViewClick(int position) {
 
     }
-    SharedPreferences prefs = this.getActivity().getSharedPreferences("login_shared_preference", MODE_PRIVATE);
-    Boolean status = prefs.getBoolean("status", false);
-    int uid = prefs.getInt("uid", 0); //0 is the default value.
-    void Network(){
+    void Network(){SharedPreferences prefs = this.getActivity().getSharedPreferences("login_shared_preference", MODE_PRIVATE);
+        Boolean status = prefs.getBoolean("status", false);
+        int uid = prefs.getInt("uid", 0); //0 is the default value.
         if (!status)
             return;
         String url2 = url+"myroute/userupdate";
