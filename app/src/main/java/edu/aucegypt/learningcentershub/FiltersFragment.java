@@ -21,7 +21,7 @@ public class FiltersFragment extends Fragment implements View.OnClickListener {
 
     ArrayList<String> CatNames = new ArrayList<String>();
     ArrayList<String> AreaNames = new ArrayList<String>();
-
+    ArrayList<Integer> DateFilters = new ArrayList<Integer>();
     public ArrayList<String> getAreaNames() {
         return AreaNames;
     }
@@ -187,6 +187,8 @@ public class FiltersFragment extends Fragment implements View.OnClickListener {
 
 
             case R.id.cbBox1:
+                if(cbBox1.isChecked())
+
                 break;
 
             case R.id.cbBox2:
