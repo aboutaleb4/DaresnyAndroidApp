@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements CoursesList_frag.
     }
 
     @Override
-    public void onClickApply(ArrayList<String> CatNames, ArrayList<String> AreaNames, int Price) {
+    public void onClickApply(ArrayList<String> CatNames, ArrayList<String> AreaNames, int Price, ArrayList<Integer> DateFilters) {
 
         Bundle bundle=new Bundle();
         CoursesList_frag coursesList_frag = new CoursesList_frag();
@@ -126,6 +126,12 @@ public class MainActivity extends AppCompatActivity implements CoursesList_frag.
         if(Price != 0){
             bundle.putInt("Price", Price);
             bundle.putBoolean("isFilterPrice", true);
+            bundle.putBoolean("isFilter", true);
+        }
+
+        if(!DateFilters.isEmpty()){
+            bundle.putSerializable("Start Date", DateFilters);
+            bundle.putBoolean("isFilterStartDate", true);
             bundle.putBoolean("isFilter", true);
         }
 

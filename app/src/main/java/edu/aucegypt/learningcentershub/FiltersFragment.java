@@ -63,7 +63,7 @@ public class FiltersFragment extends Fragment implements View.OnClickListener {
     public interface filtersFragmentOnClickListener {
 
         public void onClickClose();
-        public void onClickApply(ArrayList<String> CatNames, ArrayList<String> AreaNames, int Price);
+        public void onClickApply(ArrayList<String> CatNames, ArrayList<String> AreaNames, int Price, ArrayList<Integer> DateFilters);
 
     }
 
@@ -182,23 +182,51 @@ public class FiltersFragment extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.applyBtn:
-                listener.onClickApply(CatNames, AreaNames, seekBarVal);
+                listener.onClickApply(CatNames, AreaNames, seekBarVal, DateFilters);
                 break;
 
 
             case R.id.cbBox1:
                 if(cbBox1.isChecked())
+                {
+                    DateFilters.add( new Integer(14));
+                }else {
+                    DateFilters.remove(new Integer(14));
+
+                }
 
                 break;
 
             case R.id.cbBox2:
+                if(cbBox2.isChecked())
+                {
+                    DateFilters.add(new Integer(30));
+                }else {
+                    DateFilters.remove(new Integer(30));
+
+                }
+
                 break;
 
             case R.id.cbBox3:
+                if(cbBox3.isChecked())
+                {
+                    DateFilters.add(new Integer(60));
+                }else {
+                    DateFilters.remove(new Integer(60));
+
+                }
                 break;
 
 
             case R.id.cbBox4:
+                if(cbBox4.isChecked())
+                {
+                    DateFilters.add(new Integer(90));
+                }else {
+                    DateFilters.remove(new Integer(90));
+
+                }
                 break;
 
 

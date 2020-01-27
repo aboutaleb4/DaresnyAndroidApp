@@ -27,7 +27,12 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import edu.aucegypt.learningcentershub.data.Category;
 import edu.aucegypt.learningcentershub.data.Course;
@@ -52,11 +57,13 @@ public class CoursesList_frag extends Fragment implements View.OnClickListener {
     ArrayList<Course> courseArrayListFiltered = new ArrayList<Course>();
     ArrayList<Course> courseArrayListFilteredArea = new ArrayList<Course>();
     ArrayList<Course> courseArrayListFilteredPrice = new ArrayList<Course>();
+    ArrayList<Course> courseArrayListFilteredDate = new ArrayList<Course>();
 
 
     coursesListAdapter adapter;
     ArrayList<String> CatNamesFilters;
     ArrayList<String> AreaNamesFilters;
+    ArrayList<Integer> DateFilters;
 
     int PriceFilter = 0;
 
@@ -80,7 +87,10 @@ public class CoursesList_frag extends Fragment implements View.OnClickListener {
                 AreaNamesFilters = (ArrayList<String>) getArguments().getSerializable("AreaNames");
             if(getArguments().getBoolean("isFilterPrice")){
                 PriceFilter = getArguments().getInt("Price");
+
             }
+            if(getArguments().getBoolean("isFilterStartDate"))
+                DateFilters = (ArrayList<Integer>) getArguments().getSerializable("Start Date");
 
         }
 
@@ -150,11 +160,25 @@ public class CoursesList_frag extends Fragment implements View.OnClickListener {
                                     filterPrice(courseArrayList);
                                 } else if (AreaNamesFilters == null && CatNamesFilters != null){
                                     filterPrice(courseArrayListFiltered);
-                                }else if (AreaNamesFilters != null && CatNamesFilters != null){
+                                }else if (AreaNamesFilters != null){
                                     filterPrice(courseArrayListFilteredArea);
 
                                 }
                                 adapter = new coursesListAdapter(getContext(), courseArrayListFilteredPrice);
+
+                            }
+                            if(DateFilters != null){
+                                if (AreaNamesFilters == null && CatNamesFilters == null && PriceFilter == 0) {
+                                    filterDate(courseArrayList);
+                                } else if (AreaNamesFilters == null && CatNamesFilters != null && PriceFilter == 0){
+                                    filterDate(courseArrayListFiltered);
+                                }else if (AreaNamesFilters != null && CatNamesFilters != null && PriceFilter == 0){
+                                    filterDate(courseArrayListFilteredArea);
+                                }else if (PriceFilter != 0){
+                                    filterDate(courseArrayListFilteredPrice);
+
+                                }
+                                adapter = new coursesListAdapter(getContext(), courseArrayListFilteredDate);
 
                             }
 
@@ -215,6 +239,28 @@ public class CoursesList_frag extends Fragment implements View.OnClickListener {
             }
         }
     }
+    public void filterDate(ArrayList<Course> courseArrayList){
+
+
+        for (Course itemModel : courseArrayList) {
+
+
+            Date StTime_date = Calendar.getInstance().getTime();
+            Date EndTime_date = itemModel.getStDate();
+
+            long startTime = StTime_date.getTime();
+            long endTime = EndTime_date.getTime();
+            long diffTime = endTime - startTime;
+            long diffDays = diffTime / (1000 * 60 * 60 * 24);
+
+            for(int i=0; i<=3; i++){
+                if (DateFilters.get(i) >= diffDays) {
+                    courseArrayListFilteredDate.add(itemModel);
+                }
+            }
+        }
+    }
+
 
     public void filterArea(ArrayList<Course> courseArrayList){
 
