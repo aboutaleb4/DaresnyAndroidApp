@@ -85,6 +85,7 @@ public class coursesListAdapter extends RecyclerView.Adapter<coursesListAdapter.
         }
     }
 
+
     @Override
     public Filter getFilter() {
         Filter filter = new Filter() {
@@ -93,6 +94,8 @@ public class coursesListAdapter extends RecyclerView.Adapter<coursesListAdapter.
                 FilterResults results = new FilterResults();
 
                 ArrayList<Course> arrayListFilter = new ArrayList<Course>();
+
+
 
                 if(constraint == null|| constraint.length() == 0) {
                     results.count = arrayList.size();
@@ -123,4 +126,6 @@ public class coursesListAdapter extends RecyclerView.Adapter<coursesListAdapter.
         };
         return filter;
     }
+
+
 }

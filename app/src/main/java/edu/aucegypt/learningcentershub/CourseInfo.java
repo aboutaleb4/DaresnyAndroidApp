@@ -200,9 +200,6 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
 
 
 
-
-
-
                                 }
                             }
                     );

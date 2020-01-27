@@ -39,6 +39,9 @@ public class NavBar extends Fragment implements BottomNavigationView.OnNavigatio
                 break;
             case "Search":
                 selectedFragment = new CoursesList_frag();
+                Bundle bundle = new Bundle();
+                selectedFragment.setArguments(bundle);
+                bundle.putBoolean("isFilter", false);
                 break;
 
             case "My Courses":

@@ -14,11 +14,25 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
 public class FiltersFragment extends Fragment implements View.OnClickListener {
+
+    ArrayList<String> CatNames = new ArrayList<String>();
+    ArrayList<String> AreaNames = new ArrayList<String>();
+
+    public ArrayList<String> getAreaNames() {
+        return AreaNames;
+    }
+
+    public void setAreaNames(ArrayList<String> areaNames) {
+        AreaNames = areaNames;
+    }
 
     private filtersFragmentOnClickListener listener;
 
     Button closeBtn;
+    Button applyBtn;
 
     RecyclerView recyclerView_CategoryFilter;
     RecyclerView recyclerView_AreaFilter;
@@ -26,12 +40,25 @@ public class FiltersFragment extends Fragment implements View.OnClickListener {
     SeekBar seekBar;
     TextView textView;
 
+
+    public ArrayList<String> getCatNames() {
+        return CatNames;
+    }
+
+    public void setCatNames(ArrayList<String> catNames) {
+        CatNames = catNames;
+    }
+
+
+
+
     private filtersListAdapter catAdapter;
     private filtersListAdapter areaAdapter;
 
     public interface filtersFragmentOnClickListener {
 
         public void onClickClose();
+        public void onClickApply(ArrayList<String> CatNames, ArrayList<String> AreaNames);
 
     }
 
@@ -41,6 +68,8 @@ public class FiltersFragment extends Fragment implements View.OnClickListener {
         View view = inflater.inflate(R.layout.search_filters, container, false);
 
         closeBtn = (Button)  view.findViewById(R.id.closeBtn);
+        applyBtn =(Button) view.findViewById(R.id.applyBtn);
+
         recyclerView_CategoryFilter = view.findViewById(R.id.recyclerView_CategoryFilter);
         recyclerView_AreaFilter = view.findViewById(R.id.recyclerView_AreaFilter);
 
@@ -48,6 +77,7 @@ public class FiltersFragment extends Fragment implements View.OnClickListener {
         textView = view.findViewById(R.id.price_txt);
 
         closeBtn.setOnClickListener(this);
+        applyBtn.setOnClickListener(this);
         // Inflate the layout for this fragment
 
         initRecyclerView_Cat(view);
@@ -82,6 +112,7 @@ public class FiltersFragment extends Fragment implements View.OnClickListener {
     }
 
 
+
     public void onAttach(Context context){
         super.onAttach(context);
 
@@ -99,23 +130,50 @@ public class FiltersFragment extends Fragment implements View.OnClickListener {
         recyclerView_CategoryFilter.setLayoutManager(linearLayoutManager);
 
         final String catNames [] = getResources().getStringArray(R.array.categories);
-        catAdapter = new filtersListAdapter(catNames, view.getContext());
+        catAdapter = new filtersListAdapter(catNames, view.getContext(),"Category", communication);
         recyclerView_CategoryFilter.setAdapter(catAdapter);
         recyclerView_CategoryFilter.setNestedScrollingEnabled(false);
     }
+
     private void initRecyclerView_Area(View view) {
         recyclerView_AreaFilter.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext());
         recyclerView_AreaFilter.setLayoutManager(linearLayoutManager);
 
         final String areaNames [] = getResources().getStringArray(R.array.Areas);
-        areaAdapter = new filtersListAdapter(areaNames,view.getContext());
+        areaAdapter = new filtersListAdapter(areaNames,view.getContext(), "Area", communication);
         recyclerView_AreaFilter.setAdapter(areaAdapter);
         recyclerView_AreaFilter.setNestedScrollingEnabled(false);
     }
 
+    filtersListAdapter.FragmentCommunication communication=new filtersListAdapter.FragmentCommunication() {
+        @Override
+        public void setCatNames(ArrayList<String> CatNames) {
+            FiltersFragment.this.setCatNames(CatNames);
+        }
+
+        @Override
+        public void setAreaNames(ArrayList<String> AreaNames) {
+            FiltersFragment.this.setAreaNames(AreaNames);
+        }
+
+
+    };
+
 
     public void onClick(View view){
-        listener.onClickClose();
+
+        switch (view.getId()){
+
+            case R.id.closeBtn:
+                listener.onClickClose();
+                break;
+
+            case R.id.applyBtn:
+                listener.onClickApply(CatNames, AreaNames);
+                break;
+
+
+        }
     }
 }
