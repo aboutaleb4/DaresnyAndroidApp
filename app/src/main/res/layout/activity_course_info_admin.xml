@@ -37,13 +37,15 @@
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
        android:id ="@+id/Frame"
+       android:isScrollContainer="true"
+       android:scrollbars="vertical"
        app:layout_constraintTop_toBottomOf="@id/Frame1">
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/Frame1"
         >
-        <ScrollView
+        <androidx.core.widget.NestedScrollView
 
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -56,13 +58,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
-
+                    <ImageView
+                        android:id="@+id/crseimage"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:src="@mipmap/ic_launcher" />
                     <LinearLayout
                         android:id="@+id/infoLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:padding="16dp">
+                        >
+
 
                         <LinearLayout
                             android:layout_width="0dp"
@@ -74,22 +81,28 @@
                                 android:id="@+id/crseName"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_marginLeft="20dp"
                                 android:text="Course Name"
-                                android:inputType="text"
-                                android:maxLines="1"
                                 android:textColor="@color/applicationColor"
-                                android:textSize="30sp" />
+                                android:textSize="24sp" />
 
                             <TextView
                                 android:id="@+id/crseCategory"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_marginLeft="20dp"
                                 android:text="Course Category"
                                 android:textColor="@color/applicationColor"
-                                android:textSize="20sp" />
-                           <LinearLayout
+                                android:textSize="16sp" />
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="20dp"
+                                android:orientation="horizontal">
+                            <LinearLayout
                                android:layout_width="wrap_content"
                                android:layout_height="wrap_content"
+                               android:layout_marginLeft="20dp"
                                android:orientation="horizontal">
                             <TextView
                                 android:id="@+id/crseLikes"
@@ -97,7 +110,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="Favorite"
                                 android:textColor="@color/applicationColor"
-                                android:textSize="20sp" />
+                                android:textSize="16sp" />
                                <TextView
                                    android:id="@+id/crseLikes2"
                                    android:layout_width="wrap_content"
@@ -105,13 +118,14 @@
                                    android:text="⭐"
                                    android:layout_marginLeft="10dp"
                                    android:textColor="@color/applicationColor"
-                                   android:textSize="20sp" />
+                                   android:textSize="16sp" />
                            </LinearLayout>
                             <LinearLayout
                                 android:id="@+id/reg_click"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:clickable="true"
+                                android:layout_marginLeft="20dp"
                                 android:orientation="horizontal">
                                 <TextView
                                     android:id="@+id/crseuser"
@@ -119,7 +133,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="reg"
                                     android:textColor="@color/applicationColor"
-                                    android:textSize="20sp" />
+                                    android:textSize="16sp" />
                                 <TextView
                                     android:id="@+id/crseuser2"
                                     android:layout_width="wrap_content"
@@ -127,24 +141,9 @@
                                     android:layout_marginLeft="10dp"
                                     android:text="registered"
                                     android:textColor="@color/applicationColor"
-                                    android:textSize="20sp" />
+                                    android:textSize="16sp" />
                             </LinearLayout>
                         </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="right"
-                            android:orientation="vertical">
-
-
-                            <ImageView
-                                android:id="@+id/crseimage"
-                                android:layout_width="100dp"
-                                android:layout_height="100dp"
-                                android:src="@mipmap/ic_launcher" />
-
-
                         </LinearLayout>
 
 
@@ -153,130 +152,319 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
                         android:orientation="horizontal">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Description:"
                             android:textColor="@color/applicationColor"
-                            android:textSize="22sp" />
+                            android:textSize="16sp" />
                         <EditText
                             android:id="@+id/crsedesc"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Description"
-                            android:textColor="@color/applicationColor"
-                            android:textSize="22sp"
+                            android:layout_marginLeft="10dp"
+                            android:maxLines="1"
                             android:inputType="text"
-                            android:maxLines="1"/>
+                            android:textColor="@color/applicationColor"
+                            android:textSize="16sp" />
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
                         android:orientation="horizontal">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Video:"
+                            android:text="Preview Link:"
                             android:textColor="@color/applicationColor"
-                            android:textSize="22sp" />
+                            android:textSize="16sp" />
                         <EditText
                             android:id="@+id/crsevideo"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Preview"
+                            android:layout_marginLeft="10dp"
                             android:textColor="@color/applicationColor"
-                            android:textSize="22sp"
+                            android:textSize="16sp"
                             android:inputType="text"
                             android:maxLines="1"/>
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
                         android:orientation="horizontal">
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Start Date:"
                             android:textColor="@color/applicationColor"
-                            android:textSize="22sp" />
+                            android:textSize="16sp" />
                         <EditText
                             android:id="@+id/crsestd"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Start date"
+                            android:focusableInTouchMode="false"
                             android:textColor="@color/applicationColor"
-                            android:textSize="22sp"
+                            android:textSize="16sp"
                             android:inputType="text"
                             android:maxLines="1"/>
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
                         android:orientation="horizontal">
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="End Date:"
                             android:textColor="@color/applicationColor"
-                            android:textSize="22sp" />
+                            android:textSize="16sp" />
                         <EditText
                             android:id="@+id/crseend"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="End date"
+                            android:focusableInTouchMode="false"
+                            android:layout_marginLeft="10dp"
                             android:textColor="@color/applicationColor"
-                            android:textSize="22sp"
+                            android:textSize="16sp"
                             android:inputType="text"
                             android:maxLines="1" />
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
                         android:orientation="horizontal">
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Registration Fees:"
                             android:textColor="@color/applicationColor"
-                            android:textSize="22sp" />
+                            android:textSize="16sp" />
                         <EditText
                             android:id="@+id/crsereg"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Reg"
+                            android:layout_marginLeft="10dp"
                             android:textColor="@color/applicationColor"
-                            android:textSize="22sp"
-                            android:inputType="text"
+                            android:textSize="16sp"
+                            android:inputType="numberDecimal"
                             android:maxLines="1"/>
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
                         android:orientation="horizontal">
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Price:"
                             android:textColor="@color/applicationColor"
-                            android:textSize="22sp" />
+                            android:textSize="16sp" />
                         <EditText
                             android:id="@+id/crseprice"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Price"
+                            android:layout_marginLeft="10dp"
                             android:textColor="@color/applicationColor"
-                            android:textSize="22sp"
-                            android:inputType="text"
+                            android:textSize="16sp"
+                            android:inputType="numberDecimal"
                             android:maxLines="1"/>
                     </LinearLayout>
 
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Schedule:"
+                            android:textColor="@color/applicationColor"
+                            android:textSize="16sp" />
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Sunday:"
+                            android:textColor="@color/applicationColor"
+                            android:textSize="14sp" />
+
+                        <EditText
+                            android:id="@+id/crsesunfrom"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Price"
+                            android:layout_marginLeft="10dp"
+                            android:textColor="@color/applicationColor"
+                            android:textSize="14sp"
+                            android:inputType="numberDecimal"
+                            android:maxLines="1"/>
+                        <EditText
+                            android:id="@+id/crsesunto"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Price"
+                            android:layout_marginLeft="10dp"
+                            android:textColor="@color/applicationColor"
+                            android:textSize="14sp"
+                            android:inputType="numberDecimal"
+                            android:maxLines="1"/>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Monday:"
+                                android:textColor="@color/applicationColor"
+                                android:textSize="14sp" />
+
+                            <EditText
+                                android:id="@+id/crsemonfrom"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Price"
+                                android:layout_marginLeft="10dp"
+                                android:textColor="@color/applicationColor"
+                                android:textSize="14sp"
+                                android:inputType="numberDecimal"
+                                android:maxLines="1"/>
+                            <EditText
+                                android:id="@+id/crsemonto"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Price"
+                                android:layout_marginLeft="10dp"
+                                android:textColor="@color/applicationColor"
+                                android:textSize="14sp"
+                                android:inputType="numberDecimal"
+                                android:maxLines="1"/>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Tuesday:"
+                                android:textColor="@color/applicationColor"
+                                android:textSize="14sp" />
+
+                            <EditText
+                                android:id="@+id/crsetuefrom"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Price"
+                                android:layout_marginLeft="10dp"
+                                android:textColor="@color/applicationColor"
+                                android:textSize="14sp"
+                                android:inputType="numberDecimal"
+                                android:maxLines="1"/>
+                            <EditText
+                                android:id="@+id/crsetueto"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Price"
+                                android:layout_marginLeft="10dp"
+                                android:textColor="@color/applicationColor"
+                                android:textSize="14sp"
+                                android:inputType="numberDecimal"
+                                android:maxLines="1"/>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Wednesday:"
+                                android:textColor="@color/applicationColor"
+                                android:textSize="14sp" />
+
+                            <EditText
+                                android:id="@+id/crsewedfrom"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Price"
+                                android:layout_marginLeft="10dp"
+                                android:textColor="@color/applicationColor"
+                                android:textSize="14sp"
+                                android:maxLines="1"/>
+                            <EditText
+                                android:id="@+id/crswedto"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Price"
+                                android:layout_marginLeft="10dp"
+                                android:textColor="@color/applicationColor"
+                                android:textSize="14sp"
+                                android:inputType="numberDecimal"
+                                android:maxLines="1"/>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Thursday:"
+                                android:textColor="@color/applicationColor"
+                                android:textSize="14sp" />
+
+                            <EditText
+                                android:id="@+id/crsethufrom"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Price"
+                                android:layout_marginLeft="10dp"
+                                android:textColor="@color/applicationColor"
+                                android:textSize="14sp"
+                                android:inputType="numberDecimal"
+                                android:maxLines="1"/>
+                            <EditText
+                                android:id="@+id/crsethuto"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Price"
+                                android:layout_marginLeft="10dp"
+                                android:textColor="@color/applicationColor"
+                                android:textSize="14sp"
+                                android:inputType="numberDecimal"
+                                android:maxLines="1"/>
+                        </LinearLayout>
+                    </LinearLayout>
                 </LinearLayout>
 
             </RelativeLayout>
 
 
-        </ScrollView>
+        </androidx.core.widget.NestedScrollView>
 
 </FrameLayout>
 </FrameLayout>

@@ -55,10 +55,13 @@ public class NavBar_LC extends Fragment implements BottomNavigationView.OnNaviga
                 break;
 
     }
-    if (selectedFragment.equals(add_course_frag.class))
+    if (selectedFragment instanceof  add_course_frag)
     {
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_21, selectedFragment).commit();
-        getActivity().getSupportFragmentManager().beginTransaction().remove(getActivity().getSupportFragmentManager().findFragmentById(R.id.fragment_2)).commit();
+        Fragment frag = getActivity().getSupportFragmentManager().findFragmentById(R.id.fragment_2);
+        if (frag != null)
+            getActivity().getSupportFragmentManager().beginTransaction().remove(getActivity().getSupportFragmentManager().findFragmentById(R.id.fragment_2)).commit();
+
 
     }
     else {

@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -95,13 +96,15 @@ class rvadapter2 extends RecyclerView.Adapter<rvadapter2.ViewHolder3> implements
     Calendar myCalendar, myCalendar2;
     DatePickerDialog DPD,DPD2;
     View view, view2;
-    String name, category, instructor, std, end,sun,mon,tue,wed,thu,fri,sat;
+    String name, category, instructorFname, instructorBio,instructorLname, std, end,sun,mon,tue,wed,thu,fri,sat,sun1,mon1,tue1,wed1,thu1,fri1,sat1;
+    boolean sunday = false, monday = false, tuesday = false,wednesday =false, thursay =false, friday =false ,saturday = false;
     Double fees, regfees;
      DatePickerDialog.OnDateSetListener date,date2;
 
      public rvadapter2(Context context, String[] Names) {
         this.rows = Names;
         this.mContext = context;
+         setHasStableIds(true);
         String [] categories = mContext.getResources().getStringArray(R.array.category_4);
         dataAdapter = new ArrayAdapter<>(mContext, android.R.layout.simple_spinner_item, categories);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -149,9 +152,9 @@ class rvadapter2 extends RecyclerView.Adapter<rvadapter2.ViewHolder3> implements
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_checkbox, parent, false);
             return new ViewHolder3(view);
         }
-        if (viewType == 4)
+        if (viewType == 5)
         {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_video, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_checkbox2, parent, false);
             return new ViewHolder3(view);
         }
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row, parent, false);
@@ -214,7 +217,7 @@ class rvadapter2 extends RecyclerView.Adapter<rvadapter2.ViewHolder3> implements
             });
 
         }
-        else if (position == 6 )
+        else if (position == 8 )
         {
             holder.text1.setText(rows[position]);
             view = holder.editText;
@@ -229,7 +232,7 @@ class rvadapter2 extends RecyclerView.Adapter<rvadapter2.ViewHolder3> implements
             });
 
         }
-        else if (position == 7)
+        else if (position == 9)
         {
             holder.text1.setText(rows[position]);
             view2 = holder.editText;
@@ -243,7 +246,7 @@ class rvadapter2 extends RecyclerView.Adapter<rvadapter2.ViewHolder3> implements
                 }
             });
         }
-        else if (position == 8)
+        else if (position == 10)
         {
             holder.text4.setText(rows[position]);
             holder.cbsun.setInputType(InputType.TYPE_NULL);
@@ -351,12 +354,158 @@ class rvadapter2 extends RecyclerView.Adapter<rvadapter2.ViewHolder3> implements
                     timePickerDialog.show();
                 }
             });
+            holder.sun1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    sunday = ! sunday;
+                }
+            });
+            holder.mon1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    monday = ! monday;
+                }
+            });
+            holder.tue1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    tuesday = ! tuesday;
+                }
+            });
+            holder.wed1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    wednesday = ! wednesday;
+                }
+            });
+            holder.thu1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    thursay = ! thursay;
+                }
+            });
+            holder.fri1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    friday = ! friday;
+                }
+            });
+            holder.sat1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    saturday = ! saturday;
+                }
+            });
+            holder.cbsun1.setInputType(InputType.TYPE_NULL);
+            holder.cbsun1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    TimePickerDialog timePickerDialog = new TimePickerDialog(mContext, new TimePickerDialog.OnTimeSetListener() {
+
+                        @Override
+                        public void onTimeSet(TimePicker timePicker, int hourOfDay, int minutes ) {
+                            holder.cbsun1.setText(hourOfDay + ":" + minutes);
+                            sun1 = hourOfDay + ":" + minutes;
+                        }
+                    }, myCalendar.get(Calendar.HOUR_OF_DAY), myCalendar.get(Calendar.MINUTE),true );
+                    timePickerDialog.show();
+                }
+            });
+            holder.cbmon1.setInputType(InputType.TYPE_NULL);
+            holder.cbmon1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    TimePickerDialog timePickerDialog = new TimePickerDialog(mContext, new TimePickerDialog.OnTimeSetListener() {
+
+                        @Override
+                        public void onTimeSet(TimePicker timePicker, int hourOfDay, int minutes ) {
+                            holder.cbmon1.setText(hourOfDay + ":" + minutes);
+                            mon1 = hourOfDay + ":" + minutes;
+                        }
+                    }, myCalendar.get(Calendar.HOUR_OF_DAY), myCalendar.get(Calendar.MINUTE),true );
+                    timePickerDialog.show();
+                }
+            });
+            holder.cbtue1.setInputType(InputType.TYPE_NULL);
+            holder.cbtue1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    TimePickerDialog timePickerDialog = new TimePickerDialog(mContext, new TimePickerDialog.OnTimeSetListener() {
+
+                        @Override
+                        public void onTimeSet(TimePicker timePicker, int hourOfDay, int minutes ) {
+                            holder.cbtue1.setText(hourOfDay + ":" + minutes);
+                            tue1 = hourOfDay + ":" + minutes;
+                        }
+                    }, myCalendar.get(Calendar.HOUR_OF_DAY), myCalendar.get(Calendar.MINUTE),true );
+                    timePickerDialog.show();
+                }
+            });
+            holder.cbwed1.setInputType(InputType.TYPE_NULL);
+            holder.cbwed1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    TimePickerDialog timePickerDialog = new TimePickerDialog(mContext, new TimePickerDialog.OnTimeSetListener() {
+
+                        @Override
+                        public void onTimeSet(TimePicker timePicker, int hourOfDay, int minutes ) {
+                            holder.cbwed1.setText(hourOfDay + ":" + minutes);
+                            wed1 = hourOfDay + ":" + minutes;
+                        }
+                    }, myCalendar.get(Calendar.HOUR_OF_DAY), myCalendar.get(Calendar.MINUTE),true );
+                    timePickerDialog.show();
+                }
+            });
+            holder.cbthu1.setInputType(InputType.TYPE_NULL);
+            holder.cbthu1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    TimePickerDialog timePickerDialog = new TimePickerDialog(mContext, new TimePickerDialog.OnTimeSetListener() {
+
+                        @Override
+                        public void onTimeSet(TimePicker timePicker, int hourOfDay, int minutes ) {
+                            holder.cbthu1.setText(hourOfDay + ":" + minutes);
+                            thu1 = hourOfDay + ":" + minutes;
+                        }
+                    }, myCalendar.get(Calendar.HOUR_OF_DAY), myCalendar.get(Calendar.MINUTE),true );
+                    timePickerDialog.show();
+                }
+            });
+            holder.cbsat1.setInputType(InputType.TYPE_NULL);
+            holder.cbsat1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    TimePickerDialog timePickerDialog = new TimePickerDialog(mContext, new TimePickerDialog.OnTimeSetListener() {
+
+                        @Override
+                        public void onTimeSet(TimePicker timePicker, int hourOfDay, int minutes ) {
+                            holder.cbsat1.setText(hourOfDay + ":" + minutes);
+                            sat1 = hourOfDay + ":" + minutes;
+                        }
+                    }, myCalendar.get(Calendar.HOUR_OF_DAY), myCalendar.get(Calendar.MINUTE),true );
+                    timePickerDialog.show();
+                }
+            });
+            holder.cbfri1.setInputType(InputType.TYPE_NULL);
+            holder.cbfri1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    TimePickerDialog timePickerDialog = new TimePickerDialog(mContext, new TimePickerDialog.OnTimeSetListener() {
+
+                        @Override
+                        public void onTimeSet(TimePicker timePicker, int hourOfDay, int minutes ) {
+                            holder.cbfri1.setText(hourOfDay + ":" + minutes);
+                            fri1 = hourOfDay + ":" + minutes;
+                        }
+                    }, myCalendar.get(Calendar.HOUR_OF_DAY), myCalendar.get(Calendar.MINUTE),true );
+                    timePickerDialog.show();
+                }
+            });
         }
-        else if (position == 10)
+        else if (position == 13)
         {
-            holder.text5.setText(rows[position]);
-            holder.imageButton2.setOnClickListener(this);
-            holder.videoview.setVideoURI(null);
+            holder.text6.setText(rows[position]);
+
         }
         else {
             holder.text1.setText(rows[position]);
@@ -374,7 +523,13 @@ class rvadapter2 extends RecyclerView.Adapter<rvadapter2.ViewHolder3> implements
                             name = charSequence.toString();
                             break;
                         case 5:
-                            instructor = charSequence.toString();
+                            instructorFname = charSequence.toString();
+                            break;
+                        case 6:
+                            instructorLname = charSequence.toString();
+                            break;
+                        case 7:
+                            instructorBio = charSequence.toString();
                             break;
                             default:
                                 break;
@@ -394,10 +549,10 @@ class rvadapter2 extends RecyclerView.Adapter<rvadapter2.ViewHolder3> implements
             return 1;
         if(position == 2)
             return 2;
-        if (position == 8)
+        if (position == 10)
             return 3;
-        if (position==10)
-            return 4;
+        if (position == 13)
+            return 5;
         return 0;
     }
     @Override
@@ -423,12 +578,13 @@ class rvadapter2 extends RecyclerView.Adapter<rvadapter2.ViewHolder3> implements
 
     public class ViewHolder3 extends RecyclerView.ViewHolder{
 
-        TextView text1, text2, text3, text4,text5;
+        TextView text1, text2, text3, text4,text5, text6;
         Spinner spinner;
         ImageButton imageButton, imageButton2;
         VideoView videoview;
         ImageView imageView;
-        EditText editText,cbsun,cbmon,cbtue,cbwed,cbthu,cbfri,cbsat;
+        EditText editText,cbsun,cbmon,cbtue,cbwed,cbthu,cbfri,cbsat,cbsun1,cbmon1,cbtue1,cbwed1,cbthu1,cbfri1,cbsat1;
+        CheckBox sun1,mon1,tue1,wed1,thu1,fri1,sat1 ;
 
         public ViewHolder3(View itemView) {
             super(itemView);
@@ -447,20 +603,76 @@ class rvadapter2 extends RecyclerView.Adapter<rvadapter2.ViewHolder3> implements
             cbthu = itemView.findViewById(R.id.thuTime);
             cbfri = itemView.findViewById(R.id.friTime);
             cbsat = itemView.findViewById(R.id.satTime);
+            cbsun1 = itemView.findViewById(R.id.sunTimeEnd);
+            cbmon1 = itemView.findViewById(R.id.monTimeEnd);
+            cbtue1 = itemView.findViewById(R.id.tueTimeEnd);
+            cbwed1 = itemView.findViewById(R.id.wedTimeEnd);
+            cbthu1 = itemView.findViewById(R.id.thuTimeEnd);
+            cbfri1 = itemView.findViewById(R.id.friTimeEnd);
+            cbsat1 = itemView.findViewById(R.id.satTimeEnd);
             videoview = itemView.findViewById(R.id.row_edit4);
             text5 = itemView.findViewById(R.id.row_text5);
+            text6 = itemView.findViewById(R.id.row_text6);
             imageButton2 = itemView.findViewById(R.id.row_select2);
-
+            sun1 = itemView.findViewById(R.id.checkBox1);
+            mon1 = itemView.findViewById(R.id.checkBox2);
+            tue1 = itemView.findViewById(R.id.checkBox3);
+            wed1 = itemView.findViewById(R.id.checkBox4);
+            thu1 = itemView.findViewById(R.id.checkBox5);
+            fri1 = itemView.findViewById(R.id.checkBox6);
+            sat1 = itemView.findViewById(R.id.checkBox7);
 
         }}
      void Network_add_crse(String id){
-         String url2 = url+"/myroute/AddCourse";
-        id =String.valueOf(1);
+         String url2 = url+"myroute/AddCourse";
          OkHttpClient client = new OkHttpClient();
+         String dt = "";
+         if (sunday)
+         {
+             dt +="\"sun\":[\""+sun+"\",\""+sun1+"\"]";
+         }
+         if (monday)
+         {
+             if (dt != "")
+                 dt+=",";
+             dt +="\"mon\":[\""+mon+"\",\""+mon1+"\"]";
+         }
+         if (tuesday)
+         {
+             if (dt != "")
+                 dt+=",";
+             dt +="\"tue\":[\""+tue+"\",\""+tue1+"\"]";
+         }
+         if (wednesday)
+         {
+             if (dt != "")
+                 dt+=",";
+             dt +="\"wed\":[\""+wed+"\",\""+wed1+"\"]";
+         }
+         if (thursay)
+         {
+             if (dt != "")
+                 dt+=",";
+             dt +="\"thu\":[\""+thu+"\",\""+thu1+"\"]";
+         }
+         if (friday)
+         {
+             if (dt != "")
+                 dt+=",";
+             dt +="\"fri\":[\""+sun+"\",\""+fri1+"\"]";
+         }
+         if (saturday)
+         {
+             if (dt != "")
+                 dt+=",";
+             dt +="\"sat\":[\""+sat+"\",\""+sat1+"\"]";
+         }
          final MediaType JSON = MediaType.get("application/json; charset=utf-8");
          String json = "{\"name\":\""+name+"\", \"price\":"+fees+", \"regfees\": "+regfees
                  +", \"std\":\""+std+"\", \"end\": \""+end
-                 +"\",\"id\":"+id+", \"cat\":\""+category+"\"}";
+                 +"\",\"id\":"+id+", \"cat\":\""+category+"\", \"insFname\":\""+instructorFname
+                 +"\", \"insLname\": \""+instructorLname+"\", \"insBio\":\""+instructorBio+"\","+dt+"}";
+         //instructor - schedule
          final RequestBody body = RequestBody.create(json,JSON);
          final Request request = new Request.Builder()
                  .url(url2)

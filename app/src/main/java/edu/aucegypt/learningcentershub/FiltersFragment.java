@@ -40,6 +40,8 @@ public class FiltersFragment extends Fragment implements View.OnClickListener {
     SeekBar seekBar;
     TextView textView;
 
+    int seekBarVal=0;
+
 
     public ArrayList<String> getCatNames() {
         return CatNames;
@@ -58,7 +60,7 @@ public class FiltersFragment extends Fragment implements View.OnClickListener {
     public interface filtersFragmentOnClickListener {
 
         public void onClickClose();
-        public void onClickApply(ArrayList<String> CatNames, ArrayList<String> AreaNames);
+        public void onClickApply(ArrayList<String> CatNames, ArrayList<String> AreaNames, int Price);
 
     }
 
@@ -90,6 +92,7 @@ public class FiltersFragment extends Fragment implements View.OnClickListener {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 
                 int val = (progress * (seekBar.getWidth() - 6 * seekBar.getThumbOffset())) / seekBar.getMax();
+                seekBarVal = progress;
                 textView.setText("" + progress);
                 textView.setX(seekBar.getX() + val + seekBar.getThumbOffset() / 2);
                 textView.setY(seekBar.getY()-70);
@@ -170,7 +173,7 @@ public class FiltersFragment extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.applyBtn:
-                listener.onClickApply(CatNames, AreaNames);
+                listener.onClickApply(CatNames, AreaNames, seekBarVal);
                 break;
 
 

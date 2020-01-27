@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.transition.AutoTransition;
 import android.transition.ChangeBounds;
@@ -17,14 +18,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -44,6 +50,7 @@ import static edu.aucegypt.learningcentershub.Network.APIcall.url;
 import static edu.aucegypt.learningcentershub.utitlies.Utility.formatdouble;
 
 public class CourseInfo extends AppCompatActivity implements View.OnClickListener {
+    int CID;
 
     LinearLayout expandableLearningCenter;
     LinearLayout expandableCourseInfo;
@@ -57,6 +64,7 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
     Button arrowBtnCourseInfo;
     Button arrowBtnCourseSchedule;
     Button registerBtn;
+    CheckBox favourite;
 
     ImageView course_logo;
 
@@ -72,6 +80,9 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
     TextView tv_learningCenterEmail;
 
 
+    JSONObject myResponseReader;
+    boolean isfavourite;
+
 
     RecyclerView recyclerView_Schedule;
 
@@ -81,14 +92,16 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        SharedPreferences prefs = getSharedPreferences("login_shared_preference", MODE_PRIVATE);
+        Boolean status = prefs.getBoolean("status", false);
+        final int uid = prefs.getInt("uid", 0); //0 is the default value.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_info);
 
-        int CID=0;
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             CID = bundle.getInt("CID");
-            setTitle(Integer.toString(CID));
+            setTitle(" ");
         }
 
         assert getSupportActionBar() != null;   //null check
@@ -127,7 +140,7 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
         recyclerView_Schedule.setItemAnimator(new DefaultItemAnimator());
 
         registerBtn = (Button)findViewById(R.id.registerBtn);
-
+        favourite = (CheckBox)findViewById(R.id.favourite);
 
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,118 +149,218 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
                 startActivity(i);
             }
         });
+        if (!status)
+        {
+            favourite.setVisibility(View.GONE);
+        }
 
         arrowBtnLearningCenter.setOnClickListener(this);
         arrowBtnCourseInfo.setOnClickListener(this);
         arrowBtnCourseSchedule.setOnClickListener(this);
+        if (status) {
+            String url_api_1 = url + "myroute/checkFavorites?uid=" + Integer.toString(uid) + "&cid=" + Integer.toString(CID);
 
+            OkHttpClient client_1 = new OkHttpClient();
 
+            final Request request_1 = new Request.Builder()
+                    .url(url_api_1)
+                    .build();
 
-        String url_api = url + "myroute/getCourseInfo?id="+Integer.toString(CID);
+            client_1.newCall(request_1).enqueue(new Callback() {
 
-        String url_api_schedule = url + "myroute/getCourseSchedule?id="+Integer.toString(CID);
+                @Override
+                public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                    if (response.isSuccessful()) {
+                        final String myResponse = response.body().string();
 
+                        if (myResponse != "") {
 
-        OkHttpClient client = new OkHttpClient();
-        final MediaType JSON = MediaType.get("application/json; charset=utf-8");
+                            CourseInfo.this.runOnUiThread(
+                                    new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            try {
+                                                myResponseReader = new JSONObject(myResponse);
+                                                isfavourite = myResponseReader.getBoolean("status");
+                                                favourite.setChecked(isfavourite);
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
 
-        final Request request = new Request.Builder()
-                .url(url_api)
-                .build();
+                                        }
+                                    }
+                            );
 
-        final Request request_schedule = new Request.Builder()
-                .url(url_api_schedule)
-                .build();
+                        }
 
-        client.newCall(request).enqueue(new Callback() {
-
-            @Override
-            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                if (response.isSuccessful()) {
-                    Gson gson = new Gson();
-
-                    final Type courseType = new TypeToken<Course>(){}.getType();
-
-                    course = gson.fromJson(response.body().string(), courseType);
-
-
-                    CourseInfo.this.runOnUiThread(
-                            new Runnable() {
-                                @Override
-                                public void run() {
-
-                                    new DownloadImageTask(course_logo)
-                                            .execute(url+"images/"+ course.getCourseImage());
-
-                                    tv_name.setText(course.getCourseName());
-                                    tv_category.setText(course.getCatName());
-
-                                    tv_learningCenterName.setText(course.getLCname());
-                                    tv_learningCenterPhone.setText(course.getPhoneNo());
-                                    tv_learningCenterEmail.setText(course.getEmail());
-
-
-                                    tv_course_description.setText(course.getDescription());
-                                    tv_reg_fees.setText("EGP " + formatdouble(course.getRegFees()));
-
-
-                                    SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE, MMMM F, yyyy");
-                                    String StDate = dateFormat.format(course.getStDate());
-                                    tv_stdate.setText(StDate);
-
-                                    String EndDate = dateFormat.format(course.getEndDate());
-                                    tv_enddate.setText(EndDate);
-
-
-
-                                }
-                            }
-                    );
-
-
+                    }
 
                 }
 
-            }
+                @Override
+                public void onFailure(@NotNull Call call, @NotNull IOException e) {
 
-            @Override
-            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                }
+            });
 
-            }
-        });
+            favourite.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
-        client.newCall(request_schedule).enqueue(new Callback() {
+                                                     @Override
+                                                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                                                         if (isChecked) {
+                                                             String url_api_1 = url + "myroute/addToFavorites?uid=" + Integer.toString(uid) + "&cid=" + Integer.toString(CID);
 
-            @Override
-            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                if (response.isSuccessful()) {
-                    Gson gson = new Gson();
-                    Type scheduleListType = new TypeToken<ArrayList<Schedule>>(){}.getType();
+                                                             OkHttpClient client_1 = new OkHttpClient();
 
-                    ArrayList<Schedule> scheduleArrayList = gson.fromJson(response.body().string(), scheduleListType);
-                    mScheduleAdapter = new scheduleAdapter(CourseInfo.this, scheduleArrayList);
+                                                             final Request request_1 = new Request.Builder()
+                                                                     .url(url_api_1)
+                                                                     .build();
+
+                                                             client_1.newCall(request_1).enqueue(new Callback() {
+
+                                                                 @Override
+                                                                 public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                                                                 }
+
+                                                                 @Override
+                                                                 public void onFailure(@NotNull Call call, @NotNull IOException e) {
+
+                                                                 }
+                                                             });
+
+                                                         } else {
+                                                             String url_api_1 = url + "myroute/removeFromFavorites?uid=" + Integer.toString(uid) + "&cid=" + Integer.toString(CID);
+
+                                                             OkHttpClient client_1 = new OkHttpClient();
+
+                                                             final Request request_1 = new Request.Builder()
+                                                                     .url(url_api_1)
+                                                                     .build();
+
+                                                             client_1.newCall(request_1).enqueue(new Callback() {
+
+                                                                 @Override
+                                                                 public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                                                                 }
+
+                                                                 @Override
+                                                                 public void onFailure(@NotNull Call call, @NotNull IOException e) {
+
+                                                                 }
+                                                             });
+
+                                                         }
+                                                     }
+                                                 }
+            );
+        }
 
 
-                    CourseInfo.this.runOnUiThread(
-                            new Runnable() {
-                                @Override
-                                public void run() {
-                                    recyclerView_Schedule.setAdapter(mScheduleAdapter);
+            String url_api = url + "myroute/getCourseInfo?id=" + Integer.toString(CID);
+
+            String url_api_schedule = url + "myroute/getCourseSchedule?id=" + Integer.toString(CID);
+
+
+            OkHttpClient client = new OkHttpClient();
+            final MediaType JSON = MediaType.get("application/json; charset=utf-8");
+
+            final Request request = new Request.Builder()
+                    .url(url_api)
+                    .build();
+
+            final Request request_schedule = new Request.Builder()
+                    .url(url_api_schedule)
+                    .build();
+
+            client.newCall(request).enqueue(new Callback() {
+
+                @Override
+                public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                    if (response.isSuccessful()) {
+                        Gson gson = new Gson();
+
+                        final Type courseType = new TypeToken<Course>() {
+                        }.getType();
+
+                        course = gson.fromJson(response.body().string(), courseType);
+
+
+                        CourseInfo.this.runOnUiThread(
+                                new Runnable() {
+                                    @Override
+                                    public void run() {
+
+                                        new DownloadImageTask(course_logo)
+                                                .execute(url + "images/" + course.getCourseImage());
+
+                                        tv_name.setText(course.getCourseName());
+                                        tv_category.setText(course.getCatName());
+
+                                        tv_learningCenterName.setText(course.getLCname());
+                                        tv_learningCenterPhone.setText(course.getPhoneNo());
+                                        tv_learningCenterEmail.setText(course.getEmail());
+
+
+                                        tv_course_description.setText(course.getDescription());
+                                        tv_reg_fees.setText("EGP " + formatdouble(course.getRegFees()));
+
+
+                                        SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE, MMMM F, yyyy");
+                                        String StDate = dateFormat.format(course.getStDate());
+                                        tv_stdate.setText(StDate);
+
+                                        String EndDate = dateFormat.format(course.getEndDate());
+                                        tv_enddate.setText(EndDate);
+
+
+                                    }
                                 }
-                            }
-                    );
+                        );
 
 
+                    }
 
                 }
 
-            }
+                @Override
+                public void onFailure(@NotNull Call call, @NotNull IOException e) {
 
-            @Override
-            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                }
+            });
 
-            }
-        });
+
+            client.newCall(request_schedule).enqueue(new Callback() {
+
+                @Override
+                public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                    if (response.isSuccessful()) {
+                        Gson gson = new Gson();
+                        Type scheduleListType = new TypeToken<ArrayList<Schedule>>() {
+                        }.getType();
+
+                        ArrayList<Schedule> scheduleArrayList = gson.fromJson(response.body().string(), scheduleListType);
+                        mScheduleAdapter = new scheduleAdapter(CourseInfo.this, scheduleArrayList);
+
+
+                        CourseInfo.this.runOnUiThread(
+                                new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        recyclerView_Schedule.setAdapter(mScheduleAdapter);
+                                    }
+                                }
+                        );
+
+
+                    }
+
+                }
+
+                @Override
+                public void onFailure(@NotNull Call call, @NotNull IOException e) {
+
+                }
+            });
 
 
 

@@ -50,10 +50,15 @@ public class CoursesList_frag extends Fragment implements View.OnClickListener {
     Button filterBtn;
     ArrayList<Course> courseArrayList;
     ArrayList<Course> courseArrayListFiltered = new ArrayList<Course>();
+    ArrayList<Course> courseArrayListFilteredArea = new ArrayList<Course>();
+    ArrayList<Course> courseArrayListFilteredPrice = new ArrayList<Course>();
+
 
     coursesListAdapter adapter;
     ArrayList<String> CatNamesFilters;
     ArrayList<String> AreaNamesFilters;
+
+    int PriceFilter = 0;
 
     private coursesFragOnClickListener listener;
 
@@ -73,6 +78,9 @@ public class CoursesList_frag extends Fragment implements View.OnClickListener {
                 CatNamesFilters = (ArrayList<String>) getArguments().getSerializable("CatNames");
             if(getArguments().getBoolean("isFilterArea"))
                 AreaNamesFilters = (ArrayList<String>) getArguments().getSerializable("AreaNames");
+            if(getArguments().getBoolean("isFilterPrice")){
+                PriceFilter = getArguments().getInt("Price");
+            }
 
         }
 
@@ -121,20 +129,35 @@ public class CoursesList_frag extends Fragment implements View.OnClickListener {
 
                             if (CatNamesFilters != null) {
                                 filterCategory(courseArrayList);
+                                adapter = new coursesListAdapter(getContext(), courseArrayListFiltered);
                             }
 
                             if (AreaNamesFilters != null) {
 
-                                if (!courseArrayListFiltered.isEmpty()) {
+                                if (CatNamesFilters != null) {
                                     filterArea(courseArrayListFiltered);
                                 } else {
                                     filterArea(courseArrayList);
                                 }
+                                adapter = new coursesListAdapter(getContext(), courseArrayListFilteredArea);
 
                             }
 
 
-                            adapter = new coursesListAdapter(getContext(), courseArrayListFiltered);
+                            if (PriceFilter != 0) {
+
+                                if (AreaNamesFilters == null && CatNamesFilters == null) {
+                                    filterPrice(courseArrayList);
+                                } else if (AreaNamesFilters == null && CatNamesFilters != null){
+                                    filterPrice(courseArrayListFiltered);
+                                }else if (AreaNamesFilters != null && CatNamesFilters != null){
+                                    filterPrice(courseArrayListFilteredArea);
+
+                                }
+                                adapter = new coursesListAdapter(getContext(), courseArrayListFilteredPrice);
+
+                            }
+
 
 
                         } else {
@@ -197,8 +220,19 @@ public class CoursesList_frag extends Fragment implements View.OnClickListener {
 
         for (Course itemModel : courseArrayList) {
             if (AreaNamesFilters.contains(itemModel.getArea())) {
-                if(!courseArrayListFiltered.contains(itemModel))
-                    courseArrayListFiltered.add(itemModel);
+                if(!courseArrayListFilteredArea.contains(itemModel))
+                    courseArrayListFilteredArea.add(itemModel);
+            }
+        }
+    }
+
+
+    public void filterPrice(ArrayList<Course> courseArrayList){
+
+        for (Course itemModel : courseArrayList) {
+            if (itemModel.getPrice()<= PriceFilter) {
+                if(!courseArrayListFilteredPrice.contains(itemModel))
+                    courseArrayListFilteredPrice.add(itemModel);
             }
         }
     }

@@ -1,5 +1,6 @@
 package edu.aucegypt.learningcentershub;
 
+import android.location.Location;
 import android.os.Bundle;
 import android.transition.ChangeBounds;
 import android.transition.TransitionManager;
@@ -23,6 +24,17 @@ public class MainActivity extends AppCompatActivity implements CoursesList_frag.
     FrameLayout filters_layout;
     ConstraintLayout main_layout;
 
+    protected static final String TAG = "main-activity";
+
+    protected static final String ADDRESS_REQUESTED_KEY = "address-request-pending";
+    protected static final String LOCATION_ADDRESS_KEY = "location-address";
+
+
+    protected Location mLastLocation;
+    protected boolean mAddressRequested;
+
+    protected String mAddressOutput;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,19 +45,25 @@ public class MainActivity extends AppCompatActivity implements CoursesList_frag.
         main_layout = (ConstraintLayout) findViewById(R.id.main_layout);
 
 
+        // Set defaults, then update using values stored in the Bundle.
+        mAddressRequested = false;
+        mAddressOutput = "";
+
+
+
         FragmentManager fragmentManager = this.getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragment6, new NavBar());
         fragmentTransaction.replace(R.id.fragment6_1, new TopBar());
         fragmentTransaction.replace(R.id.fragment6_2, new main_frag());
         fragmentTransaction.replace(R.id.filters_layout, new FiltersFragment());
-        //fragmentTransaction.replace(R.id.seealllearningcenters, new LearningCenter());
+        //fragmentTransaction.replace(R.id.fragment7_2, new course_frag());
         fragmentTransaction.commit();
 
 
-
-
     }
+
+
 
     @Override
     public void onFiltersBtnClick() {
@@ -82,29 +100,35 @@ public class MainActivity extends AppCompatActivity implements CoursesList_frag.
 
     public void onCourseListener()
     {
-        MainActivity.this.getSupportFragmentManager().beginTransaction().replace(R.id.fragment6_2, new LearningCenter_frag()).commit();
+        MainActivity.this.getSupportFragmentManager().beginTransaction().replace(R.id.fragment6_2, new CoursesList_frag()).commit();
     }
 
     @Override
-    public void onClickApply(ArrayList<String> CatNames, ArrayList<String> AreaNames) {
+    public void onClickApply(ArrayList<String> CatNames, ArrayList<String> AreaNames, int Price) {
 
         Bundle bundle=new Bundle();
         CoursesList_frag coursesList_frag = new CoursesList_frag();
+        bundle.putBoolean("isFilter", false);
+
         if(!CatNames.isEmpty())
         {
             bundle.putSerializable("CatNames", CatNames);
             bundle.putBoolean("isFilter", true);
             bundle.putBoolean("isFilterCat", true);
+        }
 
-        }else if(!AreaNames.isEmpty()){
+        if(!AreaNames.isEmpty()){
             bundle.putSerializable("AreaNames", AreaNames);
             bundle.putBoolean("isFilterArea", true);
             bundle.putBoolean("isFilter", true);
         }
-        else
-        {
-            bundle.putBoolean("isFilter", false);
+
+        if(Price != 0){
+            bundle.putInt("Price", Price);
+            bundle.putBoolean("isFilterPrice", true);
+            bundle.putBoolean("isFilter", true);
         }
+
 
         coursesList_frag.setArguments(bundle);
 

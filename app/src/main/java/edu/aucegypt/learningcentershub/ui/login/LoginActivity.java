@@ -2,9 +2,11 @@ package edu.aucegypt.learningcentershub.ui.login;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -28,7 +30,9 @@ import org.json.JSONObject;
 import java.io.IOException;
 
 import edu.aucegypt.learningcentershub.Admin_home;
+import edu.aucegypt.learningcentershub.MainActivity;
 import edu.aucegypt.learningcentershub.MyAccount;
+import edu.aucegypt.learningcentershub.MyAccount_frag;
 import edu.aucegypt.learningcentershub.R;
 import edu.aucegypt.learningcentershub.rvadapter3;
 import okhttp3.Call;
@@ -44,9 +48,12 @@ import static edu.aucegypt.learningcentershub.Network.APIcall.url;
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     private LoginViewModel loginViewModel;
+    int uid;
     int lcid;
+    public static Boolean status = false;
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        final SharedPreferences.Editor editor = getSharedPreferences("login_shared_preference", MODE_PRIVATE).edit();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
@@ -160,22 +167,28 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     if (myResponse != "") {
                                         try {
                                             myResponseReader = new JSONObject(myResponse);
-                                            Boolean status = myResponseReader.getBoolean("status");
+                                             status = myResponseReader.getBoolean("status");
                                             String message = myResponseReader.getString("message");
                                             int isadmin = myResponseReader.getInt("isadmin");
-                                             lcid = myResponseReader.getInt("lcid");
                                             if (status == true){
                                                 Intent mIntent;
+                                                Network_myaccount(String.valueOf(uid));
                                                     if (isadmin == 1) {
+                                                        lcid = myResponseReader.getInt("lcid");
                                                         mIntent = new Intent(LoginActivity.this, Admin_home.class);
                                                         mIntent.putExtra("lcid",String.valueOf(lcid));
                                                         Network_lcinfo(String.valueOf(lcid));
                                                         Network_course(String.valueOf(lcid));
                                                         Network_lcinfodisplay(String.valueOf(lcid));
                                                     }
-                                                    else
-                                                         mIntent = new Intent(LoginActivity.this, MyAccount.class);
-                                                startActivity(mIntent);
+                                                    else {
+                                                        uid = myResponseReader.getInt("UID");
+                                                        mIntent = new Intent(LoginActivity.this, MainActivity.class);
+                                                        editor.putBoolean("status", true);
+                                                        editor.putInt("uid", uid);
+                                                        editor.commit();
+                                                    }
+                                                         startActivity(mIntent);
                                                 }
 
                                         } catch (JSONException e) {
@@ -452,6 +465,45 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     try {
                         myResponseReader = new JSONObject(String.valueOf(new JSONArray(myResponse).getJSONObject(0)));
                         rvadapter3.message2[i][12] = String.valueOf(myResponseReader.getInt("COUNT(*)"));
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+
+            }});
+
+
+    }
+    private void Network_myaccount( String id){
+        String url2 = url+"myroute/userinfo?id="+ id;
+
+        OkHttpClient client = new OkHttpClient();
+        final MediaType JSON = MediaType.get("application/json; charset=utf-8");
+
+        final Request request = new Request.Builder()
+                .url(url2)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                if (response.isSuccessful()){
+                    final String myResponse = response.body().string();
+                    JSONObject myResponseReader;
+                    try {
+                        myResponseReader = new JSONObject(String.valueOf(new JSONArray(myResponse).getJSONObject(0)));
+                        MyAccount_frag.message[0] = myResponseReader.getString("Fname")+" "+ myResponseReader.getString("Lname");
+                        MyAccount_frag.message[1] = myResponseReader.getString("Email");
+                        MyAccount_frag.message[2] = myResponseReader.getString("PhoneNo");
+                        MyAccount_frag.message[3] = myResponseReader.getString("Prefrences");
+
 
                     } catch (JSONException e) {
                         e.printStackTrace();
