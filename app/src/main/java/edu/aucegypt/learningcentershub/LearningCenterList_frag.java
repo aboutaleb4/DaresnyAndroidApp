@@ -58,6 +58,8 @@ public class LearningCenterList_frag extends Fragment {
 
         recyclerView.setNestedScrollingEnabled(false);
 
+        searchView = (SearchView) view.findViewById(R.id.searchView_lc);
+
 
 
         String url_api = url + "myroute/getLearningCenters";

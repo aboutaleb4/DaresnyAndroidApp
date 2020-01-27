@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -100,7 +101,11 @@ public class MainActivity extends AppCompatActivity implements CoursesList_frag.
 
     public void onCourseListener()
     {
-        MainActivity.this.getSupportFragmentManager().beginTransaction().replace(R.id.fragment6_2, new CoursesList_frag()).commit();
+        CoursesList_frag coursesList_frag = new CoursesList_frag();
+        Bundle bundle = new Bundle();
+        coursesList_frag.setArguments(bundle);
+        bundle.putBoolean("isFilter", false);
+        MainActivity.this.getSupportFragmentManager().beginTransaction().replace(R.id.fragment6_2, coursesList_frag).commit();
     }
 
     @Override

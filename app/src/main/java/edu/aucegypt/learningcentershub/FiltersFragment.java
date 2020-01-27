@@ -89,6 +89,11 @@ public class FiltersFragment extends Fragment implements View.OnClickListener {
 
         closeBtn.setOnClickListener(this);
         applyBtn.setOnClickListener(this);
+        cbBox1.setOnClickListener(this);
+        cbBox2.setOnClickListener(this);
+        cbBox3.setOnClickListener(this);
+        cbBox4.setOnClickListener(this);
+
         // Inflate the layout for this fragment
 
         initRecyclerView_Cat(view);

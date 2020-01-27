@@ -67,6 +67,7 @@ public class TopBar extends Fragment implements View.OnClickListener {
             editor = prefs.edit();
             editor.putBoolean("status", false);
             editor.commit();
+
             Intent i = new Intent("edu.aucegypt.learningcentershub.MAIN_ACTIVITY");
             startActivity(i);
         }else {

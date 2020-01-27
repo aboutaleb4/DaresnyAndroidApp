@@ -208,7 +208,6 @@
                 android:scrollbars="vertical"
                 app:layout_constraintTop_toBottomOf="@id/area_header"/>
 
-
             <TextView
                 android:id="@+id/start_date_header"
                 android:layout_width="match_parent"
@@ -234,7 +233,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_margin="5dp"
-                android:text="Less than a month"
+                android:text="Two weeks or less"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="18sp"></CheckBox>
 
@@ -245,7 +244,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_margin="5dp"
-                android:text="One month"
+                android:text="One month or less"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="18sp"></CheckBox>
 
@@ -255,7 +254,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_margin="5dp"
-                android:text="Two months"
+                android:text="Two months or less"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="18sp"></CheckBox>
 
@@ -265,7 +264,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_margin="5dp"
-                android:text="Three months or more"
+                android:text="Three months or less"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="18sp"></CheckBox>
 

@@ -253,8 +253,9 @@ public class CoursesList_frag extends Fragment implements View.OnClickListener {
             long diffTime = endTime - startTime;
             long diffDays = diffTime / (1000 * 60 * 60 * 24);
 
-            for(int i=0; i<=3; i++){
+            for(int i=0; i< DateFilters.size(); i++){
                 if (DateFilters.get(i) >= diffDays) {
+                    if(!courseArrayListFilteredDate.contains(itemModel))
                     courseArrayListFilteredDate.add(itemModel);
                 }
             }

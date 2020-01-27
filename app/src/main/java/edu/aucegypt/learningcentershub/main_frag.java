@@ -367,11 +367,7 @@ if (status) {
 
     }
 
-    public void onClickLearningCenters(View view){
-        listener2.onLearningCenterListener();
-    }
 
-    public void onCourseListener(View view) { listener3.onCourseListener(); }
 
 
     @Override
