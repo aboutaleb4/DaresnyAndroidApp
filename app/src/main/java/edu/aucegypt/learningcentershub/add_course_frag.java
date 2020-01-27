@@ -671,7 +671,11 @@ class rvadapter2 extends RecyclerView.Adapter<rvadapter2.ViewHolder3> implements
          String json = "{\"name\":\""+name+"\", \"price\":"+fees+", \"regfees\": "+regfees
                  +", \"std\":\""+std+"\", \"end\": \""+end
                  +"\",\"id\":"+id+", \"cat\":\""+category+"\", \"insFname\":\""+instructorFname
-                 +"\", \"insLname\": \""+instructorLname+"\", \"insBio\":\""+instructorBio+"\","+dt+"}";
+                 +"\", \"insLname\": \""+instructorLname+"\", \"insBio\":\""+instructorBio+"\"";
+         if (dt =="")
+             json +="}";
+         else
+             json+=","+dt+"{";
          //instructor - schedule
          final RequestBody body = RequestBody.create(json,JSON);
          final Request request = new Request.Builder()

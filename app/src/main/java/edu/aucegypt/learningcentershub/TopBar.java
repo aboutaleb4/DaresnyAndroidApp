@@ -12,10 +12,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
-import java.util.Arrays;
-
-import edu.aucegypt.learningcentershub.ui.login.LoginActivity;
-
 import static android.content.Context.MODE_PRIVATE;
 
 public class TopBar extends Fragment implements View.OnClickListener {
