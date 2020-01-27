@@ -37,6 +37,7 @@ import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+import edu.aucegypt.learningcentershub.data.Address;
 import edu.aucegypt.learningcentershub.data.Course;
 import edu.aucegypt.learningcentershub.data.Schedule;
 import okhttp3.Call;
@@ -78,10 +79,13 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
     TextView tv_learningCenterPhone;
     TextView tv_learningCenterAddress;
     TextView tv_learningCenterEmail;
+    TextView address;
 
 
     JSONObject myResponseReader;
     boolean isfavourite;
+
+    Address addressObject;
 
 
     RecyclerView recyclerView_Schedule;
@@ -120,6 +124,7 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
 
         tv_name = (TextView) findViewById(R.id.tv_name);
         tv_category = (TextView) findViewById(R.id.tv_category);
+        Bundle mBundle = getIntent().getExtras();
 
         tv_learningCenterName = (TextView) findViewById(R.id.tv_learningCenterName);
         tv_learningCenterAddress =(TextView) findViewById(R.id.tv_learningCenterAddress);
@@ -361,6 +366,68 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
 
                 }
             });
+
+
+
+        String url_api_getAddress = url + "myroute/getAddress";
+
+        url_api_getAddress = url_api_getAddress + "?id=" + Integer.toString(mBundle.getInt("LCID"));
+
+        OkHttpClient client_2 = new OkHttpClient();
+
+        final Request request_2 = new Request.Builder()
+                .url(url_api_getAddress)
+                .build();
+
+        client_2.newCall(request_2).enqueue(new Callback() {
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull final Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    final String myResponse1 = response.body().string();
+                    Gson gson = new Gson();
+
+                    final Type typeAddress = new TypeToken<Address>(){}.getType();
+
+                    addressObject = gson.fromJson(myResponse1, typeAddress);
+
+                    if (myResponse1 != "") {
+
+                        CourseInfo.this.runOnUiThread(
+                                new Runnable() {
+                                    @Override
+                                    public void run() {
+
+                                        if(addressObject.getFloorNo() == null || addressObject.getAptNo() == null)
+                                        {
+                                            address.setText(addressObject.getBuildingNo()+" "+
+                                                    addressObject.getStreet()+" ,"+
+                                                    addressObject.getArea()+" ,"+
+                                                    addressObject.getCity());
+                                        }
+                                        else{
+                                            address.setText(addressObject.getBuildingNo()+" "+
+                                                    addressObject.getStreet()+" ,"+
+                                                    addressObject.getArea()+" ,"+
+                                                    addressObject.getCity()+"\n"+"Floor: "+
+                                                    addressObject.getFloorNo()+"\n"+"Apartment: "+
+                                                    addressObject.getAptNo());
+                                        }
+                                    }
+                                }
+                        );
+
+                    }
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+
+            }
+        });
 
 
 
