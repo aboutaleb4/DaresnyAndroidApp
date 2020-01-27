@@ -13,7 +13,10 @@ import androidx.fragment.app.Fragment;
 
 import java.util.Arrays;
 
+import edu.aucegypt.learningcentershub.ui.login.LoginActivity;
+
 public class TopBar extends Fragment implements View.OnClickListener {
+    public static  Button button;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -21,11 +24,12 @@ public class TopBar extends Fragment implements View.OnClickListener {
         Toolbar myToolbar = view.findViewById(R.id.topbar2);
         ((AppCompatActivity) getActivity()).setSupportActionBar(myToolbar);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
-        Button button = view.findViewById(R.id.button);
+         button = view.findViewById(R.id.button);
         if (Admin_home.class == getContext().getClass())
         {
             button.setText("Log Out");
         }
+        if(LoginActivity.status) button.setText("Log out");
         button.setOnClickListener(this);
         return view;
     }
@@ -37,7 +41,7 @@ public class TopBar extends Fragment implements View.OnClickListener {
             startActivity(i);
 
         }
-        else  if (((Button) view).getText().toString().equals("Log Out")) {
+        else  if (((Button) view).getText().toString().equals("Log out")) {
             Intent i = new Intent("edu.aucegypt.learningcentershub.MAIN_ACTIVITY");
             startActivity(i);
             rvadapter3.cname.clear();
@@ -47,7 +51,11 @@ public class TopBar extends Fragment implements View.OnClickListener {
                 Arrays.fill(rvadapter3.message2[j], null);
             Admin_home.lcid = "";
             Arrays.fill(Admin_home.message, null);
+            LoginActivity.status = !LoginActivity.status;
+            MyAccount_frag.cleanup();
+            ((Button)view).setText("Login");
         }
+        if(LoginActivity.status) button.setText("Log out");
 
     }
 }
