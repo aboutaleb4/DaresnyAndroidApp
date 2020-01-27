@@ -98,6 +98,7 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
 
     RecyclerView recyclerView_Schedule;
 
+    int cid;
     scheduleAdapter mScheduleAdapter;
 
     Course course;
@@ -164,7 +165,9 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent i = new Intent(getApplicationContext(),CourseRegisterActivity.class);
+                i.putExtra("cid", cid);
                 startActivity(i);
             }
         });
@@ -314,6 +317,7 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
                                             new DownloadImageTask(course_logo)
                                                     .execute(url + "images/" + course.getCourseImage());
 
+                                            cid = course.getCID();
                                             tv_name.setText(course.getCourseName());
                                             tv_category.setText(course.getCatName());
 
@@ -581,7 +585,6 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
     }
 
 }
-//hjkl
 
 
 
