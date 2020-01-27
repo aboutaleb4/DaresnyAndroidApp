@@ -41,6 +41,7 @@ import edu.aucegypt.learningcentershub.data.Address;
 import edu.aucegypt.learningcentershub.data.Course;
 import edu.aucegypt.learningcentershub.data.Instructor;
 import edu.aucegypt.learningcentershub.data.Schedule;
+import edu.aucegypt.learningcentershub.ui.login.LoginActivity;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MediaType;
@@ -91,6 +92,7 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
 
     JSONObject myResponseReader;
     boolean isfavourite;
+    boolean isRegistered;
 
     Address addressObject;
     Instructor instructor;
@@ -162,18 +164,28 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
         registerBtn = (Button)findViewById(R.id.registerBtn);
         favourite = (CheckBox)findViewById(R.id.favourite);
 
-        registerBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                Intent i = new Intent(getApplicationContext(),CourseRegisterActivity.class);
-                i.putExtra("cid", cid);
-                startActivity(i);
-            }
-        });
         if (!status)
         {
+            registerBtn.setClickable(true);
+            registerBtn.setText("Login to Register");
             favourite.setVisibility(View.GONE);
+            registerBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+                    startActivity(i);
+                }
+            });
+        } else {
+            registerBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(getApplicationContext(),CourseRegisterActivity.class);
+                    i.putExtra("cid", cid);
+                    startActivity(i);
+                }
+            });
         }
 
         arrowBtnLearningCenter.setOnClickListener(this);
@@ -206,6 +218,58 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
                                                 myResponseReader = new JSONObject(myResponse);
                                                 isfavourite = myResponseReader.getBoolean("status");
                                                 favourite.setChecked(isfavourite);
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+
+                                        }
+                                    }
+                            );
+
+                        }
+
+                    }
+
+                }
+
+                @Override
+                public void onFailure(@NotNull Call call, @NotNull IOException e) {
+
+                }
+            });
+
+
+
+            String url_api_2 = url + "myroute/checkRegisteredCourse?uid=" + Integer.toString(uid) + "&cid=" + Integer.toString(CID);
+
+            OkHttpClient client_2 = new OkHttpClient();
+
+            final Request request_2 = new Request.Builder()
+                    .url(url_api_2)
+                    .build();
+
+            client_2.newCall(request_2).enqueue(new Callback() {
+
+                @Override
+                public void onResponse(@NotNull Call call, @NotNull Response response1) throws IOException {
+                    if (response1.isSuccessful()) {
+                        final String myResponse = response1.body().string();
+                        if (myResponse != "") {
+
+                            CourseInfo.this.runOnUiThread(
+                                    new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            try {
+                                                myResponseReader = new JSONObject(myResponse);
+                                                isRegistered = myResponseReader.getBoolean("status");
+                                                if (isRegistered) {
+                                                    registerBtn.setClickable(false);
+                                                    registerBtn.setText("REGISTERED");
+                                                } else{
+                                                    registerBtn.setClickable(true);
+                                                }
+
                                             } catch (JSONException e) {
                                                 e.printStackTrace();
                                             }
