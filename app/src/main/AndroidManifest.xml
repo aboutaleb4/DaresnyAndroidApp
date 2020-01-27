@@ -35,6 +35,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".CourseRegisterActivity" >
+
         </activity>
         <activity android:name=".StartingActivity">
             <intent-filter>
