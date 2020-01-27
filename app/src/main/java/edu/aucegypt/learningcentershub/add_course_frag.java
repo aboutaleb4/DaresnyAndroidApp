@@ -37,6 +37,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -105,8 +106,43 @@ class rvadapter2 extends RecyclerView.Adapter<rvadapter2.ViewHolder3> implements
         this.rows = Names;
         this.mContext = context;
          setHasStableIds(true);
-        String [] categories = mContext.getResources().getStringArray(R.array.category_4);
-        dataAdapter = new ArrayAdapter<>(mContext, android.R.layout.simple_spinner_item, categories);
+         final String[][] CATS = {{null}};// = new String[1][1];// = mContext.getResources().getStringArray(R.array.category_4);
+         String url2 = url+"myroute/getCategories";
+         OkHttpClient client = new OkHttpClient();
+         final MediaType JSON = MediaType.get("application/json; charset=utf-8");
+         final Request request = new Request.Builder()
+                 .url(url2)
+                 .build();
+         client.newCall(request).enqueue(new Callback() {
+             @Override
+             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                 if (response.isSuccessful()){
+                     final String myResponse = response.body().string();
+                     JSONArray myResponseReader;
+                     if (myResponse != "") {
+                         try {
+                             myResponseReader = new JSONArray(myResponse);
+                             ArrayList<String> cats = new ArrayList<>();
+                             for (int i = 0; i<myResponseReader.length();i++) {
+                                 JSONObject jsonObject = myResponseReader.getJSONObject(i);
+                                cats.add(jsonObject.getString("CatName"));
+
+                             }
+                             CATS[0] = cats.toArray(new String[cats.size()]);
+                         } catch (JSONException e) {
+                             e.printStackTrace();
+                         }
+                     }
+                 }
+
+             }
+
+             @Override
+             public void onFailure(@NotNull Call call, @NotNull IOException e) {
+
+             }});
+
+         dataAdapter = new ArrayAdapter<>(mContext, android.R.layout.simple_spinner_item, CATS[0]);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
          myCalendar = Calendar.getInstance();
         date = new DatePickerDialog.OnDateSetListener() {
