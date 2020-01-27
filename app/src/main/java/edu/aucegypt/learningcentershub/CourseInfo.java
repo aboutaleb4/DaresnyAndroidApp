@@ -98,6 +98,7 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
 
     RecyclerView recyclerView_Schedule;
 
+    int cid;
     scheduleAdapter mScheduleAdapter;
 
     Course course;
@@ -164,7 +165,9 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent i = new Intent(getApplicationContext(),CourseRegisterActivity.class);
+                i.putExtra("cid", cid);
                 startActivity(i);
             }
         });
@@ -190,9 +193,9 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
             client_1.newCall(request_1).enqueue(new Callback() {
 
                 @Override
-                public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                    if (response.isSuccessful()) {
-                        final String myResponse = response.body().string();
+                public void onResponse(@NotNull Call call, @NotNull Response response1) throws IOException {
+                    if (response1.isSuccessful()) {
+                        final String myResponse = response1.body().string();
                         if (myResponse != "") {
 
                             CourseInfo.this.runOnUiThread(
@@ -239,7 +242,7 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
                          client_1.newCall(request_1).enqueue(new Callback() {
 
                              @Override
-                             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                             public void onResponse(@NotNull Call call, @NotNull Response response2) throws IOException {
                              }
 
                              @Override
@@ -260,7 +263,7 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
                          client_1.newCall(request_1).enqueue(new Callback() {
 
                              @Override
-                             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                             public void onResponse(@NotNull Call call, @NotNull Response response3) throws IOException {
                              }
 
                              @Override
@@ -281,7 +284,7 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
             String url_api_schedule = url + "myroute/getCourseSchedule?id=" + Integer.toString(CID);
 
 
-            OkHttpClient client = new OkHttpClient();
+            OkHttpClient client_2 = new OkHttpClient();
 
             final Request request = new Request.Builder()
                     .url(url_api)
@@ -291,7 +294,7 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
                     .url(url_api_schedule)
                     .build();
 
-            client.newCall(request).enqueue(new Callback() {
+          client_2.newCall(request).enqueue(new Callback() {
 
                 @Override
                 public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
@@ -303,7 +306,7 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
                             final Type courseType = new TypeToken<Course>() {
                             }.getType();
 
-                            course = gson.fromJson(response.body().string(), courseType);
+                            course = gson.fromJson(myResponse, courseType);
 
 
                             CourseInfo.this.runOnUiThread(
@@ -314,6 +317,7 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
                                             new DownloadImageTask(course_logo)
                                                     .execute(url + "images/" + course.getCourseImage());
 
+                                            cid = course.getCID();
                                             tv_name.setText(course.getCourseName());
                                             tv_category.setText(course.getCatName());
 
@@ -351,7 +355,8 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
             });
 
 
-            client.newCall(request_schedule).enqueue(new Callback() {
+        OkHttpClient client_3 = new OkHttpClient();
+        client_3.newCall(request_schedule).enqueue(new Callback() {
 
                 @Override
                 public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
@@ -362,7 +367,7 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
                             Type scheduleListType = new TypeToken<ArrayList<Schedule>>() {
                             }.getType();
 
-                            ArrayList<Schedule> scheduleArrayList = gson.fromJson(response.body().string(), scheduleListType);
+                            ArrayList<Schedule> scheduleArrayList = gson.fromJson(myResponse, scheduleListType);
                             mScheduleAdapter = new scheduleAdapter(CourseInfo.this, scheduleArrayList);
 
 
@@ -393,13 +398,13 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
 
         url_api_getAddress = url_api_getAddress + "?id=" + Integer.toString(mBundle.getInt("LCID"));
 
-        OkHttpClient client_2 = new OkHttpClient();
+        OkHttpClient client_4 = new OkHttpClient();
 
         final Request request_2 = new Request.Builder()
                 .url(url_api_getAddress)
                 .build();
 
-        client_2.newCall(request_2).enqueue(new Callback() {
+        client_4.newCall(request_2).enqueue(new Callback() {
 
             @Override
             public void onResponse(@NotNull Call call, @NotNull final Response response) throws IOException {
@@ -459,7 +464,8 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
                 .url(url_api_getInstructor)
                 .build();
 
-        client_2.newCall(request_getInstructor).enqueue(new Callback() {
+        OkHttpClient client_5 = new OkHttpClient();
+        client_5.newCall(request_getInstructor).enqueue(new Callback() {
 
             @Override
             public void onResponse(@NotNull Call call, @NotNull final Response response) throws IOException {
@@ -581,7 +587,6 @@ public class CourseInfo extends AppCompatActivity implements View.OnClickListene
     }
 
 }
-//hjkl
 
 
 
