@@ -1,7 +1,10 @@
 package edu.aucegypt.learningcentershub;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.webkit.WebView;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
@@ -13,6 +16,7 @@ public class Payment extends AppCompatActivity {
     protected void onCreate(Bundle savedInstances){
         super.onCreate(savedInstances);
         setContentView(R.layout.payment);
+        Button pay = (Button) findViewById(R.id.pay);
 
         FragmentManager fragmentManager = this.getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -21,6 +25,14 @@ public class Payment extends AppCompatActivity {
 
         webView = findViewById(R.id.webView);
         webView.loadUrl("https://www.paypal.com/eg/signin");
+
+        pay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Payment.this, MainActivity.class);
+                startActivity(i);
+            }
+        });
 
     }
 }

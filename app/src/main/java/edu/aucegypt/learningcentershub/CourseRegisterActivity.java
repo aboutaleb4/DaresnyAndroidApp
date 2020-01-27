@@ -60,7 +60,7 @@ public class CourseRegisterActivity extends AppCompatActivity {
                         json.put("PhoneNo", PhoneNo.getText().toString());
                         json.put("BDate", BDate.getText().toString());
                         json.put("UID", uid);
-                        json.put("CID", mBundle.getInt("CID"));
+                        json.put("CID", mBundle.getInt("cid"));
                         jsonString = json.toString();
 
 
@@ -81,22 +81,12 @@ public class CourseRegisterActivity extends AppCompatActivity {
                             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                                 if (response.isSuccessful()) {
                                     final String myResponse = response.body().string();
-                                    JSONObject myResponseReader;
-                                    if (myResponse != "") {
-                                        try {
-                                            myResponseReader = new JSONObject(myResponse);
                                             Intent mIntent;
-                                            mIntent = new Intent(CourseRegisterActivity.this, MainActivity.class);
+                                            mIntent = new Intent(CourseRegisterActivity.this, Payment.class);
                                             startActivity(mIntent);
-
-                                        } catch (JSONException e) {
-                                            e.printStackTrace();
-                                        }
-
                                     }
                                 }
 
-                            }
 
                             @Override
                             public void onFailure(@NotNull Call call, @NotNull IOException e) {
@@ -108,11 +98,9 @@ public class CourseRegisterActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
 
-                    Intent i = new Intent(CourseRegisterActivity.this, Payment.class);
-                    startActivity(i);
                 } else {
 
-                    Intent i = new Intent(CourseRegisterActivity.this, Payment.class);
+                    Intent i = new Intent(CourseRegisterActivity.this, MainActivity.class);
                     startActivity(i);
                 }
             }

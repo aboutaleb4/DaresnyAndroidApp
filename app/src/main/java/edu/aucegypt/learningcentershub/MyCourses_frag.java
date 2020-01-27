@@ -57,7 +57,7 @@ public class MyCourses_frag extends Fragment{
             String url_api = url + "myroute/getUserLikedCourses";
 
             url_api = url_api + "?id=" + Integer.toString(uid);
-            ;
+
 
             OkHttpClient client = new OkHttpClient();
 
@@ -103,7 +103,7 @@ public class MyCourses_frag extends Fragment{
 
         String url_api_1 = url + "myroute/getUserRegisteredCourses";
 
-        url_api_1 = url_api_1 + "?id=" + "37";
+        url_api_1 = url_api_1 + "?id=" + Integer.toString(uid);
 
         OkHttpClient client_1 = new OkHttpClient();
 
