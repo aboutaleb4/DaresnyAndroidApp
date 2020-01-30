@@ -15,10 +15,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".CatCoursesActivity"
+        <activity android:name=".ui.user.categoriesscreen.CatCoursesActivity"
             android:theme="@style/ActionBarTheme"></activity>
-        <activity android:name=".DownloadImageActivity"></activity>
-        <activity android:name=".CreateAccountActivity">
+        <activity android:name=".ui.DownloadImageActivity"></activity>
+        <activity android:name=".ui.user.createaccountscreen.CreateAccountActivity">
             <intent-filter>
                 <action android:name="edu.aucegypt.learningcentershub.CREATE_ACCOUNT" />
 
@@ -26,7 +26,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.login.LoginActivity"
+            android:name=".ui.user.login.LoginActivity"
             android:label="@string/title_activity_login">
             <intent-filter>
                 <action android:name="edu.aucegypt.learningcentershub.LOGIN" />
@@ -34,32 +34,32 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".CourseRegisterActivity" >
+        <activity android:name=".ui.user.registercoursescreen.CourseRegisterActivity" >
 
         </activity>
-        <activity android:name=".StartingActivity">
+        <activity android:name=".ui.StartingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".ui.user.homescreen.MainActivity">
             <intent-filter>
                 <action android:name="edu.aucegypt.learningcentershub.MAIN_ACTIVITY" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".Admin_home" />
-        <activity android:name=".CourseInfo"
+        <activity android:name=".ui.admin.Admin_home" />
+        <activity android:name=".ui.user.courseinfoscreen.CourseInfo"
             android:theme="@style/ActionBarTheme"/>
-        <activity android:name=".MyAccount" />
-        <activity android:name=".Payment" />
-        <activity android:name=".LearningCenterInfoActivity" />
-        <activity android:name=".LearningCenterInfoAdmin" />
-        <activity android:name=".CourseInfoAdmin" />
-        <activity android:name=".Registered__users"/>
+        <activity android:name=".ui.user.myaccountscreen.MyAccount" />
+        <activity android:name=".ui.user.registercoursescreen.Payment" />
+        <activity android:name=".ui.user.learningcenterinfoscreen.LearningCenterInfoActivity" />
+        <activity android:name=".ui.admin.LearningCenterInfoAdmin" />
+        <activity android:name=".ui.admin.CourseInfoAdmin" />
+        <activity android:name=".ui.admin.Registered__users"/>
     </application>
 
 </manifest>
