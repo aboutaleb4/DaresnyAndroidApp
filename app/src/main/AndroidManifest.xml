@@ -56,7 +56,8 @@
             android:theme="@style/ActionBarTheme"/>
         <activity android:name=".ui.user.myaccountscreen.MyAccount" />
         <activity android:name=".ui.user.registercoursescreen.Payment" />
-        <activity android:name=".ui.user.learningcenterinfoscreen.LearningCenterInfoActivity" />
+        <activity android:name=".ui.user.learningcenterinfoscreen.LearningCenterInfoActivity"
+            android:theme="@style/ActionBarTheme"/>
         <activity android:name=".ui.admin.LearningCenterInfoAdmin" />
         <activity android:name=".ui.admin.CourseInfoAdmin" />
         <activity android:name=".ui.admin.Registered__users"/>

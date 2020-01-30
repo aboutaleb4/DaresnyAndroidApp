@@ -1,6 +1,9 @@
 package edu.aucegypt.learningcentershub.ui.user.learningcenterinfoscreen;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -15,12 +18,15 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 
 import edu.aucegypt.learningcentershub.R;
+import edu.aucegypt.learningcentershub.service.data.Course;
 import edu.aucegypt.learningcentershub.service.network.DownloadImageTask;
 import edu.aucegypt.learningcentershub.service.data.Address;
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -36,22 +42,42 @@ public class LearningCenterInfoActivity extends AppCompatActivity {
     JSONObject myResponseReader;
     JSONObject myResponseReader1;
     ImageView logo;
+    RecyclerView recyclerView_lc_courses;
 
     Address addressObject;
+    int LCID;
+
+    LCCoursesListAdapter adapter;
+
+
     @Override
     public void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_learningcenter_info);
+
+        setTitle(" ");
+
+        assert getSupportActionBar() != null;   //null check
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);   //show back button
+
         name = (TextView) findViewById(R.id.learningcenter_info_name);
         description = (TextView) findViewById(R.id.learningcenter_info_description);
         phone = (TextView) findViewById(R.id.learningcenter_info_phonenumber);
         logo = (ImageView) findViewById(R.id.learningcenter_info_image);
         address = (TextView) findViewById(R.id.learningcenter_info_address1);
+        recyclerView_lc_courses = (RecyclerView) findViewById(R.id.recyclerView_lc_courses);
+
+        recyclerView_lc_courses.setHasFixedSize(true);
+        recyclerView_lc_courses.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        recyclerView_lc_courses.setItemAnimator(new DefaultItemAnimator());
+
+
 
         String url_api = url + "myroute/LCinfo";
 
         Bundle mBundle = getIntent().getExtras();
-        url_api = url_api + "?id=" + Integer.toString(mBundle.getInt("LCID"));
+        LCID = mBundle.getInt("LCID");
+        url_api = url_api + "?id=" + Integer.toString(LCID);
 
         OkHttpClient client = new OkHttpClient();
 
@@ -160,5 +186,55 @@ public class LearningCenterInfoActivity extends AppCompatActivity {
 
             }
         });
+
+
+        String url_api_courses = url + "myroute/getCoursesInLearningCenter?id="+Integer.toString(LCID);
+
+
+        final Request request_courses = new Request.Builder()
+                .url(url_api_courses)
+                .build();
+
+        client.newCall(request_courses).enqueue(new Callback() {
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    Gson gson = new Gson();
+
+                    Type courseListType = new TypeToken<ArrayList<Course>>(){}.getType();
+
+                    ArrayList<Course> courseArrayList = gson.fromJson(response.body().string(), courseListType);
+                    adapter = new LCCoursesListAdapter(LearningCenterInfoActivity.this, courseArrayList);
+
+
+                    LearningCenterInfoActivity.this.runOnUiThread(
+                            new Runnable() {
+                                @Override
+                                public void run() {
+                                    recyclerView_lc_courses.setAdapter(adapter);
+                                }
+                            }
+                    );
+
+
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+
+            }
+        });
+
+
+    }
+
+    @Override
+    public boolean onSupportNavigateUp(){
+        finish();
+        return true;
     }
 }
